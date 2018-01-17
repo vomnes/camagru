@@ -16,7 +16,7 @@
       }
 
       function connect() {
-        require_once 'config/database.php';
+        require_once $_SERVER['DOCUMENT_ROOT'] . '/config/database.php';
         if (!$this->DB_CONN) {
           try {
             $this->DB_CONN = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD, $DB_OPTIONS);
@@ -33,9 +33,9 @@
             $this->status_fatal = false;
           }
         }
-        if($this->DB_CONN){
-          echo "Connection sucessfull <br>";
-        }
+        // if($this->DB_CONN){
+        //   echo "Connection sucessfull";
+        // }
         return $this->DB_CONN;
       }
 

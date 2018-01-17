@@ -6,14 +6,10 @@
   </head>
   <body>
     <t1>Sign up<br></t1>
-    <form action="welcome.php" method="post">
+    <form action="server/control/signin.php" method="POST">
       Name: <input type="text" name="name"><br>
-      E-mail: <input type="text" name="email"><br>
+      Password: <input type="text" name="password"><br>
       <input type="submit">
     </form>
-    <?php
-      include('./server/db.php');
-      $bdd = new database();
-    ?>
   </body>
 </html>

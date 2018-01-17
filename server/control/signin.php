@@ -16,12 +16,17 @@
   $pw = $_POST["password"];
   if ($name != '' && $pw != '') {
     $data = $bdd->getAll('SELECT Firstname FROM Users');
-    print(userExists($data, 'FirstName', $name));
-    if (!userExists($data, 'FirstName', $name)) {
+    print(userExists($data, 'Firstsname', $name));
+    if (!userExists($data, 'Firstname', $name)) {
       $bdd->insertData('Users', 'Firstname, Lastname', ':firstname, :lastname', array('firstname' => $name, 'lastname' => $pw));
-      header("Location: ../..?result=UserCreated");
+      // User created
+      header("Location: ../..?code=1");
     } else {
-      header("Location: ../..?result=UserAlreadyExists");
+      // User already exists
+      header("Location: ../..?code=2");
     }
   }
+  print('5qwd');
+  // Wrong input
+  header("Location: ../..?code=3");
 ?>

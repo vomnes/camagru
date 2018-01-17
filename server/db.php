@@ -1,5 +1,5 @@
 <?php
-    class db {
+    class database {
       private $DB_CONN;
     	private $DB_PORT;
     	private $DB_DEBUG;
@@ -16,13 +16,13 @@
       }
 
       function connect() {
-        require 'database.php';
+        require_once 'config/database.php';
         if (!$this->DB_CONN) {
           try {
             $this->DB_CONN = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD, $DB_OPTIONS);
           }
           catch (Exception $e) {
-            die('Erreur : ' . $e->getMessage());
+            die('Erreur database.connect() new PDO('.$DB_DSN.', '.$DB_USER.', '.$DB_PASSWORD.', '.$DB_OPTIONS.'): ' . $e->getMessage());
           }
           if (!$this->DB_CONN) {
             $this->status_fatal = true;
@@ -57,6 +57,19 @@
         $result->setFetchMode(PDO::FETCH_ASSOC);
         $reponse = $result->fetch();
         return $reponse;
+      }
+
+      function insertData($tableName, $fields, $values, array $content) {
+        $result = $this->DB_CONN->prepare('INSERT INTO '.$tableName.'('.$fields.')'.' VALUES('.$values.')');
+        $ret = $result->execute($content);
+        if (!$ret) {
+           echo 'PDO::errorInfo():';
+           echo '<br />';
+           echo 'error SQL INSERT: INSERT INTO '.$tableName.'('.$fields.')'.' VALUES('.$values.')';
+           die();
+           return false;
+        }
+        return true;
       }
 
       function getAll($query) {

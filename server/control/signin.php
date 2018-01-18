@@ -10,10 +10,7 @@
     }
     return false;
   }
-  // print($_POST["name"]);
-  // print($_POST["email"]);
-  $name = $_POST["name"];
-  $pw = $_POST["password"];
+
   if ($name != '' && $pw != '') {
     $data = $bdd->getAll('SELECT Firstname FROM Users');
     print(userExists($data, 'Firstsname', $name));
@@ -26,7 +23,6 @@
       header("Location: ../..?code=2");
     }
   }
-  print('5qwd');
   // Wrong input
   header("Location: ../..?code=3");
 ?>

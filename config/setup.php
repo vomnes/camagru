@@ -3,17 +3,17 @@
     private $dbh;
 
     function __construct() {
-      require_once '../server/db.php';
+      require_once '../model/db.php';
       $this->dbh = $this->connectionDB();
       $this->createDB();
       $td = new database();
       $td->execute('create table `Users` (
         Id   INT              NOT NULL AUTO_INCREMENT,
-        Firstname VARCHAR (20)     NOT NULL,
-        Lastname VARCHAR (20)     NOT NULL,
+        Username VARCHAR (20)     NOT NULL,
+        Password VARCHAR (128)     NOT NULL,
         PRIMARY KEY (ID)
       )');
-      $td->insertData('Users', 'Firstname, Lastname', ':firstname, :lastname', array('firstname' => "bonjour", 'lastname' => "hello"));
+      $td->insertData('Users', 'Username, Password', ':username, :password', array('username' => "admin", 'password' => "admin"));
     }
 
     // Establish a connection the connection with mySQL

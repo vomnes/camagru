@@ -16,7 +16,7 @@
       }
 
       function connect() {
-        require_once $_SERVER['DOCUMENT_ROOT'] . '/config/database.php';
+        require $_SERVER['DOCUMENT_ROOT'] . '/config/database.php';
         if (!$this->DB_CONN) {
           try {
             $this->DB_CONN = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD, $DB_OPTIONS);

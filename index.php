@@ -1,6 +1,12 @@
 <?php
-  session_start();
+require('controller/controller.php');
 
-  include("server/db.php");
-  $bdd = new database();
-?>
+session_start();
+
+if (isset($_GET['action'])) {
+    if ($_GET['action'] == 'signup') {
+        signUp();
+    }
+} else {
+  signUp();
+}

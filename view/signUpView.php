@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Camagru</title>
-  </head>
-  <body>
+<div class="container">
     <t1>Sign up<br></t1>
     <form action="" method="POST">
       Name: <input type="text" name="username"><br>
@@ -25,5 +19,4 @@
       echo "Email address must not be empty";
     }
     ?></p>
-  </body>
-</html>
+</div>

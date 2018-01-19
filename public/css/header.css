@@ -1,0 +1,71 @@
+@media screen and (min-width: 1034px) {
+  #topnav {
+    position: fixed;
+    width: 1000px;
+    height: 64px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+    -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+  }
+  #camagru-logo {
+    position: fixed;
+    top: 0px;
+    left: 5%;
+  }
+  #camagru-text {
+    position: relative;
+    top: 22px;
+    left: 12%;
+  }
+  #profile-link {
+    position: fixed;
+    top: 22px;
+    right: 20%;
+  }
+  #profile-link:hover {
+    text-decoration: underline;
+    color: #444;
+  }
+  #about-link {
+    position: fixed;
+    top: 22px;
+    right: 5%;
+  }
+  #about-link:hover {
+    text-decoration: underline;
+    color: #444;
+  }
+}
+
+@media screen and (max-width: 1034px) {
+  #topnav {
+    position: fixed;
+    width: 98%;
+    height: 64px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+    -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+  }
+  #camagru-logo {
+    position: fixed;
+    top: 0px;
+    left: 5%;
+  }
+  #camagru-text {
+    visibility: hidden;
+  }
+  #profile-link {
+    position: fixed;
+    top: 22px;
+    right: 20%;
+  }
+  #about-link {
+    position: fixed;
+    top: 22px;
+    right: 5%;
+  }
+}

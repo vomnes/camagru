@@ -1,14 +1,14 @@
-   <img class="picture-sign" src="public/pictures/signUpPicture.jpg" alt="Open 24 hours">
+   <img class="picture-sign" src="public/pictures/signUpPicture.jpg" alt="Vintage camera">
    <div class="sign">
      <h2 style="text-align: center;font-size: 1.7em;">Sign up<br></h2>
      <form action="" method="POST">
        <fieldset>
-         <label for="name">Username: </label><br><input type="text" name="username"><br>
-         <label for="name">Password: </label><br><input type="password" name="password"><br>
-         <label for="name">Re-enter password </label><br><input type="password2" name="password"><br>
-         <label for="name">Email address: </label><br><input type="text" name="email"><br>
+         <label for="name">Username</label><br><input type="text" name="username"><br>
+         <label for="name">Password</label><br><input type="password" name="password"><br>
+         <label for="name">Re-enter password</label><br><input type="password2" name="password"><br>
+         <label for="name">Email address</label><br><input type="text" name="email"><br>
        </fieldset>
-       <p style="text-align: center;"><input class="submit-btm" type="submit"></p>
+       <p style="text-align: center;"><input class="submit-btm" type="submit" value="Registered"></p>
        <?php
        if ($signUpCode == 1) {
          echo "<p style=\"text-align: center; color: ForestGreen;\">Your account has been created</p>";

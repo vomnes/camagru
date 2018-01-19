@@ -14,10 +14,10 @@
   </head>
   <body>
     <div id="topnav">
-        <a id="camagru-logo" href="index.php?action=home"><img src="/public/pictures/photo-camera-128.png" alt="logo" width="64" height="64" border="0"></a>
-        <a id="camagru-text" href="index.php?action=home">Camagru</a>
-        <a id="profile-link" href="#news">Valentin's Profile</a>
+        <a id="camagru-logo" href="index.php"><img src="/public/pictures/photo-camera-128.png" alt="logo" width="64" height="64" border="0"></a>
+        <a id="camagru-text" href="index.php">Camagru</a>
+        <a id="profile-link" href="#">Valentin's Profile</a>
         <!-- <li><a href="#contact"></a></li> -->
-        <a id="about-link" href="#about">About</a>
+        <a id="about-link" href="#">About</a>
     </div>
     <div class="container">

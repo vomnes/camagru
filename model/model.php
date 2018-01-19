@@ -14,19 +14,30 @@
     return false;
   }
 
-  function createUser($username, $pw) {
+  function createUser($username, $pw, $email) {
+    $password = hash('whirlpool', $pw); // Encode password
+    if ($password == $pw) {
+      return -1;
+    }
     $bdd = new database();
-    $bdd->insertData('Users', 'Username, Password', ':username, :password', array('username' => $username, 'password' => $pw));
+    $bdd->insertData(
+      'Users',
+      'username, password, email',
+      ':username, :password, :email',
+      array('username' => $username, 'password' => $password, 'email' => $email));
+    return 1;
   }
 
   function signUpModel() {
     $username = $_REQUEST["username"];
     $pw = $_REQUEST["password"];
+    $rePW = $_REQUEST["re-password"];
     $emailAddress = $_REQUEST["email"];
-    if ($username != '' && $pw != '' && $emailAddress != '') {
-      if (!userExists($username, $emailAddress)) {
-        createUser($username, $pw);
-        return 1; // User created
+    if ($username != '' && $pw != '' && $rePW != '' && $emailAddress != '') {
+      if ($pw != $rePW) {
+        return 6;
+      } else if (!userExists($username)) {
+        return createUser($username, $pw, $emailAddress); // Error or User created
       } else {
         return 2; // User already exists
       }

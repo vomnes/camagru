@@ -8,12 +8,15 @@
       $this->createDB();
       $td = new database();
       $td->execute('create table `Users` (
-        Id   INT              NOT NULL AUTO_INCREMENT,
-        Username VARCHAR (20)     NOT NULL,
-        Password VARCHAR (128)     NOT NULL,
+        id   INT              NOT NULL AUTO_INCREMENT,
+        username VARCHAR (20)     NOT NULL,
+        password VARCHAR (128)     NOT NULL,
+        email VARCHAR (128) NOT NULL,
+        account_validated BIT NULL,
+        creation_date DATETIME DEFAULT CURRENT_TIMESTAMP,
         PRIMARY KEY (ID)
       )');
-      $td->insertData('Users', 'Username, Password', ':username, :password', array('username' => "admin", 'password' => "admin"));
+      $td->insertData('Users', 'username, password, email', ':username, :password, :email', array('username' => "admin", 'password' => hash('whirlpool', "admin"), 'email' => 'admin@camagru.co'));
     }
 
     // Establish a connection the connection with mySQL

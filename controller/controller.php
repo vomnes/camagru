@@ -12,7 +12,8 @@ function signUp()
 
 function signIn()
 {
-    // $signUpCode = signUpModel();
+    $signInCode = authLogin();
+    print($signInCode);
     require($_SERVER['DOCUMENT_ROOT'] . '/view/headerView.php');
     require($_SERVER['DOCUMENT_ROOT'] . '/view/signInView.php');
     require($_SERVER['DOCUMENT_ROOT'] . '/view/footerView.php');
@@ -20,7 +21,6 @@ function signIn()
 
 function index()
 {
-    $signUpCode = signUpModel();
     require($_SERVER['DOCUMENT_ROOT'] . '/view/headerView.php');
     require($_SERVER['DOCUMENT_ROOT'] . '/view/footerView.php');
 }

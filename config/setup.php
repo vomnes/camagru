@@ -9,9 +9,9 @@
       $td = new database();
       $td->execute('create table `Users` (
         id   INT              NOT NULL AUTO_INCREMENT,
-        username VARCHAR (20)     NOT NULL,
-        password VARCHAR (128)     NOT NULL,
-        email VARCHAR (128) NOT NULL,
+        username VARCHAR (256)     NOT NULL,
+        password VARCHAR (256)     NOT NULL,
+        email VARCHAR (256) NOT NULL,
         account_validated BIT NULL,
         creation_date DATETIME DEFAULT CURRENT_TIMESTAMP,
         PRIMARY KEY (ID)

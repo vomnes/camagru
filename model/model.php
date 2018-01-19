@@ -4,10 +4,10 @@
 
   function userExists($username) {
     $bdd = new database();
-    $data = $bdd->getAll('SELECT Username FROM Users');
+    $data = $bdd->getAll('SELECT username FROM Users');
     $dataLen = count($data);
     for($i = 0; $i < $dataLen; $i++) {
-      if ($data[$i]["Username"] == $username) {
+      if ($data[$i]["username"] == $username) {
         return true;
       }
     }
@@ -35,18 +35,37 @@
     $emailAddress = $_REQUEST["email"];
     if ($username != '' && $pw != '' && $rePW != '' && $emailAddress != '') {
       if ($pw != $rePW) {
-        return 6;
+        return -2;
+      } else if (count($username) > 64 || count($pw) > 255 || count($pw) < 8 || count($emailAddress) > 128) {
+        return -4;
       } else if (!userExists($username)) {
         return createUser($username, $pw, $emailAddress); // Error or User created
       } else {
-        return 2; // User already exists
+        return -3; // User already exists
       }
-    } else if ($username != '') {
-        return 3; // Username empty
-    } else if ($pw != '') {
-        return 4; // Password empty
-    } else if ($emailAddress != '') {
-        return 5; // Email address empty
+    }
+    return 0;
+  }
+
+  function authLogin() {
+    $username = $_REQUEST["username"];
+    $pw = $_REQUEST["password"];
+    if ($username != '' && $pw != '') {
+      if (count($username) > 256 || count($pw) > 256) {
+        return -2;
+      }
+      $bdd = new database();
+      $data = $bdd->getAll('SELECT username, password, account_validated FROM Users');
+      $dataLen = count($data);
+      for($i = 0; $i < $dataLen; $i++) {
+        if ($username == $data[$i]["username"] AND hash('whirlpool', $pw) == $data[$i]["password"]) {
+          if ($data[$i]["account_validated"] == 0) {
+            return -1;
+          }
+          return 1;
+        }
+      }
+      return -2;
     }
     return 0;
   }

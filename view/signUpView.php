@@ -11,7 +11,7 @@
        <p style="text-align: center;"><input class="submit-btm" type="submit" value="Registered"></p>
        <?php
        if ($signUpCode == 1) {
-         echo "<p style=\"text-align: center; color: ForestGreen;\">Your account has been created</p>";
+         echo "<p style=\"text-align: center; color: ForestGreen;\">Your account has been created<br>You will be receiving an email at<br>".$_POST["email"]."<br>with the activation URL</p>";
        } else if ($signUpCode == -3) {
          echo "<p style=\"text-align: center; color: Brown;\">Please choose another username</p>";
        } else if ($signUpCode == -2) {
@@ -19,7 +19,7 @@
        } else if ($signUpCode == -1) {
          echo "<p style=\"text-align: center; color: Brown;\">An error has occured</p>";
        } else if ($signUpCode == -4) {
-         echo "<p style=\"text-align: center; color: Brown;\">Fields limited to 256 characters</p>";
+         echo "<p style=\"text-align: center; color: Brown;\">Fields with limits, please respect the warnings/p>";
        }
        ?>
      </form>

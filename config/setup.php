@@ -13,10 +13,11 @@
         password VARCHAR (256)     NOT NULL,
         email VARCHAR (256) NOT NULL,
         account_validated BIT NULL,
+        unique_token VARCHAR (256)     NOT NULL,
         creation_date DATETIME DEFAULT CURRENT_TIMESTAMP,
         PRIMARY KEY (ID)
       )');
-      $td->insertData('Users', 'username, password, email', ':username, :password, :email', array('username' => "admin", 'password' => hash('whirlpool', "admin"), 'email' => 'admin@camagru.co'));
+      $td->insertData('Users', 'username, password, email, unique_token', ':username, :password, :email, :unique_token', array('username' => "admin", 'password' => hash('whirlpool', "admin"), 'email' => 'admin@camagru.co', 'unique_token' => 'abcdef'));
     }
 
     // Establish a connection the connection with mySQL

@@ -1,6 +1,16 @@
-<img class="picture-sign" src="public/pictures/signInPicture.jpg" alt="Sign in">
+<?php if ($accountIsActivated > 0) { ?>
+  <img class="picture-sign" src="public/pictures/activatePicture.jpg" alt="Activate">
+<?php } else { ?>
+  <img class="picture-sign" src="public/pictures/signInPicture.jpg" alt="Sign in">
+<?php } ?>
 <div class="sign">
-  <h2 style="text-align: center;font-size: 1.7em;">Sign in<br></h2>
+  <?php if ($accountIsActivated == 1) { ?>
+    <h2 style="text-align: center;font-size: 1.7em;">Your account has been<br>successfully activated !<br><br>You can now login :</h2>
+  <?php } elseif ($accountIsActivated == 2) { ?>
+    <h2 style="text-align: center;font-size: 1.7em;">Your account has <br><i>already</i> been activated.<br><br>You can login :</h2>
+  <?php } else { ?>
+    <h2 style="text-align: center;font-size: 1.7em;">Sign in<br></h2>
+  <?php } ?>
   <form action="" method="POST">
     <fieldset>
       <label for="name">Username</label><br><input type="text" name="username" maxlength="64" required><br>
@@ -20,6 +30,8 @@
       echo "<p style=\"text-align: center; color: Brown;\">Password can not be empty</p>";
     }
     ?>
-    <p style="text-align: center;"><a id="notYetR" href="index.php?action=passwordforgotten">Forgot your password ?</a> - <a id="notYetR" href="index.php?action=signup">Not yet a registered ?</a></p>
+    <?php if ($accountIsActivated == 0) { ?>
+      <p style="text-align: center;"><a id="notYetR" href="index.php?action=passwordforgotten">Forgot your password ?</a> - <a id="notYetR" href="index.php?action=signup">Not yet a registered ?</a></p>
+    <?php } ?>
   </form>
 </div>

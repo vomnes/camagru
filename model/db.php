@@ -72,6 +72,15 @@
         return true;
       }
 
+      function updateData($query) {
+        if ($this->DB_CONN->query($query) === false) {
+          echo 'PDO::errorInfo():';
+          echo '<br />';
+          echo 'error SQL updateDate: '.$query.' '.$this->DB_CONN->error;
+          die();
+        }
+      }
+
       function getAll($query) {
         $result = $this->DB_CONN->prepare($query);
         $ret = $result->execute();

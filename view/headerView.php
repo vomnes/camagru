@@ -7,6 +7,7 @@
     <title>Camagru</title>
     <link rel="stylesheet" type="text/css" href="public/css/header.css">
     <link rel="stylesheet" type="text/css" href="public/css/content.css">
+    <link rel="stylesheet" type="text/css" href="public/css/footer.css">
     <link rel="me" href="mailto:valentin.omnes@gmail.com">
     <link rel="icon" type="image/png" sizes="32x32" href="/public/pictures/favicon.png">
     <link href="https://fonts.googleapis.com/css?family=Belgrano" rel="stylesheet">
@@ -19,3 +20,4 @@
         <!-- <li><a href="#contact"></a></li> -->
         <a id="about-link" href="#about">About</a>
     </div>
+    <div class="container">

@@ -19,33 +19,10 @@ a {
   display: block;
   box-shadow: 3px 3px 3px rgba(0,0,0,0.25);
 }
-.picture-sign-height {
-  position: relative;
-  width: 45%;
-  top: 100px;
-  /* Center */
-  left: 50%;
-  transform: translateX(-50%);
-  background: #FFF;
-  display: block;
-  box-shadow: 3px 3px 3px rgba(0,0,0,0.25);
-}
 .sign {
   position: absolute;
   right: 50%;
   top: 50%;
-  transform: translateX(50%);
-  display: block;
-  background-color: white;
-  padding-left: 10px;
-  padding-right: 10px;
-  /* Border */
-  box-shadow: 3px 3px 3px rgba(0,0,0,0.25);
-}
-.sign-height {
-  position: absolute;
-  right: 50%;
-  top: 2.5%;
   transform: translateX(50%);
   display: block;
   background-color: white;

@@ -1,9 +1,10 @@
 <?php if ($accountIsActivated > 0) { ?>
-  <img class="picture-sign" src="public/pictures/activatePicture.jpg" alt="Activate">
+  <img class="picture-sign-height" src="public/pictures/activatePicture.jpg" alt="Activate">
+  <div class="sign-height">
 <?php } else { ?>
   <img class="picture-sign" src="public/pictures/signInPicture.jpg" alt="Sign in">
+  <div class="sign">
 <?php } ?>
-<div class="sign">
   <?php if ($accountIsActivated == 1) { ?>
     <h2 style="text-align: center;font-size: 1.7em;">Your account has been<br>successfully activated !<br><br>You can now login :</h2>
   <?php } elseif ($accountIsActivated == 2) { ?>
@@ -18,10 +19,11 @@
     </fieldset>
     <p style="text-align: center;"><input class="submit-btm" type="submit" value="Login"></p>
     <?php
+    $signInCode = $signInData["code"];
     if ($signInCode == 1) {
       header('Location: index.php');
     } else if ($signInCode == -1) {
-      echo "<p style=\"text-align: center; color: Brown;\">Account not yet validated</p>";
+      echo "<p style=\"text-align: center; color: Brown;\">Account not yet validated<br>An email has been sent to<br><u>".$signInData["accountEmail"]."</u><br>with the activation URL</p>";
     } else if ($signInCode == -2) {
       echo "<p style=\"text-align: center; color: Brown;\">Wrong username or password</p>";
     } else if ($signInCode == -3) {

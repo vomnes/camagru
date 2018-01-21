@@ -40,7 +40,7 @@
     sendEmail(
       $emailAddress,
       "Camagru - Account validation",
-      "Go on localhost:8080/index.php?action=validateaccount&token=".$token);
+      "Welcome ".$username.", Go on localhost:8080/index.php?action=validateaccount&token=".$token." to validate your account.");
   }
 
   function signUpModel() {
@@ -50,14 +50,14 @@
     $emailAddress = $_REQUEST["email"];
     if ($username != '' && $pw != '' && $rePW != '' && $emailAddress != '') {
       if ($pw != $rePW) {
-        return -2;
+        return -2; // The two password must be the same
       } else if (strlen($username) > 64 || strlen($pw) > 255 || strlen($pw) < 8 || strlen($emailAddress) > 128) {
-        return -4;
+        return -4; // Fields with limits, please respect the warnings
       } else if (!userExists($username)) {
         $uniqueToken = md5(uniqid(rand(), true));
         $ret = createUser($username, $pw, $emailAddress, $uniqueToken); // Error or User created
         if ($ret == -1) {
-          return (-1);
+          return -1; // An error has occured
         }
         validationEmail($username, $emailAddress, $uniqueToken);
         return $ret;
@@ -73,22 +73,26 @@
     $pw = $_REQUEST["password"];
     if ($username != '' && $pw != '') {
       if (count($username) > 256 || count($pw) > 256) {
-        return -2;
+        return array("code" => -2);
       }
       $bdd = new database();
-      $data = $bdd->getAll('SELECT username, password, account_validated FROM Users');
+      $data = $bdd->getAll('SELECT username, password, account_validated, email FROM Users');
       $dataLen = count($data);
       for($i = 0; $i < $dataLen; $i++) {
         if ($username == $data[$i]["username"] AND hash('whirlpool', $pw) == $data[$i]["password"]) {
           if ($data[$i]["account_validated"] == 0) {
-            return -1;
+            return array("code" => -1, "accountEmail" => $data[$i]["email"]); // Account not yet validated
           }
-          return 1;
+          return array("code" => 1);
         }
       }
-      return -2;
+      return array("code" => -2); // Wrong username or password
+    } else if ($username == '' && $pw != '') {
+      return array("code" => -3); // Username can not be empty
+    } else if ($pw == '' && $username != '') {
+      return array("code" => -4); // Password can not be empty
     }
-    return 0;
+    return array("code" => 0);
   }
 
   function validateaccount() {
@@ -109,6 +113,32 @@
       return false;
     }
     return false;
+  }
+
+  function sendResetEmail($username, $emailAddress, $token) {
+    sendEmail(
+      $emailAddress,
+      "Camagru - Set new password",
+      "Hello ".$username.", This is the link to generate a new password: localhost:8080/index.php?action=setnewpassword&token=".$token."");
+  }
+
+  function resetPasswordEmail() {
+    $username = $_REQUEST["username"];
+    if ($username != '') {
+      $bdd = new database();
+      $data = $bdd->getAll('SELECT username, unique_token, account_validated, email FROM Users');
+      $dataLen = count($data);
+      for($i = 0; $i < $dataLen; $i++) {
+        if ($username == $data[$i]["username"]) {
+          if ($data[$i]["account_validated"] == 0) {
+            return -1; // Account not yet validated
+          }
+          sendResetEmail($username, $data[$i]["email"], $data[$i]["unique_token"]);
+          return 1; // Email with set new password link sent
+        }
+      }
+      return -2; // User does not exists
+    }
   }
 
 

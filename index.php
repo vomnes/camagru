@@ -2,13 +2,16 @@
 require('controller/controller.php');
 
 session_start();
-if (isset($_GET['action'])) {
-    if ($_GET['action'] == 'signup') {
+$page = $_GET['action'];
+if (isset($page)) {
+    if ($page == 'signup') {
         signUp();
-    } else if ($_GET['action'] == 'signin') {
+    } else if ($page == 'signin') {
         signIn();
-    } else if ($_GET['action'] == 'validateaccount') {
+    } else if ($page == 'validateaccount') {
         activateAccount();
+    } else if ($page == 'passwordforgotten') {
+        sendResetPasswordEmail();
     } else {
         index();
     }

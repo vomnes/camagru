@@ -12,7 +12,7 @@ function signUp()
 
 function signIn()
 {
-    $signInCode = authLogin();
+    $signInData = authLogin();
     require($_SERVER['DOCUMENT_ROOT'] . '/view/headerView.php');
     require($_SERVER['DOCUMENT_ROOT'] . '/view/signInView.php');
     require($_SERVER['DOCUMENT_ROOT'] . '/view/footerView.php');
@@ -23,10 +23,19 @@ function activateAccount()
     $accountIsActivated = validateaccount();
     require($_SERVER['DOCUMENT_ROOT'] . '/view/headerView.php');
     if ($accountIsActivated > 0) {
+      $signInData = authLogin();
       require($_SERVER['DOCUMENT_ROOT'] . '/view/signInView.php');
     } else {
       require($_SERVER['DOCUMENT_ROOT'] . '/view/indexView.php');
     }
+    require($_SERVER['DOCUMENT_ROOT'] . '/view/footerView.php');
+}
+
+function sendResetPasswordEmail()
+{
+    $code = resetPasswordEmail();
+    require($_SERVER['DOCUMENT_ROOT'] . '/view/headerView.php');
+    require($_SERVER['DOCUMENT_ROOT'] . '/view/resetPasswordView.php');
     require($_SERVER['DOCUMENT_ROOT'] . '/view/footerView.php');
 }
 

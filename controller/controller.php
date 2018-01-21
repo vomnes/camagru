@@ -41,7 +41,27 @@ function resetPassword()
     }
 }
 
+function logout()
+{
+    session_start();
+    logoutUser();
+    require($_SERVER['DOCUMENT_ROOT'] . '/view/indexView.php');
+}
+
 function index()
 {
     require($_SERVER['DOCUMENT_ROOT'] . '/view/indexView.php');
+}
+
+function gallery()
+{
+    require($_SERVER['DOCUMENT_ROOT'] . '/view/galleryView.php');
+}
+
+function headerController() {
+  session_start();
+  return array(
+    'isLogged' => userLogged(),
+    'username' => $_SESSION["logged_user"],
+  );
 }

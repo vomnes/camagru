@@ -21,23 +21,52 @@
     top: 22px;
     left: 12%;
   }
-  #profile-link {
+  #description-btm {
     position: fixed;
     top: 22px;
-    right: 20%;
+    width: 200px;
+    text-align: center;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 3px;
+    background-color: #FCFCFC;
+    /* Shadow */
+    border: 1px solid rgba(0,0,0,0.25);
+    box-shadow: inset 1px 1px 3px rgba(0,0,0,0.25);
+    -moz-box-shadow: inset 1px 1px 3px rgba(0,0,0,0.25);
+    -webkit-box-shadow: inset 1px 1px 3px rgba(0,0,0,0.25);
   }
-  #profile-link:hover {
-    text-decoration: underline;
-    color: #444;
-  }
-  #about-link {
+  #camera-btm {
     position: fixed;
-    top: 22px;
+    top: 19.5px;
+    right: 21.25%;
+  }
+  #camera-btm:hover {
+    filter: brightness(80%);
+  }
+  #gallery-btm {
+    position: fixed;
+    top: 19.5px;
+    right: 15.6%;
+  }
+  #gallery-btm:hover {
+    filter: brightness(80%);
+  }
+  #profile-btm {
+    position: fixed;
+    top: 19.5px;
+    right: 10.5%;
+  }
+  #profile-btm:hover {
+    filter: brightness(80%);
+  }
+  #logout-btm {
+    position: fixed;
+    top: 16px;
     right: 5%;
   }
-  #about-link:hover {
-    text-decoration: underline;
-    color: #444;
+  #logout-btm:hover {
+    -webkit-filter: invert(50%);
   }
 }
 
@@ -64,10 +93,5 @@
     position: fixed;
     top: 22px;
     right: 20%;
-  }
-  #about-link {
-    position: fixed;
-    top: 22px;
-    right: 5%;
   }
 }

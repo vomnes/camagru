@@ -14,11 +14,16 @@
   </head>
   <body>
     <div id="topnav">
-        <a id="camagru-logo" href="index.php"><img src="/public/pictures/photo-camera-128.png" alt="logo" width="64" height="64" border="0"></a>
+        <a id="camagru-logo" href="index.php"><img src="/public/pictures/photo-camera-128.png" alt="logo" width="64" height="64" border="0" title="Camagru logo"></a>
         <a id="camagru-text" href="index.php">Camagru</a>
-        <a id="profile-link" href="#">Valentin's Profile</a>
+        <?php if ($data['isLogged']) { ?>
+        <a id="description-btm"><?php echo ucfirst($data["username"]); ?>'s Profile</a>
+        <a id="camera-btm" href="index.php?action=camera"><img title="Manage pictures" src="/public/pictures/camera-128.png" alt="camera logo" width="30" height="30" border="0"></a>
+        <a id="gallery-btm" href="index.php?action=gallery"><img title="See the gallery" src="/public/pictures/gallery-128.png" alt="gallery logo" width="30" height="30" border="0"></a>
+        <a id="profile-btm" href="index.php?action=myprofile"><img title="Edit profile" src="/public/pictures/profile-128.png" alt="profile logo" width="30" height="30" border="0"></a>
+        <a id="logout-btm" href="index.php?action=logout"><img title="Logout" src="/public/pictures/logout-128.png" alt="logout logo" width="35" height="35" border="0"></a>
+        <? } ?>
         <!-- <li><a href="#contact"></a></li> -->
-        <a id="about-link" href="#">About</a>
     </div>
     <div class="container">
       <?= $content ?>

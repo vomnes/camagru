@@ -2,6 +2,25 @@
   require("db.php");
   $bdd = new database();
 
+  /* Session */
+
+  function userLogged() {
+    session_start();
+    if (isset($_SESSION["logged_user"]) && $_SESSION["logged_user"] != '') {
+      return true;
+    }
+    return false;
+  }
+
+  function logoutUser() {
+    session_start();
+    if (isset($_SESSION["logged_user"])) {
+      $_SESSION["logged_user"] = "";
+    }
+  }
+
+  /* ------ */
+
   function userExists($username) {
     $bdd = new database();
     $data = $bdd->getAll('SELECT username FROM Users');
@@ -83,6 +102,8 @@
           if ($data[$i]["account_validated"] == 0) {
             return array("code" => -1, "accountEmail" => $data[$i]["email"]); // Account not yet validated
           }
+          session_start();
+          $_SESSION["logged_user"] = $username;
           return array("code" => 1);
         }
       }

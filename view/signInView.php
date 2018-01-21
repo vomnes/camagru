@@ -20,7 +20,7 @@
     <?php
     $signInCode = $signInData["code"];
     if ($signInCode == 1) {
-      header('Location: index.php');
+      header('Location: index.php?code=1');
     } else if ($signInCode == -1) {
       echo "<p style=\"text-align: center; color: Brown;\">Account not yet validated<br>An email has been sent to<br><u>".$signInData["accountEmail"]."</u><br>with the activation URL</p>";
     } else if ($signInCode == -2) {

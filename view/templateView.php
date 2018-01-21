@@ -21,3 +21,10 @@
         <a id="about-link" href="#">About</a>
     </div>
     <div class="container">
+      <?= $content ?>
+      <footer>
+          <a href="#">Created by Valentin Omnès - All Rights Reserved.</a>
+      </footer>
+    </div>
+  </body>
+</html>

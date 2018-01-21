@@ -12,6 +12,8 @@ if (isset($page)) {
         activateAccount();
     } else if ($page == 'passwordforgotten') {
         sendResetPasswordEmail();
+    } else if ($page == 'resetpassword') {
+        resetPassword();
     } else {
         index();
     }

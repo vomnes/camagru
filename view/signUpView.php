@@ -15,7 +15,7 @@
        } else if ($signUpCode == -3) {
          echo "<p style=\"text-align: center; color: Brown;\">Please choose another username</p>";
        } else if ($signUpCode == -2) {
-         echo "<p style=\"text-align: center; color: Brown;\">The two password must be the same</p>";
+         echo "<p style=\"text-align: center; color: Brown;\">The two passwords must be identical</p>";
        } else if ($signUpCode == -1) {
          echo "<p style=\"text-align: center; color: Brown;\">An error has occured</p>";
        } else if ($signUpCode == -4) {

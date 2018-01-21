@@ -35,7 +35,19 @@ function sendResetPasswordEmail()
 {
     $code = resetPasswordEmail();
     require($_SERVER['DOCUMENT_ROOT'] . '/view/headerView.php');
-    require($_SERVER['DOCUMENT_ROOT'] . '/view/resetPasswordView.php');
+    require($_SERVER['DOCUMENT_ROOT'] . '/view/forgotPasswordView.php');
+    require($_SERVER['DOCUMENT_ROOT'] . '/view/footerView.php');
+}
+
+function resetPassword()
+{
+    $code = handleResetPassword();
+    require($_SERVER['DOCUMENT_ROOT'] . '/view/headerView.php');
+    if ($code == -1) {
+      require($_SERVER['DOCUMENT_ROOT'] . '/view/indexView.php');
+    } else {
+      require($_SERVER['DOCUMENT_ROOT'] . '/view/resetPasswordView.php');
+    }
     require($_SERVER['DOCUMENT_ROOT'] . '/view/footerView.php');
 }
 

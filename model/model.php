@@ -50,7 +50,7 @@
     $emailAddress = $_REQUEST["email"];
     if ($username != '' && $pw != '' && $rePW != '' && $emailAddress != '') {
       if ($pw != $rePW) {
-        return -2; // The two password must be the same
+        return -2; // The two passwords must be identical
       } else if (strlen($username) > 64 || strlen($pw) > 255 || strlen($pw) < 8 || strlen($emailAddress) > 128) {
         return -4; // Fields with limits, please respect the warnings
       } else if (!userExists($username)) {
@@ -119,7 +119,7 @@
     sendEmail(
       $emailAddress,
       "Camagru - Set new password",
-      "Hello ".$username.", This is the link to generate a new password: localhost:8080/index.php?action=setnewpassword&token=".$token."");
+      "Hello ".$username.", This is the link to generate a new password: localhost:8080/index.php?action=resetpassword&token=".$token."");
   }
 
   function resetPasswordEmail() {
@@ -138,6 +138,40 @@
         }
       }
       return -2; // User does not exists
+    }
+  }
+
+  function checkTokenValidity($token) {
+    if ($token == '') {
+      return false;
+    }
+    $bdd = new database();
+    $data = $bdd->getAll('SELECT unique_token FROM Users');
+    $dataLen = count($data);
+    for($i = 0; $i < $dataLen; $i++) {
+      if ($token == $data[$i]["unique_token"]) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  function handleResetPassword() {
+    $token = $_GET["token"];
+    if (!checkTokenValidity($token)) {
+      return -1; // Invalid token -> Redirect to index
+    }
+    $pw = $_REQUEST["password"];
+    $rePW = $_REQUEST["re-password"];
+    if ($pw != '' && $rePW != '') {
+      if ($pw != $rePW) {
+        return -2; // The two passwords must be identical
+      } else if (strlen($pw) > 255 || strlen($pw) < 8) {
+        return -3; // Fields with limits, please respect the warnings
+      }
+      $bdd = new database();
+      $bdd->updateData("UPDATE Users SET password = \"".hash('whirlpool', $pw)."\" WHERE unique_token = \"".$token."\"");
+      return 1; // Password updated
     }
   }
 

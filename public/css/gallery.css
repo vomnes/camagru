@@ -5,7 +5,7 @@
     font-size: 1.7em;
   }
 
-  #gallery {
+  .gallery {
     /* position: relative; */
     max-width: 650px;
     width: auto;
@@ -144,7 +144,7 @@
   }
 
   /* Comments area */
-  #comments-picture {
+  .comments-picture {
     visibility: hidden;
     display: none;
     background-color: #FCFCFC;

@@ -24,8 +24,10 @@ if (!userLogged()) {
   }
 } else {
   if (isset($page)) {
-      if ($page == 'gallery') {
+      if ($page == 'camera') {
 
+      } elseif ($page == 'gallery') {
+          gallery();
       } elseif ($page == 'myprofile') {
 
       } elseif ($page == 'editprofile') {

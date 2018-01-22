@@ -8,7 +8,9 @@
     <link rel="stylesheet" type="text/css" href="public/css/header.css">
     <link rel="stylesheet" type="text/css" href="public/css/content.css">
     <link rel="stylesheet" type="text/css" href="public/css/footer.css">
+    <link rel="stylesheet" type="text/css" href="public/css/gallery.css">
     <script src="public/js/header.js"></script>
+    <script src="public/js/gallery.js"></script>
     <link rel="me" href="mailto:valentin.omnes@gmail.com">
     <link rel="icon" type="image/png" sizes="32x32" href="/public/pictures/favicon.png">
     <link href="https://fonts.googleapis.com/css?family=Belgrano" rel="stylesheet">

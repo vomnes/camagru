@@ -11,3 +11,13 @@ function handleTitleScroll() {
 window.onscroll = function() {
   handleTitleScroll()
 };
+
+function showsDiv(elem) {
+  if (document.getElementById(elem).style.visibility == "visible") {
+    document.getElementById(elem).style.visibility = "hidden";
+    document.getElementById(elem).style.display = "none";
+  } else {
+    document.getElementById(elem).style.visibility = "visible";
+    document.getElementById(elem).style.display = "block";
+  }
+}

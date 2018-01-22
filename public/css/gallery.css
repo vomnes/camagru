@@ -12,12 +12,6 @@
     margin-left: auto;
     margin-right: auto;
     padding-bottom: 25px;
-    /* Background color */
-    /* box-shadow: 0 1px 3px rgba(0,0,0,0.25);
-    -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.25);
-    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.25);
-    background-color: #FFFFFF; */
-    /* border: 1px solid black; */
   }
 
   /* Gallery picture */
@@ -133,19 +127,36 @@
 
   .open-comments{
     position: absolute;
+    background-color: #FFFFFF;
+    border: 1px solid white;
     top: 12.5px;
     right: 9px;
     font-size: 20px;
     z-index: -1;
   }
 
+  button:focus {
+    outline: 0;
+  }
+
   .open-comments:hover {
-    text-decoration: underline;
+    color: #aaaaaa;
   }
 
   /* Comments area */
   #comments-picture {
-    border: 1px solid black;
+    visibility: hidden;
+    display: none;
+    background-color: #FCFCFC;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding-top: 5px;
+    /* Shadow */
+    background-color: rgba(255,255,255,0.85);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+    -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+
   }
 
   .one-comment {
@@ -173,14 +184,15 @@
   }
 
   .new-comment {
-    border: 1px solid grey;
-    margin-left: 2%;
-    margin-right: 2%;
+    position: relative;
+    border-top: 1px solid grey;
+    margin: 2%;
+    padding-top: 5px;
+    height: 75px;
   }
   .content-comment {
     position: relative;
     left: -7%;
-    padding-left: 2%;
     height: 50px;
     min-width: 500px;
     width: auto;
@@ -188,16 +200,30 @@
     resize: none;
     font-family: 'Open Sans', sans-serif;
     font-size: 0.9em;
-    padding: 2px;
-  }
-  .content-comment:hover {
-    background-color: #FCFCFC;
-    /* Shadow */
-    border: 1px solid rgba(0,0,0,0.25);
-    box-shadow: inset 1px 1px 3px rgba(0,0,0,0.25);
-    -moz-box-shadow: inset 1px 1px 3px rgba(0,0,0,0.25);
-    -webkit-box-shadow: inset 1px 1px 3px rgba(0,0,0,0.25);
+    padding: 5px;
+    border: 1px solid white;
   }
   .put-comment {
-
+    position: relative;
+    text-align: center;
+    display: block;
+    left: 545px;
+    top: -84px;
+    width: 45px;
+    height: 45px;
+    border-radius: 100%;
+    border: none;
+    background-image: url("/public/pictures/send-comment-success-1-128.png");
+    background-repeat: no-repeat;
+    background-size: 45px;
+    background-position: center;
+  }
+  .put-comment:hover {
+    background-image: url("/public/pictures/send-comment-success-2-128.png");
+  }
+  input:focus {
+    outline: 0;
+  }
+  textarea:focus {
+    outline: 0;
   }

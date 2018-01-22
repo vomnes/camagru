@@ -14,7 +14,7 @@
   <div class="footer-picture">
     <img class="like-icon" src="public/pictures/like-black-128.png" alt="like red">
     <a class="like-text">+100</a>
-    <a class="open-comments">Comments</a>
+    <button class="open-comments" onclick='showsDiv("comments-picture")'>Comments</button>
   </div>
   <!-- Comment of the picture -->
   <div id="comments-picture">
@@ -32,9 +32,9 @@
     </div>
     <div class="new-comment">
       <fieldset>
-        <textarea type="text" name="comment" class="content-comment" placeholder="Your comment" title="Content of your comment" cols="40" rows="5"></textarea>
+        <textarea type="text" name="comment" class="content-comment" placeholder="Your comment ..." title="Content of your comment" cols="40" rows="5"></textarea>
       </fieldset>
-      <p><input class="put-comment" type="submit" value="Post"></p>
+      <p><input class="put-comment" type="submit" value=""></p>
     </div>
   </div>
 </div>

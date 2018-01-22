@@ -41,16 +41,14 @@ function resetPassword()
     }
 }
 
-function logout()
-{
-    session_start();
-    logoutUser();
-    require($_SERVER['DOCUMENT_ROOT'] . '/view/indexView.php');
-}
-
 function index()
 {
     require($_SERVER['DOCUMENT_ROOT'] . '/view/indexView.php');
+}
+
+function camera()
+{
+    require($_SERVER['DOCUMENT_ROOT'] . '/view/cameraView.php');
 }
 
 function gallery()
@@ -61,6 +59,12 @@ function gallery()
 function profile()
 {
     require($_SERVER['DOCUMENT_ROOT'] . '/view/myProfileView.php');
+}
+
+function logout()
+{
+    logoutUser();
+    require($_SERVER['DOCUMENT_ROOT'] . '/view/indexView.php');
 }
 
 function headerController() {

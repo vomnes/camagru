@@ -25,7 +25,7 @@ if (!userLogged()) {
 } else {
   if (isset($page)) {
       if ($page == 'camera') {
-
+          camera();
       } elseif ($page == 'gallery') {
           gallery();
       } elseif ($page == 'myprofile') {

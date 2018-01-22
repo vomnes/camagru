@@ -8,6 +8,13 @@ a {
   color: black;
 }
 
+#title-page {
+  position: relative;
+  text-align: center;
+  padding-top: 10px;
+  font-size: 1.7em;
+}
+
 .picture-sign {
   position: relative;
   width: 70%;

@@ -58,6 +58,11 @@ function gallery()
     require($_SERVER['DOCUMENT_ROOT'] . '/view/galleryView.php');
 }
 
+function profile()
+{
+    require($_SERVER['DOCUMENT_ROOT'] . '/view/myProfileView.php');
+}
+
 function headerController() {
   session_start();
   return array(

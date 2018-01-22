@@ -1,0 +1,80 @@
+#profile-area {
+  profile: relative;
+  width: 500px;
+  height: auto;
+  left: 50%;
+  transform: translateX(50%);
+  padding: 5px;
+  /* Shadow */
+  border: 1px solid rgba(0,0,0,0.25);
+  box-shadow: inset 1px 1px 3px rgba(0,0,0,0.25);
+  -moz-box-shadow: inset 1px 1px 3px rgba(0,0,0,0.25);
+  -webkit-box-shadow: inset 1px 1px 3px rgba(0,0,0,0.25);
+  background-color: #FCFCFC;
+}
+
+#profile-picture {
+  profile: relative;
+  width: 500px;
+  height: 210px;
+}
+
+/* Profile picture */
+
+.thumbnail-profile {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 5px;
+  overflow: hidden;
+  background-color: rgba(255,255,255,0.85);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+  -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+}
+
+.thumbnail-profile img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 100%;
+  width: auto;
+  -webkit-transform: translate(-50%,-50%);
+      -ms-transform: translate(-50%,-50%);
+          transform: translate(-50%,-50%);
+}
+
+.thumbnail-profile img.portrait {
+  width: 100%;
+  height: auto;
+}
+
+#text-upload-profile-picture {
+  position: relative;
+  left: 225px;
+  top: -210px;
+  border: none;
+  border-radius: 0px;
+  width: 240px;
+}
+
+#upload-profile-picture {
+  position: relative;
+  left: 225px;
+  top: -220px;
+  border: none;
+  border-radius: 0px;
+  font-size: 13px;
+  width: 219px;
+}
+
+#profile-data {
+  text-align: center;
+  position: relative;
+  height: auto;
+  width: auto;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}

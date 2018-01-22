@@ -29,7 +29,7 @@ if (!userLogged()) {
       } elseif ($page == 'gallery') {
           gallery();
       } elseif ($page == 'myprofile') {
-
+          profile();
       } elseif ($page == 'editprofile') {
 
       } elseif ($page == 'logout') {

@@ -13,7 +13,7 @@
   <!-- Footer of the picture -->
   <div class="footer-picture">
     <img class="like-icon" id="like-icon-1" onclick="handleLikes(1, 'like-icon-1', 'public/pictures/like-black-128.png', 'public/pictures/like-red-128.png')" src="public/pictures/like-black-128.png" alt="like red">
-    <a class="like-text" id="like-text-1">7</a>
+    <a class="like-text" id="like-text-1">+50</a>
     <button class="open-comments" onclick='showsDiv("comments-picture-1")'>Comments</button>
   </div>
   <!-- Comment of the picture -->

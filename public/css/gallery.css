@@ -1,10 +1,3 @@
-  #title-page {
-    position: relative;
-    text-align: center;
-    padding-top: 10px;
-    font-size: 1.7em;
-  }
-
   .gallery {
     /* position: relative; */
     max-width: 650px;
@@ -62,16 +55,6 @@
     overflow: hidden;
   }
 
-  /* --> Comment owner */
-  .thumbnail-comment {
-    position: relative;
-    width: 25px;
-    height: 25px;
-    border-radius: 100%;
-    margin: 5px;
-    overflow: hidden;
-  }
-
   .thumbnail img {
     position: absolute;
     left: 50%;
@@ -84,22 +67,6 @@
   }
 
   .thumbnail img.portrait {
-    width: 100%;
-    height: auto;
-  }
-
-  .thumbnail-comment img {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    height: 100%;
-    width: auto;
-    -webkit-transform: translate(-50%,-50%);
-        -ms-transform: translate(-50%,-50%);
-            transform: translate(-50%,-50%);
-  }
-
-  .thumbnail-comment img.portrait {
     width: 100%;
     height: auto;
   }

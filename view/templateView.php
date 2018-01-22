@@ -13,7 +13,7 @@
     <script src="public/js/gallery.js"></script>
     <link rel="me" href="mailto:valentin.omnes@gmail.com">
     <link rel="icon" type="image/png" sizes="32x32" href="/public/pictures/favicon.png">
-    <link href="https://fonts.googleapis.com/css?family=Belgrano" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Belgrano" rel="stylesheet">
   </head>
   <body>
     <div id="topnav">

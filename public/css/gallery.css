@@ -58,10 +58,21 @@
 
   /* Gallery profile picture */
 
+  /* --> Picture owner */
   .thumbnail {
     position: relative;
     width: 40px;
     height: 40px;
+    border-radius: 100%;
+    margin: 5px;
+    overflow: hidden;
+  }
+
+  /* --> Comment owner */
+  .thumbnail-comment {
+    position: relative;
+    width: 25px;
+    height: 25px;
     border-radius: 100%;
     margin: 5px;
     overflow: hidden;
@@ -79,6 +90,22 @@
   }
 
   .thumbnail img.portrait {
+    width: 100%;
+    height: auto;
+  }
+
+  .thumbnail-comment img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    height: 100%;
+    width: auto;
+    -webkit-transform: translate(-50%,-50%);
+        -ms-transform: translate(-50%,-50%);
+            transform: translate(-50%,-50%);
+  }
+
+  .thumbnail-comment img.portrait {
     width: 100%;
     height: auto;
   }
@@ -104,7 +131,7 @@
     font-size: 20px;
   }
 
-  .comments-text{
+  .open-comments{
     position: absolute;
     top: 12.5px;
     right: 9px;
@@ -112,6 +139,65 @@
     z-index: -1;
   }
 
-  .comments-text:hover {
+  .open-comments:hover {
     text-decoration: underline;
+  }
+
+  /* Comments area */
+  #comments-picture {
+    border: 1px solid black;
+  }
+
+  .one-comment {
+    position: relative;
+    width: auto;
+    display: block;
+    height: auto;
+    left: 48%;
+    margin-left: 2%;
+    margin-right: 2%;
+    padding-bottom: 5px;
+    transform: translateX(-50%);
+  }
+  .comment-owner {
+    position: relative;
+    font-style: italic;
+  }
+  .comment-text {
+    position: relative;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.9em;
+    text-align: justify;
+    text-indent: inherit;
+    transform: translate(-50%, -50%);
+  }
+
+  .new-comment {
+    border: 1px solid grey;
+    margin-left: 2%;
+    margin-right: 2%;
+  }
+  .content-comment {
+    position: relative;
+    left: -7%;
+    padding-left: 2%;
+    height: 50px;
+    min-width: 500px;
+    width: auto;
+    border: none;
+    resize: none;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.9em;
+    padding: 2px;
+  }
+  .content-comment:hover {
+    background-color: #FCFCFC;
+    /* Shadow */
+    border: 1px solid rgba(0,0,0,0.25);
+    box-shadow: inset 1px 1px 3px rgba(0,0,0,0.25);
+    -moz-box-shadow: inset 1px 1px 3px rgba(0,0,0,0.25);
+    -webkit-box-shadow: inset 1px 1px 3px rgba(0,0,0,0.25);
+  }
+  .put-comment {
+
   }

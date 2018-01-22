@@ -1,4 +1,4 @@
-<h2 class="title-page">Gallery</h2>
+<h2 id="title-page">Gallery</h2>
 <div id="gallery">
   <div class="header-picture">
     <div class="thumbnail">

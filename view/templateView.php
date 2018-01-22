@@ -19,6 +19,7 @@
     <div id="topnav">
         <a id="camagru-logo" href="index.php"><img src="/public/pictures/photo-camera-128.png" alt="logo" width="64" height="64" border="0" title="Camagru logo"></a>
         <a id="camagru-text" href="index.php">Camagru</a>
+        <h2 id="title-page-header">Gallery</h2>
         <?php if ($data['isLogged']) { ?>
         <a id="btm-description"></a>
         <a id="camera-btm" href="index.php?action=camera" onmouseover="mouseTitle('visible', 'Manage pictures')" onmouseout="mouseTitle('hidden', '')"><img title="Manage pictures" src="/public/pictures/camera-128.png" alt="camera logo" width="30" height="30" border="0"></a>

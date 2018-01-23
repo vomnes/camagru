@@ -8,32 +8,36 @@ function switchPicture(elem, src1, src2) {
   }
 }
 
-function camera() {
-  var video = document.querySelector("#camera");
+navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
 
-  navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
+function cameraOn() {
+  var video = document.getElementById("camera");
 
   if (navigator.getUserMedia) {
       navigator.getUserMedia({video: true}, handleVideo, videoError);
   }
 
   function handleVideo(stream) {
-      video.src = window.URL.createObjectURL(stream);
+      video.srcObject = stream;
   }
 
   function videoError(e) {
-      // do something
+      console.log('Error to switch on the camera');
   }
 }
 
 function turnOnCamera() {
-  camera();
-  document.getElementById("camera").style.visibility = 'visible';
+  cameraOn();
   document.getElementById("turn-on-camera").style.visibility = 'hidden';
+  document.getElementById("camera-area").className += "shadow";
+  document.getElementById("camera").style.visibility = 'visible';
 }
 
 function turnOffCamera() {
-  document.getElementById("camera").style.visibility = 'hidden';
+  document.getElementById("camera").pause();
   document.getElementById("camera").src = '';
+  document.getElementById("camera").style.visibility = 'hidden';
   document.getElementById("turn-on-camera").style.visibility = 'visible';
+  document.getElementById("camera-area").className -= "shadow";
+  location.reload();
 }

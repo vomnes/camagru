@@ -28,16 +28,21 @@ function cameraOn() {
 
 function turnOnCamera() {
   cameraOn();
-  document.getElementById("turn-on-camera").style.visibility = 'hidden';
-  document.getElementById("camera-area").className += "shadow";
-  document.getElementById("camera").style.visibility = 'visible';
+  document.getElementById("camera").onloadeddata = function() {
+    document.getElementById("turn-on-camera").style.visibility = 'hidden';
+    document.getElementById("camera-area").className += "border-style";
+    document.getElementById('camera-area').style.backgroundColor = '#EFEFEF'
+    document.getElementById("camera").style.visibility = 'visible';
+    document.getElementById("take-picture").style.visibility = 'visible';
+  };
 }
 
 function turnOffCamera() {
   document.getElementById("camera").pause();
   document.getElementById("camera").src = '';
   document.getElementById("camera").style.visibility = 'hidden';
+  document.getElementById("take-picture").style.visibility = 'hidden';
   document.getElementById("turn-on-camera").style.visibility = 'visible';
-  document.getElementById("camera-area").className -= "shadow";
+  document.getElementById("camera-area").className -= "border-style";
   location.reload();
 }

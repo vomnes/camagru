@@ -77,6 +77,18 @@
   cursor: pointer;
 }
 
+#stop-camera {
+  position: fixed;
+  visibility: hidden;
+  width: 9%;
+  height: 10%;
+  bottom: 10px;
+  left: 15px;
+}
+#stop-camera:hover {
+  cursor: pointer;
+}
+
 /* .filter {
   position: absolute;
   visibility: hidden;

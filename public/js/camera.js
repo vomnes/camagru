@@ -11,6 +11,7 @@ function switchPicture(elem, src1, src2) {
 navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
 
 function cameraOn() {
+  console.log('Camera oN function')
   var video = document.getElementById("camera");
 
   if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
@@ -27,23 +28,31 @@ function cameraOn() {
 }
 
 function turnOnCamera() {
+  var on = false;
   cameraOn();
   document.getElementById("camera").onloadeddata = function() {
-    document.getElementById("turn-on-camera").style.visibility = 'hidden';
-    document.getElementById("camera-area").className += "border-style";
-    document.getElementById('camera-area').style.backgroundColor = '#EFEFEF'
-    document.getElementById("camera").style.visibility = 'visible';
-    document.getElementById("take-picture").style.visibility = 'visible';
+      if (on == false) {
+        document.getElementById("turn-on-camera").style.visibility = 'hidden';
+        document.getElementById("camera-area").className += "border-style";
+        document.getElementById('camera-area').style.backgroundColor = '#EFEFEF'
+        document.getElementById("camera").style.visibility = 'visible';
+        document.getElementById("take-picture").style.visibility = 'visible';
+        document.getElementById("stop-camera").style.visibility = 'visible';
+      }
+      on = true;
   };
 }
 
 function turnOffCamera() {
   document.getElementById("camera").pause();
-  document.getElementById("camera").src = '';
+  document.getElementById("camera").src = "";
   document.getElementById("camera").style.visibility = 'hidden';
+  document.getElementById("canvas").style.visibility = 'hidden';
   document.getElementById("take-picture").style.visibility = 'hidden';
   document.getElementById("turn-on-camera").style.visibility = 'visible';
-  document.getElementById("camera-area").className -= "border-style";
+  document.getElementById("stop-camera").style.visibility = 'hidden';
+  document.getElementById('camera-area').style.backgroundColor = 'white';
+  document.getElementById("camera-area").classList.remove("border-style");
   location.reload();
 }
 

@@ -19,9 +19,16 @@ function cameraOn() {
 
   function handleVideo(stream) {
       video.srcObject = stream;
+      console.log(document.getElementById("title-page").innerHTML);
+      if (document.getElementById("title-page").innerHTML == 'Camera<br>Camera access denied') {
+        document.getElementById("title-page").innerHTML = 'Camera';
+      }
   }
 
   function videoError(e) {
+      if (document.getElementById("title-page").innerHTML != 'Camera<br>Camera access denied') {
+        document.getElementById("title-page").innerHTML += '<br>Camera access denied';
+      }
       console.log('Error to switch on the camera');
   }
 }
@@ -31,12 +38,11 @@ function turnOnCamera() {
   cameraOn();
   document.getElementById("camera").onloadeddata = function() {
       if (on == false) {
+
         document.getElementById("turn-on-camera").style.visibility = 'hidden';
         document.getElementById("camera-area").className += "border-style";
         document.getElementById('camera-area').style.backgroundColor = '#EFEFEF'
-        document.getElementById("camera").style.visibility = 'visible';
-        document.getElementById("take-picture").style.visibility = 'visible';
-        document.getElementById("stop-camera").style.visibility = 'visible';
+        changeVisibility(["camera", "take-picture", "stop-camera", "upload-picture"], 'visible');
       }
       on = true;
   };
@@ -45,14 +51,17 @@ function turnOnCamera() {
 function turnOffCamera() {
   document.getElementById("camera").pause();
   document.getElementById("camera").src = "";
-  document.getElementById("camera").style.visibility = 'hidden';
-  document.getElementById("canvas").style.visibility = 'hidden';
-  document.getElementById("take-picture").style.visibility = 'hidden';
+  changeVisibility(["camera", "canvas", "take-picture", "stop-camera", "upload-picture"], 'hidden');
   document.getElementById("turn-on-camera").style.visibility = 'visible';
-  document.getElementById("stop-camera").style.visibility = 'hidden';
   document.getElementById('camera-area').style.backgroundColor = 'white';
   document.getElementById("camera-area").classList.remove("border-style");
   location.reload();
+}
+
+function changeVisibility(elements, status) {
+  elements.forEach(function(elem) {
+    document.getElementById(elem).style.visibility = status;
+  });
 }
 
 window.onload = function() {
@@ -63,14 +72,13 @@ window.onload = function() {
   var height = 375;
 
   takePicture.addEventListener('click', function(ev){
-      console.log(takePicture.getAttribute('value'));
-      if (takePicture.getAttribute('value') == "video") {
-        takePicture.setAttribute('value', 'picture');
+      if (takePicture.getAttribute('mode') == "video") {
+        takePicture.setAttribute('mode', 'picture');
         takePicture.style.backgroundImage = "url('/public/pictures/re-icon-128.png')";
         document.getElementById("canvas").style.visibility = 'visible';
         takepicture();
       } else {
-        takePicture.setAttribute('value', 'video');
+        takePicture.setAttribute('mode', 'video');
         document.getElementById("canvas").style.visibility = 'hidden';
         takePicture.style.backgroundImage = "";
       }

@@ -6,9 +6,6 @@
   <video autoplay="true" id="camera"></video>
   <!-- <img id="filter-1" class="filter" src="public/pictures/filters/SimpleBrownFrame.png" width="166" height="125"> -->
   <canvas id="canvas"></canvas>
-  <div id="take-picture"
-    onmouseover="if (document.getElementById('camera').style.visibility == 'visible') {document.getElementById('camera-area').style.backgroundColor = 'white'}"
-    onmouseout="if (document.getElementById('camera').style.visibility == 'visible') {document.getElementById('camera-area').style.backgroundColor = '#EFEFEF'}">
-  </div>
+  <div id="take-picture" value="video"></div>
 </div>
 <!-- <img id="filter-1" src="public/pictures/filters/SimpleBrownFrame.png" width="166" height="125"> -->

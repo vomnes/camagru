@@ -70,11 +70,18 @@
   border-radius: 100%;
   margin: 5px;
   background: white;
+  background-repeat: no-repeat;
+  background-size: 30px 30px;
+  background-position: center;
 }
 
 #take-picture:hover {
   background: #EFEFEF;
   cursor: pointer;
+  background-image: url('/public/pictures/photo-camera-icon-128.png');
+  background-repeat: no-repeat;
+  background-size: 30px 30px;
+  background-position: center;
 }
 
 #stop-camera {

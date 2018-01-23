@@ -11,7 +11,6 @@ function switchPicture(elem, src1, src2) {
 navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
 
 function cameraOn() {
-  console.log('Camera oN function')
   var video = document.getElementById("camera");
 
   if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
@@ -64,7 +63,17 @@ window.onload = function() {
   var height = 375;
 
   takePicture.addEventListener('click', function(ev){
-      takepicture();
+      console.log(takePicture.getAttribute('value'));
+      if (takePicture.getAttribute('value') == "video") {
+        takePicture.setAttribute('value', 'picture');
+        takePicture.style.backgroundImage = "url('/public/pictures/re-icon-128.png')";
+        document.getElementById("canvas").style.visibility = 'visible';
+        takepicture();
+      } else {
+        takePicture.setAttribute('value', 'video');
+        document.getElementById("canvas").style.visibility = 'hidden';
+        takePicture.style.backgroundImage = "";
+      }
     ev.preventDefault();
   }, false);
 
@@ -74,6 +83,19 @@ window.onload = function() {
     canvas.getContext('2d').drawImage(video, 0, 0, width, height);
     var data = canvas.toDataURL('image/png');
     canvas.setAttribute('src', data);
-    console.log(data);
   }
+
+  takePicture.addEventListener('mouseout', function(ev){
+    if (document.getElementById('camera').style.visibility == 'visible') {
+      document.getElementById('camera-area').style.backgroundColor = '#EFEFEF';
+    }
+    ev.preventDefault();
+  }, false);
+
+  takePicture.addEventListener('mouseover', function(ev){
+    if (document.getElementById('camera').style.visibility == 'visible') {
+      document.getElementById('camera-area').style.backgroundColor = 'white';
+    }
+    ev.preventDefault();
+  }, false);
 }

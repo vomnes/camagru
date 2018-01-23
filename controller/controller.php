@@ -48,6 +48,7 @@ function index()
 
 function camera()
 {
+    // getPicture()
     require($_SERVER['DOCUMENT_ROOT'] . '/view/cameraView.php');
 }
 

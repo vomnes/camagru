@@ -196,4 +196,35 @@
     }
   }
 
+  function getPicture($url, $name) {
+    $img = '/my/folder/'.$name;
+    file_put_contents($img, file_get_contents($url));
+  }
+
+  function downloadImage($path_to_image)
+  {
+    $filename = basename($path_to_image);
+  	header("Content-Transfer-Encoding: binary");
+  	header("Content-Type: image/jpg");
+  	header("Content-Disposition: attachment; filename=$filename");
+  	readfile($path_to_image);
+  }
+  if (isset($_POST['button'])){
+    $filepath = $_POST['ImagePath'];
+    if ($filepath!="") {
+      downloadImage($filepath);
+    } else {
+      echo "No image path.";
+    }
+  }
+
+  // $filename = 'pic_'.date('YmdHis') . '.jpeg';
+  // $url = '';
+  //
+  // if(move_uploaded_file($_FILES['webcam']['tmp_name'],'upload/'.$filename) ){
+  //     $url = 'http://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['REQUEST_URI']) . '/upload/' . $filename;
+  // }
+  // echo $url;
+
+
 // abcdABCD1234

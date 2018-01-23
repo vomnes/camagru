@@ -13,7 +13,7 @@ navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia 
 function cameraOn() {
   var video = document.getElementById("camera");
 
-  if (navigator.getUserMedia) {
+  if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
       navigator.getUserMedia({video: true}, handleVideo, videoError);
   }
 
@@ -45,4 +45,26 @@ function turnOffCamera() {
   document.getElementById("turn-on-camera").style.visibility = 'visible';
   document.getElementById("camera-area").className -= "border-style";
   location.reload();
+}
+
+window.onload = function() {
+  var takePicture = document.getElementById("take-picture");
+  var canvas = document.getElementById("canvas");
+  var video = document.getElementById("camera");
+  var width = 500;
+  var height = 375;
+
+  takePicture.addEventListener('click', function(ev){
+      takepicture();
+    ev.preventDefault();
+  }, false);
+
+  function takepicture() {
+    canvas.width = width;
+    canvas.height = height;
+    canvas.getContext('2d').drawImage(video, 0, 0, width, height);
+    var data = canvas.toDataURL('image/png');
+    canvas.setAttribute('src', data);
+    console.log(data);
+  }
 }

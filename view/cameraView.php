@@ -1,4 +1,6 @@
+<script src="public/js/camera.js"></script>
 <h2 id="title-page">Camera</h2>
 <div id="camera-area">
-  <video autoplay="true" id="camera"></video>
+  <img onclick="turnOnCamera()" id="turn-on-camera" src="public/pictures/lens-close.png" onmouseover="switchPicture('turn-on-camera', 'public/pictures/lens-close.png', 'public/pictures/lens.png')" onmouseout="switchPicture('turn-on-camera', 'public/pictures/lens-close.png', 'public/pictures/lens.png')" alt="camera lens close">
+  <video onclick="turnOffCamera()" autoplay="true" id="camera"></video>
 </div>

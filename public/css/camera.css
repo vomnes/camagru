@@ -1,12 +1,37 @@
 #camera-area {
   margin: 0px auto;
-width: 500px;
-height: 375px;
-border: 10px #333 solid;
+  max-width: 500px;
+  width: auto;
+  max-height: 375px;
+  height: auto;
+  /* Background color */
+  box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+  -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+  background-color: #FFFFFF;
 }
 
 #camera {
+  visibility: hidden;
   width: 500px;
   height: 375px;
-  background-color: #666;
+  background-color: #FCFCFC;
+}
+
+#camera:hover {
+  cursor: pointer;
+}
+
+#turn-on-camera {
+  position: absolute;
+  z-index: 1;
+  width: 25%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+#turn-on-camera:hover {
+  cursor: pointer;
 }

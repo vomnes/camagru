@@ -1,3 +1,4 @@
+<script src="public/js/myprofile.js"></script>
 <h2 id="title-page">Your profile</h2>
 <div id="profile-area">
   <div id="profile-picture">

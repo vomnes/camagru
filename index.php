@@ -30,8 +30,6 @@ if (!userLogged()) {
           gallery();
       } elseif ($page == 'myprofile') {
           profile();
-      } elseif ($page == 'editprofile') {
-
       } elseif ($page == 'logout') {
           logout();
       } else {

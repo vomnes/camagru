@@ -50,11 +50,12 @@ function turnOnCamera() {
 function turnOffCamera() {
   document.getElementById("camera").pause();
   document.getElementById("camera").src = "";
-  changeVisibility(["camera", "canvas", "take-picture", "stop-camera", "upload-picture"], 'hidden');
+  changeVisibility(["camera", "canvas", "take-picture", "stop-camera", "upload-picture", "filter-area"], 'hidden');
   document.getElementById("turn-on-camera").style.visibility = 'visible';
   document.getElementById('camera-area').style.backgroundColor = 'white';
   document.getElementById("camera-area").classList.remove("border-style");
-  setPosition();
+  document.getElementById('camera-area').style.left = "50%";
+  document.getElementById('camera-area').style.transform = "translateX(-50%)";
   location.reload();
 }
 

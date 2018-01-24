@@ -18,7 +18,7 @@
   top: -444px;
   width: 422.5px;
   height: 375px;
-  border: 1px solid red;
+  border: 1px dotted grey;
 }
 
 .border-style {
@@ -137,13 +137,8 @@
   }
   #filter-area {
     position: relative;
-    visibility: visible;
-    max-width: 422.5px;
-    width: auto;
-    max-height: 375px;
-    height: auto;
+    visibility: hidden;
     top: 25px;
-    border: 1px dotted red;
     padding: 5px;
   }
 }

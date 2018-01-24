@@ -60,7 +60,9 @@ function turnOffCamera() {
 }
 
 window.onresize = function(event) {
-  setPosition()
+  if (document.getElementById("turn-on-camera").style.visibility == 'hidden') {
+    setPosition();
+  }
 };
 
 function setPosition() {

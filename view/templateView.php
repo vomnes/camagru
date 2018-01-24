@@ -32,7 +32,7 @@
     <div class="container">
       <?= $content ?>
       <footer>
-          <a href="#">Created by Valentin Omnès - All Rights Reserved.</a>
+          <!-- <a href="#">Created by Valentin Omnès - All Rights Reserved.</a> -->
       </footer>
     </div>
   </body>

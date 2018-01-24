@@ -19,7 +19,6 @@ function cameraOn() {
 
   function handleVideo(stream) {
       video.srcObject = stream;
-      console.log(document.getElementById("title-page").innerHTML);
       if (document.getElementById("title-page").innerHTML == 'Camera<br>Camera access denied') {
         document.getElementById("title-page").innerHTML = 'Camera';
       }
@@ -38,11 +37,11 @@ function turnOnCamera() {
   cameraOn();
   document.getElementById("camera").onloadeddata = function() {
       if (on == false) {
-
         document.getElementById("turn-on-camera").style.visibility = 'hidden';
         document.getElementById("camera-area").className += "border-style";
         document.getElementById('camera-area').style.backgroundColor = '#EFEFEF'
-        changeVisibility(["camera", "take-picture", "stop-camera", "upload-picture"], 'visible');
+        setPosition();
+        changeVisibility(["camera", "take-picture", "stop-camera", "upload-picture", "filter-area"], 'visible');
       }
       on = true;
   };
@@ -55,7 +54,30 @@ function turnOffCamera() {
   document.getElementById("turn-on-camera").style.visibility = 'visible';
   document.getElementById('camera-area').style.backgroundColor = 'white';
   document.getElementById("camera-area").classList.remove("border-style");
+  setPosition();
   location.reload();
+}
+
+window.onresize = function(event) {
+  setPosition()
+};
+
+function setPosition() {
+  if (document.documentElement.clientWidth > 1040) {
+    console.log('>= 1040');
+    document.getElementById('camera-area').style.left = "5%";
+    document.getElementById('camera-area').style.transform = "translateX(-5%)";
+    document.getElementById('filter-area').style.right = "5%";
+    document.getElementById('filter-area').style.transform = "translateX(10%)";
+    console.log(document.getElementById('filter-area').style.right);
+    console.log(document.getElementById('filter-area').style.transform);
+  } else {
+    console.log('< 1040');
+    document.getElementById('camera-area').style.left = "50%";
+    document.getElementById('camera-area').style.transform = "translateX(-50%)";
+    document.getElementById('filter-area').style.left = "50%";
+    document.getElementById('filter-area').style.transform = "translateX(-50%)";
+  }
 }
 
 function changeVisibility(elements, status) {

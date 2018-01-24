@@ -9,4 +9,6 @@
   <div id="take-picture" mode="video"></div>
   <img id="upload-picture" src="public/pictures/download-picture-black-128.png" alt="upload picture" onmouseover="switchPicture('upload-picture', 'public/pictures/download-picture-black-128.png', 'public/pictures/download-picture-color-128.png')" onmouseout="switchPicture('upload-picture', 'public/pictures/download-picture-black-128.png', 'public/pictures/download-picture-color-128.png')">
 </div>
-<!-- <img id="filter-1" src="public/pictures/filters/SimpleBrownFrame.png" width="166" height="125"> -->
+<div id="filter-area">
+  <!-- <img id="filter-1" src="public/pictures/filters/SimpleBrownFrame.png" width="166" height="125"> -->
+<div>

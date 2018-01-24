@@ -11,16 +11,28 @@
   background: white;
 }
 
-#filter-area {
+#your-photo-area {
   position: relative;
   visibility: hidden;
   left: 50%;
-  top: -444px;
-  width: auto;
+  top: -472px;
   max-width: 422.5px;
+  width: auto;
+  max-height: 470px;
   height: auto;
-  /* min-height: 375px; */
-  border: 1px dotted grey;
+}
+
+#your-photo-scroll {
+  position: relative;
+  visibility: hidden;
+  top: -2px;
+  max-width: 416.5px;
+  width: auto;
+  max-height: 433px;
+  height: auto;
+  overflow-y: scroll;
+  /* Border */
+  padding: 3px;
 }
 
 .border-style {
@@ -120,45 +132,25 @@
   cursor: copy;
 }
 
-/* .filter {
-  position: absolute;
-  visibility: hidden;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-  max-width: 500px;
-  width: 100%;
-  max-height: 375px;
-  height: auto;
-  right: 0px;
-  z-index: 1;
-} */
-
 @media screen and (max-width: 1040px) {
   #camera-area {
     position: relative;
   }
-  #filter-area {
+  #your-photo-area {
     position: relative;
     visibility: hidden;
     top: 25px;
     padding: 5px;
   }
-}
-
-img.filter {
-  position: relative;
-  width: 48.25%;
-  height: 27.5%;
-  border: 2px solid red;
-}
-
-@media screen and (max-width: 384px) {
-  img.filter {
-    position: relative;
-    /* text-align: center; */
-    width: 45%;
-    height: 27.5%;
-    left: 2%;
-    border: 2px solid red;
+  #your-photo-scroll {
+    visibility: hidden;
+    width: auto;
+    height: auto;
   }
+}
+
+img.your-photo {
+  position: relative;
+  width: 48.5%;
+  height: 32.5%;
 }

@@ -41,7 +41,7 @@ function turnOnCamera() {
         document.getElementById("camera-area").className += "border-style";
         document.getElementById('camera-area').style.backgroundColor = '#EFEFEF'
         setPosition();
-        changeVisibility(["camera", "take-picture", "stop-camera", "upload-picture", "filter-area"], 'visible');
+        changeVisibility(["camera", "take-picture", "stop-camera", "upload-picture", "your-photo-area", "your-photo-scroll"], 'visible');
       }
       on = true;
   };
@@ -50,7 +50,7 @@ function turnOnCamera() {
 function turnOffCamera() {
   document.getElementById("camera").pause();
   document.getElementById("camera").src = "";
-  changeVisibility(["camera", "canvas", "take-picture", "stop-camera", "upload-picture", "filter-area"], 'hidden');
+  changeVisibility(["camera", "canvas", "take-picture", "stop-camera", "upload-picture", "your-photo-area", "your-photo-scroll"], 'hidden');
   document.getElementById("turn-on-camera").style.visibility = 'visible';
   document.getElementById('camera-area').style.backgroundColor = 'white';
   document.getElementById("camera-area").classList.remove("border-style");
@@ -65,19 +65,15 @@ window.onresize = function(event) {
 
 function setPosition() {
   if (document.documentElement.clientWidth > 1040) {
-    console.log('>= 1040');
     document.getElementById('camera-area').style.left = "5%";
     document.getElementById('camera-area').style.transform = "translateX(-5%)";
-    document.getElementById('filter-area').style.right = "5%";
-    document.getElementById('filter-area').style.transform = "translateX(10%)";
-    console.log(document.getElementById('filter-area').style.right);
-    console.log(document.getElementById('filter-area').style.transform);
+    document.getElementById('your-photo-area').style.right = "5%";
+    document.getElementById('your-photo-area').style.transform = "translateX(10%)";
   } else {
-    console.log('< 1040');
     document.getElementById('camera-area').style.left = "50%";
     document.getElementById('camera-area').style.transform = "translateX(-50%)";
-    document.getElementById('filter-area').style.left = "50%";
-    document.getElementById('filter-area').style.transform = "translateX(-50%)";
+    document.getElementById('your-photo-area').style.left = "50%";
+    document.getElementById('your-photo-area').style.transform = "translateX(-50%)";
   }
 }
 

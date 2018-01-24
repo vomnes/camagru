@@ -132,6 +132,30 @@
   cursor: copy;
 }
 
+#filter-area {
+  position: absolute;
+  visibility: hidden;
+  top: 523px;
+  left: 28px;
+  width: 928px;
+  height: 83px;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  padding: 3px;
+}
+
+.filter-picture {
+  position: relative;
+  top: 0px;
+  height: 98%;
+  width: auto;
+  display: inline-block;
+  /* if you need ie7 support */
+  *display: inline;
+  zoom: 1
+}
+
 @media screen and (max-width: 1040px) {
   #camera-area {
     position: relative;

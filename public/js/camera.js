@@ -41,7 +41,7 @@ function turnOnCamera() {
         document.getElementById("camera-area").className += "border-style";
         document.getElementById('camera-area').style.backgroundColor = '#EFEFEF'
         setPosition();
-        changeVisibility(["camera", "take-picture", "stop-camera", "upload-picture", "your-photo-area", "your-photo-scroll"], 'visible');
+        changeVisibility(["camera", "take-picture", "stop-camera", "upload-picture", "your-photo-area", "your-photo-scroll", "filter-area"], 'visible');
       }
       on = true;
   };
@@ -50,7 +50,7 @@ function turnOnCamera() {
 function turnOffCamera() {
   document.getElementById("camera").pause();
   document.getElementById("camera").src = "";
-  changeVisibility(["camera", "canvas", "take-picture", "stop-camera", "upload-picture", "your-photo-area", "your-photo-scroll"], 'hidden');
+  changeVisibility(["camera", "canvas", "take-picture", "stop-camera", "upload-picture", "your-photo-area", "your-photo-scroll", "filter-area"], 'hidden');
   document.getElementById("turn-on-camera").style.visibility = 'visible';
   document.getElementById('camera-area').style.backgroundColor = 'white';
   document.getElementById("camera-area").classList.remove("border-style");
@@ -84,6 +84,7 @@ function changeVisibility(elements, status) {
 }
 
 window.onload = function() {
+  addFilterId();
   var takePicture = document.getElementById("take-picture");
   var canvas = document.getElementById("canvas");
   var video = document.getElementById("camera");
@@ -125,4 +126,38 @@ window.onload = function() {
     }
     ev.preventDefault();
   }, false);
+}
+
+
+function addFilterId() {
+  var filters = document.getElementById("filter-area").childNodes;
+  var index = 0;
+  var idName;
+  for(var i = 0; i< filters.length;i++)
+  {
+    if (filters[i].nodeType == 1) {
+      filters[i].setAttribute('class', 'filter-picture');
+      idName = 'filter-picture-' + index;
+      filters[i].setAttribute('id', idName);
+      filters[i].setAttribute('onclick', 'changeBorder(\''+ idName+ '\')');
+      filters[i].setAttribute('value', '0');
+      filters[i].style.border = "2px solid white";
+      filters[i].style.background = "url('public/pictures/camera-128.png')";
+      document.styleSheets[0].insertRule('#'+idName+':hover{cursor:pointer;}', 0);
+      index++;
+    }
+  }
+}
+
+function changeBorder(elementId) {
+  var element = document.getElementById(elementId);
+  if (element.value == 0) {
+    console.log(elementId + ' value: ' + 0);
+    element.value = 1;
+    element.style.border = "2px solid white";
+  } else {
+    console.log(elementId + ' value: ' + 1);
+    element.value = 0;
+    element.style.border = "2px solid #3092DE";
+  }
 }

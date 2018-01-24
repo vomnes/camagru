@@ -21,4 +21,22 @@
     <img class="your-photo" id="your-photo-1" src="public/pictures/filters/border-picture.jpg">
     <img class="your-photo" id="your-photo-1" src="public/pictures/filters/border-picture.jpg">
   </div>
-<div>
+</div>
+<div id="filter-area" class="border-style">
+  <img src="public/pictures/filters/border-picture.jpg">
+  <img src="public/pictures/filters/border-picture.jpg">
+  <img src="public/pictures/filters/border-picture.jpg">
+  <img src="public/pictures/filters/border-picture.jpg">
+  <img src="public/pictures/filters/border-picture.jpg">
+  <img src="public/pictures/filters/border-picture.jpg">
+  <img src="public/pictures/filters/border-picture.jpg">
+  <img src="public/pictures/filters/border-picture.jpg">
+  <img src="public/pictures/filters/border-picture.jpg">
+  <img src="public/pictures/filters/border-picture.jpg">
+  <img src="public/pictures/filters/border-picture.jpg">
+  <img src="public/pictures/filters/border-picture.jpg">
+  <img src="public/pictures/filters/border-picture.jpg">
+  <img src="public/pictures/filters/border-picture.jpg">
+  <img src="public/pictures/filters/border-picture.jpg">
+  <img src="public/pictures/filters/border-picture.jpg">
+</div>

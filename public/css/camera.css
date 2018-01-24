@@ -16,8 +16,10 @@
   visibility: hidden;
   left: 50%;
   top: -444px;
-  width: 422.5px;
-  height: 375px;
+  width: auto;
+  max-width: 422.5px;
+  height: auto;
+  /* min-height: 375px; */
   border: 1px dotted grey;
 }
 
@@ -140,5 +142,23 @@
     visibility: hidden;
     top: 25px;
     padding: 5px;
+  }
+}
+
+img.filter {
+  position: relative;
+  width: 48.25%;
+  height: 27.5%;
+  border: 2px solid red;
+}
+
+@media screen and (max-width: 384px) {
+  img.filter {
+    position: relative;
+    /* text-align: center; */
+    width: 45%;
+    height: 27.5%;
+    left: 2%;
+    border: 2px solid red;
   }
 }

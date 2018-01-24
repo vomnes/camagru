@@ -10,5 +10,10 @@
   <img id="upload-picture" src="public/pictures/download-picture-black-128.png" alt="upload picture" onmouseover="switchPicture('upload-picture', 'public/pictures/download-picture-black-128.png', 'public/pictures/download-picture-color-128.png')" onmouseout="switchPicture('upload-picture', 'public/pictures/download-picture-black-128.png', 'public/pictures/download-picture-color-128.png')">
 </div>
 <div id="filter-area">
-  <!-- <img id="filter-1" src="public/pictures/filters/SimpleBrownFrame.png" width="166" height="125"> -->
+  <h3 style="text-align:center;font-size:1.2em;margin:2px;" >Filters list</h3>
+  <img class="filter" id="filter-1" src="public/pictures/filters/border-picture.jpg">
+  <img class="filter" id="filter-1" src="public/pictures/filters/border-picture.jpg">
+  <img class="filter" id="filter-1" src="public/pictures/filters/border-picture.jpg">
+  <img class="filter" id="filter-1" src="public/pictures/filters/border-picture.jpg">
+  <img class="filter" id="filter-1" src="public/pictures/filters/border-picture.jpg">
 <div>

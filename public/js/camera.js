@@ -142,7 +142,6 @@ function addFilterId() {
       filters[i].setAttribute('onclick', 'changeBorder(\''+ idName+ '\')');
       filters[i].setAttribute('value', '0');
       filters[i].style.border = "2px solid white";
-      filters[i].style.background = "url('public/pictures/camera-128.png')";
       document.styleSheets[0].insertRule('#'+idName+':hover{cursor:pointer;}', 0);
       index++;
     }

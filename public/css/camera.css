@@ -148,6 +148,7 @@
 .filter-picture {
   position: relative;
   top: 0px;
+  max-height: 83px;
   height: 98%;
   width: auto;
   display: inline-block;
@@ -163,13 +164,28 @@
   #your-photo-area {
     position: relative;
     visibility: hidden;
-    top: 25px;
+    top: 105px;
     padding: 5px;
   }
   #your-photo-scroll {
     visibility: hidden;
     width: auto;
+    max-height: 380px;
     height: auto;
+  }
+  #filter-area {
+    position: relative;
+    visibility: hidden;
+    max-width: 500px;
+    width: 90%;
+    max-height: 83px;
+    height: auto;
+    top: -420px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .filter-picture {
+    width: 88px;
   }
 }
 

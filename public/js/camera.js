@@ -145,7 +145,7 @@ function addFilterId() {
       filters[i].setAttribute('class', 'filter-picture');
       idName = 'filter-picture-' + index;
       filters[i].setAttribute('id', idName);
-      filters[i].setAttribute('onclick', 'changeBorder(\''+ idName+ '\')');
+      filters[i].setAttribute('onclick', 'selectFilter(\''+ idName+ '\')');
       filters[i].setAttribute('value', '0');
       filters[i].style.border = "2px solid white";
       document.styleSheets[0].insertRule('#'+idName+':hover{cursor:pointer;}', 0);
@@ -154,15 +154,20 @@ function addFilterId() {
   }
 }
 
-function changeBorder(elementId) {
+function selectFilter(elementId) {
   var element = document.getElementById(elementId);
   if (element.value == 0) {
-    console.log(elementId + ' value: ' + 0);
     element.value = 1;
     element.style.border = "2px solid white";
+    var filterToRemove = document.getElementById("apply-" + elementId);
+    filterToRemove.parentNode.removeChild(filterToRemove);
   } else {
-    console.log(elementId + ' value: ' + 1);
     element.value = 0;
     element.style.border = "2px solid #3092DE";
+    var img = document.createElement("img");
+    img.src = element.src;
+    img.className += "filter-style";
+    img.id = "apply-" + elementId;
+    document.getElementById("applied-filter").appendChild(img);
   }
 }

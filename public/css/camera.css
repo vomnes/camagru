@@ -222,3 +222,23 @@ img.your-photo {
 img.your-photo:hover {
   cursor: pointer;
 }
+
+#applied-filter {
+  position: absolute;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  max-width: 501px;
+  width: 100%;
+  max-height: 377px;
+  height: auto;
+  top: -1px;
+}
+.filter-style {
+  position: fixed;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  max-width: 501px;
+  width: 100%;
+  max-height: 377px;
+  height: auto;
+}

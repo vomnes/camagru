@@ -23,7 +23,20 @@
   </div>
 </div>
 <div id="filter-area" class="border-style">
-  <img src="public/pictures/filters/SimpleBrownFrame.png">
-  <img src="public/pictures/filters/water.png">
   <img src="public/pictures/filters/basketball.png">
+  <img src="public/pictures/filters/crooks-and-castles.png">
+  <img src="public/pictures/filters/plane.png">
+  <img src="public/pictures/filters/white-mask.png">
+  <img src="public/pictures/filters/fireball-two.png">
+  <img src="public/pictures/filters/prison.png">
+  <img src="public/pictures/filters/table.png">
+  <img src="public/pictures/filters/cheese.png">
+  <img src="public/pictures/filters/hamburgers.png">
+  <img src="public/pictures/filters/cutting-board.png">
+  <img src="public/pictures/filters/spare-ribs.png">
+  <img src="public/pictures/filters/jaguar.png">
+  <img src="public/pictures/filters/owl-right.png">
+  <img src="public/pictures/filters/owl-two.png">
+  <img src="public/pictures/filters/bottle.png">
+  <img src="public/pictures/filters/bottle-2.png">
 </div>

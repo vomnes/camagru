@@ -48,8 +48,14 @@ function index()
 
 function camera()
 {
-    // getPicture()
-    require($_SERVER['DOCUMENT_ROOT'] . '/view/cameraView.php');
+    if ($_GET["method"] == "savepicture") {
+      savePictureInDatabase();
+    } elseif ($_GET["method"] == "lastpicture") {
+      echo 'public/pictures/illustration-2.jpg';
+    } else {
+      // getPicture();
+      require($_SERVER['DOCUMENT_ROOT'] . '/view/cameraView.php');
+    }
 }
 
 function gallery()

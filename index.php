@@ -40,5 +40,9 @@ if (!userLogged()) {
   }
 }
 $content = ob_get_clean();
-$data = headerController();
-require($_SERVER['DOCUMENT_ROOT'] . '/view/templateView.php');
+if ($_GET['method'] == '') {
+  $data = headerController();
+  require($_SERVER['DOCUMENT_ROOT'] . '/view/templateView.php');
+} else {
+  print_r($content);
+}

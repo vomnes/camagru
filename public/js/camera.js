@@ -92,6 +92,7 @@ function changeVisibility(elements, status) {
 window.onload = function() {
   addFilterId();
   var takePicture = document.getElementById("take-picture");
+  var uploadPicture = document.getElementById("upload-picture");
   var canvas = document.getElementById("canvas");
   var video = document.getElementById("camera");
   var width = 500;
@@ -111,14 +112,6 @@ window.onload = function() {
     ev.preventDefault();
   }, false);
 
-  function takepicture() {
-    canvas.width = width;
-    canvas.height = height;
-    canvas.getContext('2d').drawImage(video, 0, 0, width, height);
-    var data = canvas.toDataURL('image/png');
-    canvas.setAttribute('src', data);
-  }
-
   takePicture.addEventListener('mouseout', function(ev){
     if (document.getElementById('camera').style.visibility == 'visible') {
       document.getElementById('camera-area').style.backgroundColor = '#EFEFEF';
@@ -132,8 +125,20 @@ window.onload = function() {
     }
     ev.preventDefault();
   }, false);
-}
 
+  function takepicture() {
+    canvas.width = width;
+    canvas.height = height;
+    canvas.getContext('2d').drawImage(video, 0, 0, width, height);
+    var data = canvas.toDataURL('image/png');
+    canvas.setAttribute('content', data);
+  }
+
+  uploadPicture.addEventListener('click', function(ev){
+    savePicture();
+    ev.preventDefault();
+  }, false);
+}
 
 function addFilterId() {
   var filters = document.getElementById("filter-area").childNodes;
@@ -164,10 +169,72 @@ function selectFilter(elementId) {
   } else {
     element.value = 0;
     element.style.border = "2px solid #3092DE";
-    var img = document.createElement("img");
-    img.src = element.src;
-    img.className += "filter-style";
-    img.id = "apply-" + elementId;
-    document.getElementById("applied-filter").appendChild(img);
+    appendImage("applied-filter", element.src, "filter-style", "apply-" + elementId);
   }
+}
+
+function savePicture() {
+  var photo = document.getElementById("canvas");
+  var base64Photo = photo.getAttribute('content');
+  if (base64Photo == null) {
+    return;
+  } else {
+    var formData = new FormData();
+    formData.append('photo', base64Photo);
+    formData.append('filters', getUsedFilters());
+  }
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+				var xhttp = new XMLHttpRequest();
+				xhttp.onreadystatechange = function() {
+				  if (this.readyState == 4 && this.status == 200) {
+            console.log(xhttp.responseText);
+            prependImage('your-photo-scroll-after', xhttp.responseText, 'your-photo', '');
+				  }
+			  };
+				xhttp.open("GET", "index.php?action=camera&method=lastpicture", true); // Get last picture
+				xhttp.send();
+		}
+  }
+  xmlhttp.open("POST", "index.php?action=camera&method=savepicture", true); // Create new image
+  xmlhttp.send(formData);
+}
+
+function getUsedFilters() {
+  var filters = document.getElementById("applied-filter").childNodes;
+  var usedFilters = [];
+  for(var i = 0; i< filters.length;i++)
+  {
+    if (filters[i].nodeType == 1) {
+      usedFilters.push(filters[i].src);
+    }
+  }
+  return usedFilters;
+}
+
+function appendImage(parentId, src, className, idName) {
+  var img = document.createElement("img");
+  img.src = src;
+  if (className != '') {
+    img.className += className;
+  }
+  if (idName != '') {
+    img.id = idName;
+  }
+  document.getElementById(parentId).appendChild(img);
+}
+
+function prependImage(parentId, src, className, idName) {
+  var parent = document.getElementById(parentId);
+  var img = document.createElement("img");
+  img.src = src;
+  if (className != '') {
+    img.className += className;
+  }
+  if (idName != '') {
+    img.id = idName;
+  }
+  parent.appendChild(img);
+  parent.insertBefore(img, parent.firstChild);
 }

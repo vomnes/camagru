@@ -9,17 +9,17 @@
   <div id="take-picture" mode="video"></div>
   <img id="upload-picture" src="public/pictures/download-picture-black-128.png" alt="upload picture" onmouseover="switchPicture('upload-picture', 'public/pictures/download-picture-black-128.png', 'public/pictures/download-picture-color-128.png')" onmouseout="switchPicture('upload-picture', 'public/pictures/download-picture-black-128.png', 'public/pictures/download-picture-color-128.png')">
 </div>
-<div id="your-photo-area">
+<div id="your-photo-area-before">
   <h3 style="text-align:center;font-size:1.2em;margin:2px;" >Your pictures</h3>
-  <div id="your-photo-scroll" class="border-style">
-    <img class="your-photo" id="your-photo-1" src="public/pictures/filters/border-picture.jpg">
-    <img class="your-photo" id="your-photo-1" src="public/pictures/filters/border-picture.jpg">
-    <img class="your-photo" id="your-photo-1" src="public/pictures/filters/border-picture.jpg">
-    <img class="your-photo" id="your-photo-1" src="public/pictures/filters/border-picture.jpg">
-    <img class="your-photo" id="your-photo-1" src="public/pictures/filters/border-picture.jpg">
-    <img class="your-photo" id="your-photo-1" src="public/pictures/filters/border-picture.jpg">
-    <img class="your-photo" id="your-photo-1" src="public/pictures/filters/border-picture.jpg">
-    <img class="your-photo" id="your-photo-1" src="public/pictures/filters/border-picture.jpg">
+  <div id="your-photo-scroll-before">
+    <img class="your-photo" src="public/pictures/illustration-3.jpg">
+    <img class="your-photo" src="public/pictures/illustration-3.jpg">
+    <img class="your-photo" src="public/pictures/illustration-3.jpg">
+    <img class="your-photo" src="public/pictures/illustration-3.jpg">
+    <img class="your-photo" src="public/pictures/illustration-3.jpg">
+    <img class="your-photo" src="public/pictures/illustration-3.jpg">
+    <img class="your-photo" src="public/pictures/illustration-3.jpg">
+    <img class="your-photo" src="public/pictures/illustration-3.jpg">
   </div>
 </div>
 <div id="filter-area" class="border-style">

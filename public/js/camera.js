@@ -37,11 +37,13 @@ function turnOnCamera() {
   cameraOn();
   document.getElementById("camera").onloadeddata = function() {
       if (on == false) {
+        document.getElementById("your-photo-area-before").id = "your-photo-area-after";
+        document.getElementById("your-photo-scroll-before").id = "your-photo-scroll-after";
         document.getElementById("turn-on-camera").style.visibility = 'hidden';
         document.getElementById("camera-area").className += "border-style";
         document.getElementById('camera-area').style.backgroundColor = '#EFEFEF'
         setPosition();
-        changeVisibility(["camera", "take-picture", "stop-camera", "upload-picture", "your-photo-area", "your-photo-scroll", "filter-area"], 'visible');
+        changeVisibility(["camera", "take-picture", "stop-camera", "upload-picture", "your-photo-area-after", "your-photo-scroll-after", "filter-area"], 'visible');
       }
       on = true;
   };
@@ -50,12 +52,14 @@ function turnOnCamera() {
 function turnOffCamera() {
   document.getElementById("camera").pause();
   document.getElementById("camera").src = "";
-  changeVisibility(["camera", "canvas", "take-picture", "stop-camera", "upload-picture", "your-photo-area", "your-photo-scroll", "filter-area"], 'hidden');
+  changeVisibility(["camera", "canvas", "take-picture", "stop-camera", "upload-picture", "your-photo-area-after", "your-photo-scroll-after", "filter-area"], 'hidden');
   document.getElementById("turn-on-camera").style.visibility = 'visible';
   document.getElementById('camera-area').style.backgroundColor = 'white';
   document.getElementById("camera-area").classList.remove("border-style");
   document.getElementById('camera-area').style.left = "50%";
   document.getElementById('camera-area').style.transform = "translateX(-50%)";
+  document.getElementById("your-photo-area-after").id = "your-photo-area-before";
+  document.getElementById("your-photo-scroll-after").id = "your-photo-scroll-before";
   location.reload();
 }
 
@@ -69,13 +73,13 @@ function setPosition() {
   if (document.documentElement.clientWidth > 1040) {
     document.getElementById('camera-area').style.left = "5%";
     document.getElementById('camera-area').style.transform = "translateX(-5%)";
-    document.getElementById('your-photo-area').style.right = "5%";
-    document.getElementById('your-photo-area').style.transform = "translateX(10%)";
+    document.getElementById('your-photo-area-after').style.right = "5%";
+    document.getElementById('your-photo-area-after').style.transform = "translateX(10%)";
   } else {
     document.getElementById('camera-area').style.left = "50%";
     document.getElementById('camera-area').style.transform = "translateX(-50%)";
-    document.getElementById('your-photo-area').style.left = "50%";
-    document.getElementById('your-photo-area').style.transform = "translateX(-50%)";
+    document.getElementById('your-photo-area-after').style.left = "50%";
+    document.getElementById('your-photo-area-after').style.transform = "translateX(-50%)";
   }
 }
 

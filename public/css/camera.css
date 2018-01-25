@@ -11,7 +11,7 @@
   background: white;
 }
 
-#your-photo-area {
+#your-photo-area-after {
   position: relative;
   visibility: hidden;
   left: 50%;
@@ -22,7 +22,16 @@
   height: auto;
 }
 
-#your-photo-scroll {
+#your-photo-area-before {
+  position: relative;
+  visibility: visible;
+  left: 5%;
+  top: -25px;
+  width: 90%;
+  height: auto;
+}
+
+#your-photo-scroll-after {
   position: relative;
   visibility: hidden;
   top: -2px;
@@ -33,6 +42,17 @@
   overflow-y: scroll;
   /* Border */
   padding: 3px;
+}
+
+#your-photo-scroll-before {
+  position: relative;
+  visibility: visible;
+  width: 98%;
+  height: 9%;
+  padding: 3px;
+  top: -2px;
+  left: 1.75%;
+  margin-top: 5px;
 }
 
 .border-style {
@@ -161,13 +181,13 @@
   #camera-area {
     position: relative;
   }
-  #your-photo-area {
+  #your-photo-area-after {
     position: relative;
     visibility: hidden;
     top: 105px;
     padding: 5px;
   }
-  #your-photo-scroll {
+  #your-photo-scroll-after {
     visibility: hidden;
     width: auto;
     max-height: 380px;
@@ -193,4 +213,12 @@ img.your-photo {
   position: relative;
   width: 48.5%;
   height: 32.5%;
+  border-bottom: 1px solid rgba(0,0,0,0.25);
+  /* Background color */
+  box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+  -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+}
+img.your-photo:hover {
+  cursor: pointer;
 }

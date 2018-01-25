@@ -34,9 +34,14 @@
   <img src="public/pictures/filters/hamburgers.png">
   <img src="public/pictures/filters/cutting-board.png">
   <img src="public/pictures/filters/spare-ribs.png">
+  <img src="public/pictures/filters/bananas.png">
+  <img src="public/pictures/filters/bananas-left.png">
   <img src="public/pictures/filters/jaguar.png">
   <img src="public/pictures/filters/owl-right.png">
   <img src="public/pictures/filters/owl-two.png">
   <img src="public/pictures/filters/bottle.png">
   <img src="public/pictures/filters/bottle-2.png">
+  <img src="public/pictures/filters/laurel-gold.png">
+  <img src="public/pictures/filters/laurel-wreath.png">
+  <img src="public/pictures/filters/tiger.png">
 </div>

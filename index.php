@@ -44,5 +44,5 @@ if ($_GET['method'] == '') {
   $data = headerController();
   require($_SERVER['DOCUMENT_ROOT'] . '/view/templateView.php');
 } else {
-  print_r($content);
+  echo $content;
 }

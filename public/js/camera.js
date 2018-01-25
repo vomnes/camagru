@@ -181,7 +181,7 @@ function savePicture() {
   } else {
     var formData = new FormData();
     formData.append('photo', base64Photo);
-    formData.append('filters', getUsedFilters());
+    formData.append('filters', JSON.stringify(getUsedFilters()));
   }
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.onreadystatechange = function() {
@@ -189,7 +189,6 @@ function savePicture() {
 				var xhttp = new XMLHttpRequest();
 				xhttp.onreadystatechange = function() {
 				  if (this.readyState == 4 && this.status == 200) {
-            console.log(xhttp.responseText);
             prependImage('your-photo-scroll-after', xhttp.responseText, 'your-photo', '');
 				  }
 			  };

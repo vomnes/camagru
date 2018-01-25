@@ -218,13 +218,41 @@
     }
   }
 
-  // $filename = 'pic_'.date('YmdHis') . '.jpeg';
-  // $url = '';
-  //
-  // if(move_uploaded_file($_FILES['webcam']['tmp_name'],'upload/'.$filename) ){
-  //     $url = 'http://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['REQUEST_URI']) . '/upload/' . $filename;
-  // }
-  // echo $url;
+  function savePictureInDatabase() {
+    session_start();
+    $photo = $_POST['photo'];
+    if (isset($photo)) {
+      $filters = $_POST['filters'];
+      $filename = $_SESSION["logged_user"] . '-' . 'picture-' . substr(md5(mt_rand()), 0, 12) . '.png';
+      $data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $photo));
+      if (isset($filters)) {
+        $img = mergePictures($data, json_decode($filters, true));
+        imagepng($img, "public/pictures/users-pictures/" . $filename);
+      } else {
+        file_put_contents($_SERVER['DOCUMENT_ROOT'] . "/public/pictures/users-pictures/" . $filename, $data);
+      }
+    } else {
+      echo 'Error: No photo';
+    }
+  }
 
+  function mergePictures($photo, $filtersArray) {
+    $width = 500;
+    $height = 375;
+
+    $final_img = imagecreatetruecolor($width, $height);
+    // imagealphablending($final_img, true);
+    imagesavealpha($final_img, true);
+
+    // Add webcam picture
+    $frame = imagecreatefromstring($photo);
+    imagecopy($final_img, $frame, 0, 0, 0, 0, $width, $height);
+    // Add filters
+    foreach ($filtersArray as $key => $filter) {
+      $frame = imagecreatefrompng(strstr($filter, 'public'));
+      imagecopy($final_img, $frame, 0, 0, 0, 0, $width, $height);
+    }
+    return $final_img;
+  }
 
 // abcdABCD1234

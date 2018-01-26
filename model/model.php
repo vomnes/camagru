@@ -289,4 +289,24 @@
     return $allPictures;
   }
 
+  function commentInDB() {
+    session_start();
+    $userId = $_SESSION["logged_userId"];
+    $content = $_POST["content"];
+    $pictureId = $_GET["id"];
+    echo '88' . $pictureId . '%%';
+    $td = new database();
+    $td->insertData(
+      'Comments',
+      'pictureId, userId, content',
+      ':pictureId, :userId, :content',
+      array(
+        'pictureId' => intval($pictureId, 10),
+        'userId' => intval($userId, 10),
+        'content' => $content,
+      ));
+  }
+
+  // 'SELECT p.id, p.file_path as file_path, u.username, u.profile_picture from Pictures p left join Users u on u.id=p.userId';
+
 // abcdABCD1234

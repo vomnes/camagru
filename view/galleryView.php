@@ -44,7 +44,7 @@ for ($index = 1; $index < $len; $index++) {
       <fieldset>
         <textarea type="text" name="comment" class="content-comment" id="content-comment-<?php echo $index ?>" placeholder="Your comment ..." title="Content of your comment" cols="40" rows="5"></textarea>
       </fieldset>
-      <p><input class="put-comment" type="submit" value="" onclick="addComment(<?php echo $index ?>, 'username')"></p>
+      <p><input class="put-comment" type="submit" value="" onclick="addComment('<?php echo $index?>', '<?php echo $id?>', '<?php session_start(); echo $_SESSION["logged_user"];?>')"></p>
     </div>
   </div>
 </div>

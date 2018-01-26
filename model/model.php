@@ -276,4 +276,17 @@
     return $final_img;
   }
 
+  function getUserPictures() {
+    session_start();
+    $td = new database();
+    $userPictures = $td->getAll('SELECT id, file_path FROM Pictures WHERE userId = ' . $_SESSION["logged_userId"] . ' ORDER BY creation_date DESC');
+    return $userPictures;
+  }
+
+  function getAllPictures() {
+    $td = new database();
+    $allPictures = $td->getAll('SELECT id, userId, file_path FROM Pictures ORDER BY creation_date DESC');
+    return $allPictures;
+  }
+
 // abcdABCD1234

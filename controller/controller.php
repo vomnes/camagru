@@ -53,13 +53,14 @@ function camera()
     } elseif ($_GET["method"] == "lastpicture") {
       echo lastPicture();
     } else {
-      // getPicture();
+      $userPictures = getUserPictures();
       require($_SERVER['DOCUMENT_ROOT'] . '/view/cameraView.php');
     }
 }
 
 function gallery()
 {
+    $allPictures = getAllPictures();
     require($_SERVER['DOCUMENT_ROOT'] . '/view/galleryView.php');
 }
 

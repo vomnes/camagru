@@ -12,14 +12,11 @@
 <div id="your-photo-area-before">
   <h3 style="text-align:center;font-size:1.2em;margin:2px;" >Your pictures</h3>
   <div id="your-photo-scroll-before">
-    <img class="your-photo" src="public/pictures/illustration-3.jpg">
-    <img class="your-photo" src="public/pictures/illustration-3.jpg">
-    <img class="your-photo" src="public/pictures/illustration-3.jpg">
-    <img class="your-photo" src="public/pictures/illustration-3.jpg">
-    <img class="your-photo" src="public/pictures/illustration-3.jpg">
-    <img class="your-photo" src="public/pictures/illustration-3.jpg">
-    <img class="your-photo" src="public/pictures/illustration-3.jpg">
-    <img class="your-photo" src="public/pictures/illustration-3.jpg">
+    <?php
+    $len = count($userPictures);
+    for ($i = 0; $i < $len; $i++) { ?>
+      <a href='index.php?action=picture&id=<?php echo $userPictures[$i]["id"]?>'><img class="your-photo" src="<?php echo $userPictures[$i]["file_path"]?>"></a>
+    <?php } ?>
   </div>
 </div>
 <div id="filter-area" class="border-style">

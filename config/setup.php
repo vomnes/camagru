@@ -7,6 +7,7 @@
       $this->dbh = $this->connectionDB();
       $this->createDB();
       $td = new database();
+      // User table
       $td->execute('create table `Users` (
         id   INT              NOT NULL AUTO_INCREMENT,
         username VARCHAR (256)     NOT NULL,
@@ -17,7 +18,42 @@
         creation_date DATETIME DEFAULT CURRENT_TIMESTAMP,
         PRIMARY KEY (ID)
       )');
-      $td->insertData('Users', 'username, password, email, unique_token', ':username, :password, :email, :unique_token', array('username' => "admin", 'password' => hash('whirlpool', "admin"), 'email' => 'admin@camagru.co', 'unique_token' => 'abcdef'));
+      // Pictures table
+      $td->execute('create table `Pictures` (
+        id   INT              NOT NULL AUTO_INCREMENT,
+        userId INT NOT NULL,
+        file_path VARCHAR (256)     NOT NULL,
+        creation_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+        PRIMARY KEY (ID)
+      )');
+      // Comments table
+      $td->execute('create table `Comments` (
+        id   INT              NOT NULL AUTO_INCREMENT,
+        pictureId INT NOT NULL,
+        userId INT NOT NULL,
+        content TEXT NOT NULL,
+        creation_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+        PRIMARY KEY (ID)
+      )');
+      // Likes table
+      $td->execute('create table `Likes` (
+        id   INT              NOT NULL AUTO_INCREMENT,
+        pictureId INT NOT NULL,
+        userId INT NOT NULL,
+        creation_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+        PRIMARY KEY (ID)
+      )');
+      $td->insertData(
+        'Users',
+        'username, password, email, unique_token, account_validated',
+        ':username, :password, :email, :unique_token, :account_validated',
+        array(
+          'username' => "valentin",
+          'password' => hash('whirlpool', "valentin"),
+          'email' => 'valentin.omnes@gmail.com',
+          'unique_token' => 'abcdef',
+          'account_validated' => '',
+        ));
     }
 
     // Establish a connection the connection with mySQL

@@ -49,9 +49,9 @@ function index()
 function camera()
 {
     if ($_GET["method"] == "savepicture") {
-      savePictureInDatabase();
+      savePicture();
     } elseif ($_GET["method"] == "lastpicture") {
-      echo 'public/pictures/illustration-2.jpg';
+      echo lastPicture();
     } else {
       // getPicture();
       require($_SERVER['DOCUMENT_ROOT'] . '/view/cameraView.php');

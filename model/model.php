@@ -16,6 +16,7 @@
     session_start();
     if (isset($_SESSION["logged_user"])) {
       $_SESSION["logged_user"] = "";
+      $_SESSION["logged_userId"] = "";
     }
   }
 
@@ -95,7 +96,7 @@
         return array("code" => -2);
       }
       $bdd = new database();
-      $data = $bdd->getAll('SELECT username, password, account_validated, email FROM Users');
+      $data = $bdd->getAll('SELECT id, username, password, account_validated, email FROM Users');
       $dataLen = count($data);
       for($i = 0; $i < $dataLen; $i++) {
         if ($username == $data[$i]["username"] AND hash('whirlpool', $pw) == $data[$i]["password"]) {
@@ -104,6 +105,7 @@
           }
           session_start();
           $_SESSION["logged_user"] = $username;
+          $_SESSION["logged_userId"] = $data[$i]["id"];
           return array("code" => 1);
         }
       }
@@ -196,11 +198,6 @@
     }
   }
 
-  function getPicture($url, $name) {
-    $img = '/my/folder/'.$name;
-    file_put_contents($img, file_get_contents($url));
-  }
-
   function downloadImage($path_to_image)
   {
     $filename = basename($path_to_image);
@@ -218,21 +215,45 @@
     }
   }
 
-  function savePictureInDatabase() {
-    session_start();
+  function savePicture() {
     $photo = $_POST['photo'];
     if (isset($photo)) {
       $filters = $_POST['filters'];
       $filename = $_SESSION["logged_user"] . '-' . 'picture-' . substr(md5(mt_rand()), 0, 12) . '.png';
-      $data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $photo));
-      if (isset($filters)) {
-        $img = mergePictures($data, json_decode($filters, true));
-        imagepng($img, "public/pictures/users-pictures/" . $filename);
-      } else {
-        file_put_contents($_SERVER['DOCUMENT_ROOT'] . "/public/pictures/users-pictures/" . $filename, $data);
-      }
+      createPicture($photo, json_decode($filters, true), $filename);
+      pictureInDB("public/pictures/users-pictures/" . $filename);
     } else {
       echo 'Error: No photo';
+    }
+  }
+
+  function pictureInDB($file_path) {
+    session_start();
+    $td = new database();
+    $td->insertData(
+      'pictures',
+      'userId, file_path',
+      ':userId, :file_path',
+      array(
+        'userId' => $_SESSION["logged_userId"],
+        'file_path' => $file_path,
+      ));
+  }
+
+  function lastPicture() {
+    session_start();
+    $td = new database();
+    $lastPicture = $td->getOne('SELECT file_path FROM Pictures WHERE userId = ' . $_SESSION["logged_userId"] . ' ORDER BY creation_date DESC LIMIT 1');
+    return $lastPicture["file_path"];
+  }
+
+  function createPicture($photo, $filters, $filename) {
+    $data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $photo));
+    if (isset($filters)) {
+      $img = mergePictures($data, $filters);
+      imagepng($img, "public/pictures/users-pictures/" . $filename);
+    } else {
+      file_put_contents($_SERVER['DOCUMENT_ROOT'] . "/public/pictures/users-pictures/" . $filename, $data);
     }
   }
 

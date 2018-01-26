@@ -7,6 +7,7 @@ for ($index = 0; $index < $len; $index++) {
   $src = $allPictures[$index]["file_path"];
   $profilePictureSrc = $allPictures[$index]["profile_picture"];
   $pictureOwner = ucfirst($allPictures[$index]["username"]);
+  $likes = $allPictures[$index]["totalLikes"];
 ?>
 <div class="gallery" id="gallery-<?php echo $index ?>">
   <!-- Header of the picture -->
@@ -22,8 +23,14 @@ for ($index = 0; $index < $len; $index++) {
   </a>
   <!-- Footer of the picture -->
   <div class="footer-picture">
-    <img class="like-icon" id="like-icon-<?php echo $index ?>" onclick="handleLikes(<?php echo $index ?>, 'like-icon-<?php echo $index ?>', 'public/pictures/like-black-128.png', 'public/pictures/like-red-128.png')" src="public/pictures/like-black-128.png" alt="like red">
-    <a class="like-text" id="like-text-<?php echo $index ?>">+50</a>
+    <img class="like-icon" id="like-icon-<?php echo $index ?>" onclick="handleLikes(<?php echo $index ?>, 'like-icon-<?php echo $index ?>', 'public/pictures/like-black-128.png', 'public/pictures/like-red-128.png')" src="
+    <?php if ($hasLiked[$id]) {
+      echo "public/pictures/like-red-128.png";
+    } else {
+      echo "public/pictures/like-black-128.png";
+    }
+    ?>" alt="like red">
+    <a class="like-text" id="like-text-<?php echo $index ?>"><?php if ($likes){echo '+' . $likes;}?></a>
     <button class="open-comments" id="open-comments-<?php echo $index ?>" onclick="showsPictureComments('<?php echo $index ?>', '<?php echo $id ?>')" value="0">Comments</button>
   </div>
   <!-- Comment of the picture -->

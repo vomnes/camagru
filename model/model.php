@@ -285,8 +285,20 @@
 
   function getAllPictures() {
     $td = new database();
-    $allPictures = $td->getAll('SELECT p.id, p.file_path, u.username, u.profile_picture FROM Pictures p LEFT JOIN Users u ON u.id=p.userId ORDER BY p.creation_date DESC');
+    $allPictures = $td->getAll('SELECT p.id, p.file_path, u.username, u.profile_picture, COUNT(DISTINCT l.id) as totalLikes FROM Pictures p LEFT JOIN Users u ON u.id=p.userId  LEFT JOIN Likes l ON l.pictureId=p.id GROUP BY p.id ORDER BY p.creation_date DESC');
     return $allPictures;
+  }
+
+  function getUserLikes() {
+    session_start();
+    $td = new database();
+    $likes = $td->getAll('SELECT pictureId FROM Likes WHERE userId = '.$_SESSION["logged_userId"].' ORDER BY pictureId DESC');
+    $hasLiked = array();
+    $len = count($likes);
+    for ($index = 0; $index < $len; $index++) {
+      $hasLiked[$likes[$index]["pictureId"]] = 1;
+    }
+    return $hasLiked;
   }
 
   function commentInDB() {

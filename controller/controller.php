@@ -72,6 +72,7 @@ function gallery()
       }
     }
     $allPictures = getAllPictures();
+    $hasLiked = getUserLikes();
     require($_SERVER['DOCUMENT_ROOT'] . '/view/galleryView.php');
 }
 

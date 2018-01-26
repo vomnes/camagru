@@ -285,7 +285,7 @@
 
   function getAllPictures() {
     $td = new database();
-    $allPictures = $td->getAll('SELECT id, userId, file_path FROM Pictures ORDER BY creation_date DESC');
+    $allPictures = $td->getAll('SELECT p.id, p.file_path, u.username, u.profile_picture FROM Pictures p LEFT JOIN Users u ON u.id=p.userId ORDER BY p.creation_date DESC');
     return $allPictures;
   }
 
@@ -309,7 +309,7 @@
   function getPictureComments() {
     $pictureId = $_GET["id"];
     $td = new database();
-    $pictureComments = $td->getAll('SELECT c.content,  u.username FROM Comments c LEFT JOIN Users u ON u.id=c.userId WHERE pictureId = ' . $pictureId . ' ORDER BY c.creation_date ASC;');
+    $pictureComments = $td->getAll('SELECT c.content,  u.username FROM Comments c LEFT JOIN Users u ON u.id=c.userId WHERE pictureId = ' . $pictureId . ' ORDER BY c.creation_date ASC');
     return $pictureComments;
   }
 

@@ -116,6 +116,10 @@ function createComment(index, pictureId, commentContent, username, element) {
 
 function appendComment(index, username, commentContent) {
   document.getElementById('comment-list-' + index).innerHTML +=
-  "<div class=\"one-comment\">\n<a class=\"comment-owner\">"+username+"</a>\n<a class=\"comment-text\">"+commentContent+"</a>\n</div>";
+  "<div class=\"one-comment\">\n<a class=\"comment-owner\">"+capitalizeFirstLetter(username)+"</a>\n<a class=\"comment-text\">"+commentContent+"</a>\n</div>";
   document.getElementById('content-comment-' + index).value = "";
+}
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
 }

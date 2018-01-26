@@ -2,17 +2,19 @@
 <h2 id="title-page">Gallery</h2>
 <?php
 $len = count($allPictures);
-for ($index = 1; $index < $len; $index++) {
+for ($index = 0; $index < $len; $index++) {
   $id = $allPictures[$index]["id"];
   $src = $allPictures[$index]["file_path"];
+  $profilePictureSrc = $allPictures[$index]["profile_picture"];
+  $pictureOwner = ucfirst($allPictures[$index]["username"]);
 ?>
 <div class="gallery" id="gallery-<?php echo $index ?>">
   <!-- Header of the picture -->
   <div class="header-picture">
     <div class="thumbnail">
-      <img src="public/pictures/profile-picture.jpg" alt="gallery profile picture">
+      <img src="<?php echo $profilePictureSrc; ?>" alt="gallery profile picture">
     </div>
-    <a class="gallery-username">Valentin</a>
+    <a class="gallery-username"><?php echo $pictureOwner ?></a>
   </div>
   <!-- Picture -->
   <a href='index.php?action=picture&id=<?php echo $id ?>'>

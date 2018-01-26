@@ -16,6 +16,7 @@
         account_validated BIT NULL,
         unique_token VARCHAR (256)     NOT NULL,
         creation_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+        profile_picture VARCHAR (256) DEFAULT "public/pictures/profile/default-profile-picture.png",
         PRIMARY KEY (ID)
       )');
       // Pictures table
@@ -45,14 +46,13 @@
       )');
       $td->insertData(
         'Users',
-        'username, password, email, unique_token, account_validated',
-        ':username, :password, :email, :unique_token, :account_validated',
+        'username, password, email, unique_token',
+        ':username, :password, :email, :unique_token',
         array(
           'username' => "valentin",
           'password' => hash('whirlpool', "valentin"),
           'email' => 'valentin.omnes@gmail.com',
           'unique_token' => 'abcdef',
-          'account_validated' => '',
         ));
     }
 

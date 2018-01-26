@@ -22,24 +22,11 @@ for ($index = 1; $index < $len; $index++) {
   <div class="footer-picture">
     <img class="like-icon" id="like-icon-<?php echo $index ?>" onclick="handleLikes(<?php echo $index ?>, 'like-icon-<?php echo $index ?>', 'public/pictures/like-black-128.png', 'public/pictures/like-red-128.png')" src="public/pictures/like-black-128.png" alt="like red">
     <a class="like-text" id="like-text-<?php echo $index ?>">+50</a>
-    <button class="open-comments" onclick='showsDiv("comments-picture-<?php echo $index ?>")'>Comments</button>
+    <button class="open-comments" id="open-comments-<?php echo $index ?>" onclick="showsPictureComments('<?php echo $index ?>', '<?php echo $id ?>')" value="0">Comments</button>
   </div>
   <!-- Comment of the picture -->
   <div class="comments-picture" id="comments-picture-<?php echo $index ?>">
-    <div id="comment-list-<?php echo $index ?>">
-        <div class="one-comment">
-          <a class="comment-owner">Valentin</a>
-          <a class="comment-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras id hendrerit tortor. Duis rutrum enim nec nisl faucibus, ut laoreet arcu elementum. Nunc elementum porta semper.</a>
-        </div>
-        <div class="one-comment">
-          <a class="comment-owner">Antoine</a>
-          <a class="comment-text">Consectetur adipiscing elit.</a>
-        </div>
-        <div class="one-comment">
-          <a class="comment-owner">Sophie</a>
-          <a class="comment-text">Duis rutrum enim nec nisl faucibus, ut laoreet arcu elementum. Nunc elementum porta semper.</a>
-        </div>
-      </div>
+    <div id="comment-list-<?php echo $index ?>"></div>
     <div class="new-comment">
       <fieldset>
         <textarea type="text" name="comment" class="content-comment" id="content-comment-<?php echo $index ?>" placeholder="Your comment ..." title="Content of your comment" cols="40" rows="5"></textarea>

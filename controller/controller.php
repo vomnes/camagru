@@ -60,9 +60,16 @@ function camera()
 
 function gallery()
 {
-    if ($_GET["method"] == "postcomment" && isset($_GET["id"])) {
-      commentInDB();
-      return;
+    $method = $_GET["method"];
+    if (isset($_GET["id"])) {
+      if ($method == "postcomment") {
+        commentInDB();
+        return;
+      } else if ($method == "getcomments") {
+        $commentsList = getPictureComments();
+        echo json_encode($commentsList);
+        return;
+      }
     }
     $allPictures = getAllPictures();
     require($_SERVER['DOCUMENT_ROOT'] . '/view/galleryView.php');

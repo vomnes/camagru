@@ -294,7 +294,6 @@
     $userId = $_SESSION["logged_userId"];
     $content = $_POST["content"];
     $pictureId = $_GET["id"];
-    echo '88' . $pictureId . '%%';
     $td = new database();
     $td->insertData(
       'Comments',
@@ -305,6 +304,13 @@
         'userId' => intval($userId, 10),
         'content' => $content,
       ));
+  }
+
+  function getPictureComments() {
+    $pictureId = $_GET["id"];
+    $td = new database();
+    $pictureComments = $td->getAll('SELECT c.content,  u.username FROM Comments c LEFT JOIN Users u ON u.id=c.userId WHERE pictureId = ' . $pictureId . ' ORDER BY c.creation_date ASC;');
+    return $pictureComments;
   }
 
   // 'SELECT p.id, p.file_path as file_path, u.username, u.profile_picture from Pictures p left join Users u on u.id=p.userId';

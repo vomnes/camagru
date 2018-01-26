@@ -85,6 +85,9 @@
     height: 40px;
     margin: 5px;
   }
+  .like-icon:hover {
+    cursor: pointer;
+  }
 
   .like-text {
     position: relative;
@@ -107,6 +110,7 @@
   }
 
   .open-comments:hover {
+    cursor: pointer;
     color: #aaaaaa;
   }
 

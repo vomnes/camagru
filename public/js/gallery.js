@@ -30,7 +30,7 @@ function updateLikes(index, elem, pictureId) {
   var xmlhttp = new XMLHttpRequest();
   var changeType = target.getAttribute('value');
   xmlhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
+    if (this.readyState == 4 && (this.status == 201 || this.status == 202)) {
       if (changeType == 0) { // +1 Like
         document.getElementById(elem).src = 'public/pictures/like-red-128.png';
         document.getElementById('like-text-'+index).innerHTML = '+'+(likes+1);

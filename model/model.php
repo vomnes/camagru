@@ -342,12 +342,16 @@
             'userId' => $_SESSION["logged_userId"],
             'pictureId' => $pictureId,
           ));
+        http_response_code(201);
+        echo 'Status: Like added in the table Likes';
       } else {
         http_response_code(401);
         echo 'Error: This user has already liked the picture';
       }
     } else {                // Remove
       $td->deleteData('DELETE FROM Likes WHERE pictureId = ' . $pictureId . ' AND userId = ' . $userId . ';');
+      http_response_code(202);
+      echo 'Status: Like removed from the table Likes';
     }
   }
 

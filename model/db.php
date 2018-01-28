@@ -22,10 +22,12 @@
             $this->DB_CONN = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD, $DB_OPTIONS);
           }
           catch (Exception $e) {
+            http_response_code(500);
             die('Erreur database.connect() new PDO('.$DB_DSN.', '.$DB_USER.', '.$DB_PASSWORD.', '.$DB_OPTIONS.'): ' . $e->getMessage());
           }
           if (!$this->DB_CONN) {
             $this->status_fatal = true;
+            http_response_code(500);
             echo 'Connection BDD failed';
             die();
           }
@@ -33,9 +35,6 @@
             $this->status_fatal = false;
           }
         }
-        // if($this->DB_CONN){
-        //   echo "Connection sucessfull";
-        // }
         return $this->DB_CONN;
       }
 
@@ -49,6 +48,7 @@
         $result = $this->DB_CONN->prepare($query);
         $ret = $result->execute();
         if (!$ret) {
+           http_response_code(500);
            echo 'PDO::errorInfo():';
            echo '<br />';
            echo 'error SQL: '.$query;
@@ -63,6 +63,7 @@
         $result = $this->DB_CONN->prepare('INSERT INTO '.$tableName.'('.$fields.')'.' VALUES('.$values.')');
         $ret = $result->execute($content);
         if (!$ret) {
+           http_response_code(500);
            echo 'PDO::errorInfo():';
            echo '<br />';
            echo 'error SQL INSERT: INSERT INTO '.$tableName.'('.$fields.')'.' VALUES('.$values.')';
@@ -74,6 +75,17 @@
 
       function updateData($query) {
         if ($this->DB_CONN->query($query) === false) {
+          http_response_code(500);
+          echo 'PDO::errorInfo():';
+          echo '<br />';
+          echo 'error SQL updateDate: '.$query.' '.$this->DB_CONN->error;
+          die();
+        }
+      }
+
+      function deleteData($query) {
+        if ($this->DB_CONN->query($query) === false) {
+          http_response_code(500);
           echo 'PDO::errorInfo():';
           echo '<br />';
           echo 'error SQL updateDate: '.$query.' '.$this->DB_CONN->error;
@@ -85,6 +97,7 @@
         $result = $this->DB_CONN->prepare($query);
         $ret = $result->execute();
         if (!$ret) {
+           http_response_code(500);
            echo 'PDO::errorInfo():';
            echo '<br />';
            echo 'error SQL: '.$query;
@@ -102,6 +115,7 @@
             if ($DB_ERROR[0] === '00000' || $DB_ERROR[0] === '01000') {
                 return true;
             } else {
+                http_response_code(500);
                 echo 'PDO::errorInfo():';
                 echo '<br />';
                 echo 'error SQL: '.$query;

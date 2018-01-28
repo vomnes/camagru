@@ -325,6 +325,30 @@
     return $pictureComments;
   }
 
-  // 'SELECT p.id, p.file_path as file_path, u.username, u.profile_picture from Pictures p left join Users u on u.id=p.userId';
+  function updateLikes() {
+    $changeType = $_GET["type"];
+    $pictureId = $_GET["id"];
+    session_start();
+    $userId = $_SESSION["logged_userId"];
+    $td = new database();
+    if ($changeType == 0) { // Add
+      $likes = $td->getAll('SELECT pictureId FROM Likes WHERE pictureId = '. $pictureId .' AND userId = '. $userId .'');
+      if ($likes == null) {
+        $td->insertData(
+          'Likes',
+          'userId, pictureId',
+          ':userId, :pictureId',
+          array(
+            'userId' => $_SESSION["logged_userId"],
+            'pictureId' => $pictureId,
+          ));
+      } else {
+        http_response_code(401);
+        echo 'Error: This user has already liked the picture';
+      }
+    } else {                // Remove
+      $td->deleteData('DELETE FROM Likes WHERE pictureId = ' . $pictureId . ' AND userId = ' . $userId . ';');
+    }
+  }
 
 // abcdABCD1234

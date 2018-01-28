@@ -69,6 +69,13 @@ function gallery()
         $commentsList = getPictureComments();
         echo json_encode($commentsList);
         return;
+      } else if ($method == "updatelikes") {
+        if (isset($_GET["type"])) {
+          updateLikes();
+          return;
+        }
+        echo 'Error: Type in url expected';
+        return;
       }
     }
     $allPictures = getAllPictures();

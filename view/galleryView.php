@@ -23,13 +23,13 @@ for ($index = 0; $index < $len; $index++) {
   </a>
   <!-- Footer of the picture -->
   <div class="footer-picture">
-    <img class="like-icon" id="like-icon-<?php echo $index ?>" onclick="handleLikes(<?php echo $index ?>, 'like-icon-<?php echo $index ?>', 'public/pictures/like-black-128.png', 'public/pictures/like-red-128.png')" src="
+    <img class="like-icon" id="like-icon-<?php echo $index ?>" onclick="updateLikes(<?php echo $index ?>, 'like-icon-<?php echo $index ?>', <?php echo $id ?>)" src="
     <?php if ($hasLiked[$id]) {
-      echo "public/pictures/like-red-128.png";
+      echo "public/pictures/like-red-128.png\" value=\"1\"";
     } else {
-      echo "public/pictures/like-black-128.png";
+      echo "public/pictures/like-black-128.png\" value=\"0\"";
     }
-    ?>" alt="like red">
+    ?> alt="like red">
     <a class="like-text" id="like-text-<?php echo $index ?>"><?php if ($likes){echo '+' . $likes;}?></a>
     <button class="open-comments" id="open-comments-<?php echo $index ?>" onclick="showsPictureComments('<?php echo $index ?>', '<?php echo $id ?>')" value="0">Comments</button>
   </div>

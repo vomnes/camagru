@@ -23,21 +23,31 @@ function getNumberLikes(index) {
   return count;
 }
 
-function handleLikes(index, elem, src1, src2) {
-  var src = document.getElementById(elem).src;
+function updateLikes(index, elem, pictureId) {
+  var target = document.getElementById(elem);
+  var src = target.src;
   var likes = getNumberLikes(index);
-  src = src.substring(src.indexOf("/public/") + 1);
-  if (src == src1) {
-    document.getElementById(elem).src = src2;
-    document.getElementById('like-text-'+index).innerHTML = '+'+(likes+1);
-  } else {
-    document.getElementById(elem).src = src1;
-    if (likes-1 <= 0) {
-      document.getElementById('like-text-'+index).innerHTML = '';
-    } else {
-      document.getElementById('like-text-'+index).innerHTML = '+'+(likes-1);
+  var xmlhttp = new XMLHttpRequest();
+  var changeType = target.getAttribute('value');
+  xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      if (changeType == 0) { // +1 Like
+        document.getElementById(elem).src = 'public/pictures/like-red-128.png';
+        document.getElementById('like-text-'+index).innerHTML = '+'+(likes+1);
+        document.getElementById(elem).setAttribute('value', '1');
+      } else {  // -1 Like
+        document.getElementById(elem).src = 'public/pictures/like-black-128.png';
+        if (likes-1 <= 0) {
+          document.getElementById('like-text-'+index).innerHTML = '';
+        } else {
+          document.getElementById('like-text-'+index).innerHTML = '+'+(likes-1);
+        }
+        document.getElementById(elem).setAttribute('value', '0');
+      }
     }
   }
+  xmlhttp.open("POST", "index.php?action=gallery&method=updatelikes&id=" + pictureId + "&type=" + changeType, true); // Handle like in db
+  xmlhttp.send();
 }
 
 /* -- Comments -- */

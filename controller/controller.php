@@ -61,25 +61,36 @@ function camera()
 function gallery()
 {
     $method = $_GET["method"];
-    if (isset($_GET["id"])) {
-      if ($method == "postcomment") {
-        commentInDB();
-        return;
-      } else if ($method == "getcomments") {
-        $commentsList = getPictureComments();
-        echo json_encode($commentsList);
-        return;
-      } else if ($method == "updatelikes") {
-        if (isset($_GET["type"])) {
-          updateLikes();
+    if (isset($method)) {
+      if (isset($_GET["id"])) {
+        if ($method == "postcomment") {
+          commentInDB();
+          return;
+        } else if ($method == "getcomments") {
+          $commentsList = getPictureComments();
+          echo json_encode($commentsList);
+          return;
+        } else if ($method == "updatelikes") {
+          if (isset($_GET["type"])) {
+            updateLikes();
+            return;
+          }
+          echo 'Error: Type in url expected';
           return;
         }
-        echo 'Error: Type in url expected';
+      }
+      if ($method == "nextpictures") {
+        $offset = intval($_GET["offset"]);
+        $allPictures = getAllPictures($offset);
+        require($_SERVER['DOCUMENT_ROOT'] . '/view/galleryView.php');
         return;
       }
     }
-    $allPictures = getAllPictures();
+    echo '<script src="public/js/gallery.js"></script>';
+    echo '<h2 id="title-page">Gallery</h2>';
+    $offset = 0;
     $hasLiked = getUserLikes();
+    $allPictures = getAllPictures($offset);
     require($_SERVER['DOCUMENT_ROOT'] . '/view/galleryView.php');
 }
 

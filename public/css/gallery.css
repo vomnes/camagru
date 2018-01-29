@@ -197,3 +197,10 @@
   textarea:focus {
     outline: 0;
   }
+
+  #loader {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10%;
+  }

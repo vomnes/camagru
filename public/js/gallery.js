@@ -136,10 +136,47 @@ function capitalizeFirstLetter(string) {
 
 /* Scroll */
 
+window.onload = function(ev) {
+  setURLParameter('offset', '0');
+}
+
 window.onscroll = function(ev) {
-    console.log(window.innerHeight + window.pageYOffset);
-    console.log('->' + document.body.offsetHeight);
-    if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight + 100) {
-        alert("you're at the bottom of the page");
-    }
+  if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight + 100) {
+    unlimitedScroll();
+  }
 };
+
+function unlimitedScroll() {
+  var xmlhttp = new XMLHttpRequest();
+  var offset = getURLParameter("offset");
+  console.log(offset);
+  if (offset == null) {
+    offset = 5;
+  } else {
+    offset = parseInt(offset) + 5;
+  }
+  console.log(offset);
+  xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      let pagePosition = window.pageYOffset;
+      // setTimeout(function(){
+        document.getElementById("id-container").innerHTML += xmlhttp.responseText;
+        window.scrollTo(0, pagePosition);
+        setURLParameter('offset', offset);
+      // }, 1000);
+    }
+  }
+  xmlhttp.open("GET", "index.php?action=gallery&method=nextpictures&offset=" + offset, true);
+  xmlhttp.send();
+}
+
+function getURLParameter(name) {
+  var url = new URL(window.location.href);
+  return url.searchParams.get(name);
+}
+
+function setURLParameter(name, value) {
+  const params = new URLSearchParams(location.search);
+  params.set(name, value);
+  window.history.replaceState({}, '', `${location.pathname}?${params}`);
+}

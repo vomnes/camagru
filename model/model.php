@@ -326,7 +326,7 @@
     return $userPictures;
   }
 
-  function getAllPictures() {
+  function getAllPictures($offset) {
     $td = new database();
     try {
       $allPictures = $td->getAll('SELECT p.id, p.file_path, u.username, u.profile_picture, COUNT(DISTINCT l.id) as totalLikes
@@ -335,7 +335,7 @@
         LEFT JOIN Likes l ON l.pictureId=p.id
         GROUP BY p.id
         ORDER BY p.creation_date DESC
-        ');
+        LIMIT 5 OFFSET ' . $offset);
     } catch (Exception $e) {
       return responseHTTP(500, $e->getMessage());
     }

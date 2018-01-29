@@ -1,13 +1,12 @@
-<script src="public/js/gallery.js"></script>
-<h2 id="title-page">Gallery</h2>
 <?php
-$len = count($allPictures);
-for ($index = 0; $index < $len; $index++) {
-  $id = $allPictures[$index]["id"];
-  $src = $allPictures[$index]["file_path"];
-  $profilePictureSrc = $allPictures[$index]["profile_picture"];
-  $pictureOwner = ucfirst($allPictures[$index]["username"]);
-  $likes = $allPictures[$index]["totalLikes"];
+$len = count($allPictures) + $offset;
+echo $offset;
+for ($index = $offset; $index < $len; $index++) {
+  $id = $allPictures[$index-$offset]["id"];
+  $src = $allPictures[$index-$offset]["file_path"];
+  $profilePictureSrc = $allPictures[$index-$offset]["profile_picture"];
+  $pictureOwner = ucfirst($allPictures[$index-$offset]["username"]);
+  $likes = $allPictures[$index-$offset]["totalLikes"];
 ?>
 <div class="gallery" id="gallery-<?php echo $index ?>">
   <!-- Header of the picture -->
@@ -45,3 +44,4 @@ for ($index = 0; $index < $len; $index++) {
   </div>
 </div>
 <?php } ?>
+<!-- <img id="loader" src="public/pictures/loader.gif" alt="loader"> -->

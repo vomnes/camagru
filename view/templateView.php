@@ -29,7 +29,7 @@
         <a id="logout-btm" href="index.php?action=logout" onmouseover="mouseTitle('visible', 'Logout')" onmouseout="mouseTitle('hidden', '')"><img title="Logout" src="/public/pictures/logout-128.png" alt="logout logo" width="35" height="35" border="0"></a>
         <? } ?>
     </div>
-    <div class="container">
+    <div class="container" id="id-container">
       <?= $content ?>
       <footer>
           <!-- <a href="#">Created by Valentin Omnès - All Rights Reserved.</a> -->

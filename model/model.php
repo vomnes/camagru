@@ -289,11 +289,14 @@
 
   function createPicture($photo, $filters, $filename, $directory) {
     $data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $photo));
-    if (isset($filters)) {
+    if (isset($filters) && count($filters) > 0) {
       $img = mergePictures($data, $filters);
       imagepng($img, "public/pictures/" . $directory . "/" . $filename);
     } else {
-      file_put_contents($_SERVER['DOCUMENT_ROOT'] . "/public/pictures/ . $directory . /" . $filename, $data);
+      if (!is_dir($_SERVER['DOCUMENT_ROOT'] . "/public/pictures/" . $directory)) {
+        return responseHTTP(500, 'ERROR: ' . $_SERVER['DOCUMENT_ROOT'] . "/public/pictures/" . $directory . 'is not a directory');
+      }
+      file_put_contents($_SERVER['DOCUMENT_ROOT'] . "/public/pictures/" . $directory . "/" . $filename, $data);
     }
   }
 
@@ -442,21 +445,6 @@
     return;
   }
 
-  // function saveProfilePicture() {
-  //   $photo = $_POST['photo'];
-  //   if (isset($photo)) {
-  //     $filters = $_POST['filters'];
-  //     $filename = $_SESSION["logged_user"] . '-' . 'picture-' . substr(md5(mt_rand()), 0, 12) . '.png';
-  //     createPicture($photo, json_decode($filters, true), $filename, "users-pictures");
-  //     pictureInDB("public/pictures/users-pictures/" . $filename);
-  //   } else {
-  //     echo 'Error: No photo';
-  //   }
-  // }
-  function updateProfile() {
-
-  }
-
   function getProfileData() {
     session_start();
     $userId = $_SESSION["logged_userId"];
@@ -469,4 +457,81 @@
     return $profileData;
   }
 
+  function updateProfileData() {
+    session_start();
+    $userId = $_SESSION["logged_userId"];
+    $fields = '';
+    $td = new database();
+    $response = array();
+    // Nothing to update
+    if (count($_POST) == 0) {
+      http_response_code(400);
+      echo 'Status: Nothing to update';
+      return;
+    }
+    // Save picture
+    if ($_POST['profile_picture'] != '') {
+      if (strpos($_POST['profile_picture'], 'data:image/') === false) {
+        echo 'Incorrect data in profile picture<br>';
+        $_POST['profile_picture'] = '';
+      } else {
+        $filename = $_SESSION["logged_user"] . '-' . 'picture-' . substr(md5(mt_rand()), 0, 12) . '.png';
+        createPicture($_POST['profile_picture'], array(), $filename, "profile");
+        $_POST['profile_picture'] = "public/pictures/profile/" . $filename;
+      }
+    }
+    // Update username
+    if ($_POST['username'] != '') {
+      try {
+        $user = $td->getAll('SELECT username FROM Users WHERE username = "' . $_POST['username'] . '"');
+      } catch (Exception $e) {
+        return responseHTTP(500, $e->getMessage());
+      }
+      if (count($user) >= 1) {
+        if ($user[0]['username'] != $_SESSION["logged_user"]) {
+          $response['message'] .= 'Username already used<br>';
+        }
+        $_POST['username'] = '';
+      } else {
+        $_SESSION['logged_user'] = $_POST['username'];
+        $response['username'] = $_POST['username'];
+      }
+    }
+    // Update email
+    if ($_POST['email'] != '') {
+      try {
+        $user = $td->getAll('SELECT username, email FROM Users WHERE email = "' . $_POST['email'] . '"');
+      } catch (Exception $e) {
+        return responseHTTP(500, $e->getMessage());
+      }
+      if (count($user) >= 1) {
+        if ($user[0]['username'] != $_SESSION["logged_user"]) {
+          $response['message'] .= 'Email address already used<br>';
+        }
+        $_POST['email'] = '';
+      } else {
+        $response['email'] = $_POST['email'];
+      }
+    }
+    // Update password
+    if ($_POST['password'] != '' | $_POST['new-password'] != '' | $_POST['re-new-password'] != '') {
+      // Handle password
+    }
+    $_POST['new-password'] = '';
+    $_POST['re-new-password'] = '';
+    foreach ($_POST as $input => $value){
+      if ($value != '') {
+         $fields .= $input . ' = "' . $value . '", ';
+      }
+    }
+    $finalUpdate = rtrim($fields, " , ");
+    if ($finalUpdate != '') {
+      try {
+        $td->updateData("UPDATE Users SET " . $finalUpdate . " WHERE id = \"" . $userId . "\"");
+      } catch (Exception $e) {
+        return responseHTTP(500, $e->getMessage());
+      }
+      return responseHTTP(200, json_encode($response));
+    }
+  }
 // abcdABCD1234

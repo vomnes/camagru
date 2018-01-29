@@ -51,7 +51,7 @@ function saveChange() {
   if (sourcePhoto.includes('public/pictures')) {
     sourcePhoto = '';
   }
-  formData.append('photo', sourcePhoto);
+  formData.append('profile_picture', sourcePhoto);
   formData.append('username', document.getElementById('username-profile').value);
   formData.append('email', document.getElementById('email-profile').value);
   formData.append('password', document.getElementById('password-profile').value);
@@ -60,10 +60,25 @@ function saveChange() {
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-      appendComment(index, username, commentContent);
-      document.getElementById('content-comment-' + index).value = "";
+      document.getElementById('send-update-profile').style.border = "2px solid ForestGreen";
+      document.getElementById('username-profile').value = '';
+      document.getElementById('email-profile').value = '';
+      document.getElementById('password-profile').value = '';
+      document.getElementById('newpassword-profile').value = '';
+      document.getElementById('renewpassword-profile').value = '';
+      var response = JSON.parse(xmlhttp.responseText);
+      console.log(response);
+      if (response['username']) {
+        document.getElementById('username-profile').placeholder = response['username'];
+      }
+      if (response['email']) {
+        document.getElementById('email-profile').placeholder = response['email'];
+      }
+      if (response['message'] && response['message'] != '') {
+        document.getElementById('result-profile').innerHTML = response['message'];
+      }
     } else {
-      flashPlaceholder(element);
+      document.getElementById('send-update-profile').style.border = "2px solid Brown";
     }
   }
   xmlhttp.open("POST", "index.php?action=myprofile&method=savechange", true);

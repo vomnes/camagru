@@ -98,6 +98,13 @@ function gallery($userStatus)
 
 function profile()
 {
+    $method = $_GET["method"];
+    if (isset($method)) {
+      if ($method == "savechange") {
+        updateProfileData();
+        return;
+      }
+    }
     $profileData = getProfileData();
     require($_SERVER['DOCUMENT_ROOT'] . '/view/myProfileView.php');
 }

@@ -133,3 +133,13 @@ function appendComment(index, username, commentContent) {
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
+
+/* Scroll */
+
+window.onscroll = function(ev) {
+    console.log(window.innerHeight + window.pageYOffset);
+    console.log('->' + document.body.offsetHeight);
+    if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight + 100) {
+        alert("you're at the bottom of the page");
+    }
+};

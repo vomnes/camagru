@@ -22,14 +22,16 @@
         if (!$this->DB_CONN) {
           try {
             $this->DB_CONN = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD, $DB_OPTIONS);
-          }
-          catch (Exception $e) {
-            $this->handleError($e, 500, __FUNCTION__);
+          } catch (Exception $e) {
+            http_response_code(500);
+            echo $this->handleError($e, __FUNCTION__);
+            die();
           }
           if (!$this->DB_CONN) {
             $this->status_fatal = true;
             echo 'Connection BDD failed';
-            $this->handleError($e, 500, __FUNCTION__);
+            http_response_code(500);
+            echo $this->handleError($e, __FUNCTION__);
             die();
           }
           else {
@@ -50,7 +52,7 @@
         try {
           $result->execute();
         } catch (Exception $e) {
-          $this->handleError($e, 500, __FUNCTION__);
+          throw new \Exception($this->handleError($e, __FUNCTION__));
         }
         $result->setFetchMode(PDO::FETCH_ASSOC);
         $reponse = $result->fetch();
@@ -62,7 +64,7 @@
         try {
           $result->execute($content);
         } catch (Exception $e) {
-          $this->handleError($e, 500, __FUNCTION__);
+          throw new \Exception($this->handleError($e, __FUNCTION__));
         }
       }
 
@@ -70,7 +72,7 @@
         try {
           $this->DB_CONN->query($query);
         } catch (Exception $e) {
-          $this->handleError($e, 500, __FUNCTION__);
+          throw new \Exception($this->handleError($e, __FUNCTION__));
         }
       }
 
@@ -78,7 +80,7 @@
         try {
           $this->DB_CONN->query($query);
         } catch (Exception $e) {
-          $this->handleError($e, 500, __FUNCTION__);
+          throw new \Exception($this->handleError($e, __FUNCTION__));
         }
       }
 
@@ -87,7 +89,7 @@
         try {
           $result->execute();
         } catch (Exception $e) {
-          $this->handleError($e, 500, __FUNCTION__);
+          throw new \Exception($this->handleError($e, __FUNCTION__));
         }
         $result->setFetchMode(PDO::FETCH_ASSOC);
         $reponse = $result->fetchAll();
@@ -107,8 +109,7 @@
         return $response;
       }
 
-      private function handleError($e, $codeHTTP, $functionName) {
-        http_response_code($codeHTTP);
+      private function handleError($e, $functionName) {
         $error = array();
         $error['Status'] = "Error";
         $file = preg_replace('/^.*\/\s*/', '', $e->getFile());
@@ -119,7 +120,7 @@
           $error['Used'] = $realFile . ':' . $trace[1]['line'];
         }
         $error['Message'] = $e->getMessage();
-        die(json_encode($error));
+        return json_encode($error);
       }
     }
 ?>

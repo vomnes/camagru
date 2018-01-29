@@ -24,7 +24,11 @@
 
   function userExists($username) {
     $bdd = new database();
-    $data = $bdd->getAll('SELECT username FROM Users');
+    try {
+      $data = $bdd->getAll('SELECT username FROM Users');
+    } catch (Exception $e) {
+      return responseHTTP(500, $e->getMessage());
+    }
     $dataLen = count($data);
     for($i = 0; $i < $dataLen; $i++) {
       if ($data[$i]["username"] == $username) {
@@ -40,11 +44,15 @@
       return -1;
     }
     $bdd = new database();
-    $bdd->insertData(
-      'Users',
-      'username, password, email, unique_token',
-      ':username, :password, :email, :unique_token',
-      array('username' => $username, 'password' => $password, 'email' => $email, 'unique_token' => $token));
+    try {
+      $bdd->insertData(
+        'Users',
+        'username, password, email, unique_token',
+        ':username, :password, :email, :unique_token',
+        array('username' => $username, 'password' => $password, 'email' => $email, 'unique_token' => $token));
+    } catch (Exception $e) {
+      return responseHTTP(500, $e->getMessage());
+    }
     return 1;
   }
 
@@ -96,7 +104,11 @@
         return array("code" => -2);
       }
       $bdd = new database();
-      $data = $bdd->getAll('SELECT id, username, password, account_validated, email FROM Users');
+      try {
+        $data = $bdd->getAll('SELECT id, username, password, account_validated, email FROM Users');
+      } catch (Exception $e) {
+        return responseHTTP(500, $e->getMessage());
+      }
       $dataLen = count($data);
       for($i = 0; $i < $dataLen; $i++) {
         if ($username == $data[$i]["username"] AND hash('whirlpool', $pw) == $data[$i]["password"]) {
@@ -122,14 +134,22 @@
     $token = $_GET["token"];
     if ($token != '') {
       $bdd = new database();
-      $data = $bdd->getAll('SELECT unique_token, account_validated FROM Users');
+      try {
+        $data = $bdd->getAll('SELECT unique_token, account_validated FROM Users');
+      } catch (Exception $e) {
+        return responseHTTP(500, $e->getMessage());
+      }
       $dataLen = count($data);
       for($i = 0; $i < $dataLen; $i++) {
         if ($data[$i]["unique_token"] == $token) {
           if ($data[$i]["account_validated"] == 1) {
             return 2;
           }
-          $bdd->updateData("UPDATE Users SET account_validated = 1 WHERE unique_token = \"".$token."\"");
+          try {
+            $bdd->updateData("UPDATE Users SET account_validated = 1 WHERE unique_token = \"".$token."\"");
+          } catch (Exception $e) {
+            return responseHTTP(500, $e->getMessage());
+          }
           return 1;
         }
       }
@@ -149,7 +169,11 @@
     $username = $_REQUEST["username"];
     if ($username != '') {
       $bdd = new database();
-      $data = $bdd->getAll('SELECT username, unique_token, account_validated, email FROM Users');
+      try {
+        $data = $bdd->getAll('SELECT username, unique_token, account_validated, email FROM Users');
+      } catch (Exception $e) {
+        return responseHTTP(500, $e->getMessage());
+      }
       $dataLen = count($data);
       for($i = 0; $i < $dataLen; $i++) {
         if ($username == $data[$i]["username"]) {
@@ -169,7 +193,11 @@
       return false;
     }
     $bdd = new database();
-    $data = $bdd->getAll('SELECT unique_token FROM Users');
+    try {
+      $data = $bdd->getAll('SELECT unique_token FROM Users');
+    } catch (Exception $e) {
+      return responseHTTP(500, $e->getMessage());
+    }
     $dataLen = count($data);
     for($i = 0; $i < $dataLen; $i++) {
       if ($token == $data[$i]["unique_token"]) {
@@ -193,7 +221,11 @@
         return -3; // Fields with limits, please respect the warnings
       }
       $bdd = new database();
-      $bdd->updateData("UPDATE Users SET password = \"".hash('whirlpool', $pw)."\" WHERE unique_token = \"".$token."\"");
+      try {
+        $bdd->updateData("UPDATE Users SET password = \"".hash('whirlpool', $pw)."\" WHERE unique_token = \"".$token."\"");
+      } catch (Exception $e) {
+        return responseHTTP(500, $e->getMessage());
+      }
       return 1; // Password updated
     }
   }
@@ -230,20 +262,28 @@
   function pictureInDB($file_path) {
     session_start();
     $td = new database();
-    $td->insertData(
-      'pictures',
-      'userId, file_path',
-      ':userId, :file_path',
-      array(
-        'userId' => $_SESSION["logged_userId"],
-        'file_path' => $file_path,
-      ));
+    try {
+      $td->insertData(
+        'pictures',
+        'userId, file_path',
+        ':userId, :file_path',
+        array(
+          'userId' => $_SESSION["logged_userId"],
+          'file_path' => $file_path,
+        ));
+    } catch (Exception $e) {
+      return responseHTTP(500, $e->getMessage());
+    }
   }
 
   function lastPicture() {
     session_start();
     $td = new database();
-    $lastPicture = $td->getOne('SELECT file_path FROM Pictures WHERE userId = ' . $_SESSION["logged_userId"] . ' ORDER BY creation_date DESC LIMIT 1');
+    try {
+      $lastPicture = $td->getOne('SELECT file_path FROM Pictures WHERE userId = ' . $_SESSION["logged_userId"] . ' ORDER BY creation_date DESC LIMIT 1');
+    } catch (Exception $e) {
+      return responseHTTP(500, $e->getMessage());
+    }
     return $lastPicture["file_path"];
   }
 
@@ -262,7 +302,6 @@
     $height = 375;
 
     $final_img = imagecreatetruecolor($width, $height);
-    // imagealphablending($final_img, true);
     imagesavealpha($final_img, true);
 
     // Add webcam picture
@@ -279,20 +318,38 @@
   function getUserPictures() {
     session_start();
     $td = new database();
-    $userPictures = $td->getAll('SELECT id, file_path FROM Pictures WHERE userId = ' . $_SESSION["logged_userId"] . ' ORDER BY creation_date DESC');
+    try {
+      $userPictures = $td->getAll('SELECT id, file_path FROM Pictures WHERE userId = ' . $_SESSION["logged_userId"] . ' ORDER BY creation_date DESC');
+    } catch (Exception $e) {
+      return responseHTTP(500, $e->getMessage());
+    }
     return $userPictures;
   }
 
   function getAllPictures() {
     $td = new database();
-    $allPictures = $td->getAll('SELECT p.id, p.file_path, u.username, u.profile_picture, COUNT(DISTINCT l.id) as totalLikes FROM Pictures p LEFT JOIN Users u ON u.id=p.userId  LEFT JOIN Likes l ON l.pictureId=p.id GROUP BY p.id ORDER BY p.creation_date DESC');
+    try {
+      $allPictures = $td->getAll('SELECT p.id, p.file_path, u.username, u.profile_picture, COUNT(DISTINCT l.id) as totalLikes
+        FROM Pictures p
+        LEFT JOIN Users u ON u.id=p.userId
+        LEFT JOIN Likes l ON l.pictureId=p.id
+        GROUP BY p.id
+        ORDER BY p.creation_date DESC
+        ');
+    } catch (Exception $e) {
+      return responseHTTP(500, $e->getMessage());
+    }
     return $allPictures;
   }
 
   function getUserLikes() {
     session_start();
     $td = new database();
-    $likes = $td->getAll('SELECT pictureId FROM Likes WHERE userId = '.$_SESSION["logged_userId"].' ORDER BY pictureId DESC');
+    try {
+      $likes = $td->getAll('SELECT pictureId FROM Likes WHERE userId = '.$_SESSION["logged_userId"].' ORDER BY pictureId DESC');
+    } catch (Exception $e) {
+      return responseHTTP(500, $e->getMessage());
+    }
     $hasLiked = array();
     $len = count($likes);
     for ($index = 0; $index < $len; $index++) {
@@ -307,21 +364,29 @@
     $content = $_POST["content"];
     $pictureId = $_GET["id"];
     $td = new database();
-    $td->insertData(
-      'Comments',
-      'pictureId, userId, content',
-      ':pictureId, :userId, :content',
-      array(
-        'pictureId' => intval($pictureId, 10),
-        'userId' => intval($userId, 10),
-        'content' => $content,
-      ));
+    try {
+      $td->insertData(
+        'Comments',
+        'pictureId, userId, content',
+        ':pictureId, :userId, :content',
+        array(
+          'pictureId' => intval($pictureId, 10),
+          'userId' => intval($userId, 10),
+          'content' => $content,
+        ));
+    } catch (Exception $e) {
+      return responseHTTP(500, $e->getMessage());
+    }
   }
 
   function getPictureComments() {
     $pictureId = $_GET["id"];
     $td = new database();
-    $pictureComments = $td->getAll('SELECT c.content,  u.username FROM Comments c LEFT JOIN Users u ON u.id=c.userId WHERE pictureId = ' . $pictureId . ' ORDER BY c.creation_date ASC');
+    try {
+      $pictureComments = $td->getAll('SELECT c.content,  u.username FROM Comments c LEFT JOIN Users u ON u.id=c.userId WHERE pictureId = ' . $pictureId . ' ORDER BY c.creation_date ASC');
+    } catch (Exception $e) {
+      return responseHTTP(500, $e->getMessage());
+    }
     return $pictureComments;
   }
 
@@ -332,16 +397,24 @@
     $userId = $_SESSION["logged_userId"];
     $td = new database();
     if ($changeType == 0) { // Add
-      $likes = $td->getAll('SELECT pictureId FROM Likes WHERE pictureId = '. $pictureId .' AND userId = '. $userId .'');
+      try {
+        $likes = $td->getAll('SELECT pictureId FROM Likes WHERE pictureId = '. $pictureId .' AND userId = '. $userId .'');
+      } catch (Exception $e) {
+        return responseHTTP(500, $e->getMessage());
+      }
       if ($likes == null) {
-        $td->insertData(
-          'Likes',
-          'userId, pictureId',
-          ':userId, :pictureId',
-          array(
-            'userId' => $_SESSION["logged_userId"],
-            'pictureId' => $pictureId,
-          ));
+        try {
+          $td->insertData(
+            'Likes',
+            'userId, pictureId',
+            ':userId, :pictureId',
+            array(
+              'userId' => $_SESSION["logged_userId"],
+              'pictureId' => $pictureId,
+            ));
+        } catch (Exception $e) {
+          return responseHTTP(500, $e->getMessage());
+        }
         http_response_code(201);
         echo 'Status: Like added in the table Likes';
       } else {
@@ -349,10 +422,20 @@
         echo 'Error: This user has already liked the picture';
       }
     } else {                // Remove
-      $td->deleteData('DELETE FROM Likes WHERE pictureId = ' . $pictureId . ' AND userId = ' . $userId . ';');
+      try {
+        $td->deleteData('DELETE FROM Likes WHERE pictureId = ' . $pictureId . ' AND userId = ' . $userId . ';');
+      } catch (Exception $e) {
+        return responseHTTP(500, $e->getMessage());
+      }
       http_response_code(202);
       echo 'Status: Like removed from the table Likes';
     }
+  }
+
+  function responseHTTP($codeHTTP, $content) {
+    http_response_code($codeHTTP);
+    echo $content;
+    return;
   }
 
 // abcdABCD1234

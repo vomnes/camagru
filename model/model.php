@@ -339,6 +339,10 @@
     } catch (Exception $e) {
       return responseHTTP(500, $e->getMessage());
     }
+    if (count($allPictures) == 0) {
+      http_response_code(204);
+      return;
+    }
     return $allPictures;
   }
 

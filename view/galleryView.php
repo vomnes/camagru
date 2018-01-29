@@ -1,6 +1,5 @@
 <?php
 $len = count($allPictures) + $offset;
-echo $offset;
 for ($index = $offset; $index < $len; $index++) {
   $id = $allPictures[$index-$offset]["id"];
   $src = $allPictures[$index-$offset]["file_path"];
@@ -44,4 +43,3 @@ for ($index = $offset; $index < $len; $index++) {
   </div>
 </div>
 <?php } ?>
-<!-- <img id="loader" src="public/pictures/loader.gif" alt="loader"> -->

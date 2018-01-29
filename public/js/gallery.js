@@ -1,3 +1,16 @@
+window.onload = function(ev) {
+  setURLParameter('offset', '0');
+}
+
+window.onscroll = function(ev) {
+  handleTitleScroll();
+  if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight + 120) {
+    unlimitedScroll();
+  }
+};
+
+/* -- Title -- */
+
 function handleTitleScroll() {
   if (window.scrollY >= 71) {
     document.getElementById("title-page").style.visibility = 'hidden';
@@ -7,10 +20,6 @@ function handleTitleScroll() {
     document.getElementById("title-page-header").style.visibility = 'hidden';
   }
 }
-
-window.onscroll = function() {
-  handleTitleScroll()
-};
 
 /* -- Likes -- */
 
@@ -136,37 +145,23 @@ function capitalizeFirstLetter(string) {
 
 /* Scroll */
 
-window.onload = function(ev) {
-  setURLParameter('offset', '0');
-}
-
-window.onscroll = function(ev) {
-  if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight + 100) {
-    unlimitedScroll();
-  }
-};
-
 function unlimitedScroll() {
   var xmlhttp = new XMLHttpRequest();
   var offset = getURLParameter("offset");
-  console.log(offset);
   if (offset == null) {
     offset = 5;
   } else {
     offset = parseInt(offset) + 5;
   }
-  console.log(offset);
+  xmlhttp.open("GET", "index.php?action=gallery&method=nextpictures&offset=" + offset, true);
   xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       let pagePosition = window.pageYOffset;
-      // setTimeout(function(){
-        document.getElementById("id-container").innerHTML += xmlhttp.responseText;
-        window.scrollTo(0, pagePosition);
-        setURLParameter('offset', offset);
-      // }, 1000);
+      document.getElementById("id-container").innerHTML += xmlhttp.responseText;
+      window.scrollTo(0, pagePosition);
+      setURLParameter('offset', offset);
     }
   }
-  xmlhttp.open("GET", "index.php?action=gallery&method=nextpictures&offset=" + offset, true);
   xmlhttp.send();
 }
 

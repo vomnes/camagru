@@ -16,6 +16,8 @@ if (!userLogged()) {
           sendResetPasswordEmail();
       } else if ($page == 'resetpassword') {
           resetPassword();
+      } elseif ($page == 'gallery') {
+          gallery(0);
       } else {
           index();
       }
@@ -27,16 +29,16 @@ if (!userLogged()) {
       if ($page == 'camera') {
           camera();
       } elseif ($page == 'gallery') {
-          gallery();
+          gallery(1);
       } elseif ($page == 'myprofile') {
           profile();
       } elseif ($page == 'logout') {
           logout();
       } else {
-          gallery();
+          gallery(1);
       }
   } else {
-    gallery();
+    gallery(1);
   }
 }
 $content = ob_get_clean();

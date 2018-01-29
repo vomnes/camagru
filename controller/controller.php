@@ -58,7 +58,7 @@ function camera()
     }
 }
 
-function gallery()
+function gallery($userStatus)
 {
     $method = $_GET["method"];
     if (isset($method)) {
@@ -89,7 +89,9 @@ function gallery()
     echo '<script src="public/js/gallery.js"></script>';
     echo '<h2 id="title-page">Gallery</h2>';
     $offset = 0;
-    $hasLiked = getUserLikes();
+    if ($userStatus == 1) {
+      $hasLiked = getUserLikes();
+    }
     $allPictures = getAllPictures($offset);
     require($_SERVER['DOCUMENT_ROOT'] . '/view/galleryView.php');
 }

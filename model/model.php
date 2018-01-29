@@ -252,7 +252,7 @@
     if (isset($photo)) {
       $filters = $_POST['filters'];
       $filename = $_SESSION["logged_user"] . '-' . 'picture-' . substr(md5(mt_rand()), 0, 12) . '.png';
-      createPicture($photo, json_decode($filters, true), $filename);
+      createPicture($photo, json_decode($filters, true), $filename, "users-pictures");
       pictureInDB("public/pictures/users-pictures/" . $filename);
     } else {
       echo 'Error: No photo';
@@ -287,13 +287,13 @@
     return $lastPicture["file_path"];
   }
 
-  function createPicture($photo, $filters, $filename) {
+  function createPicture($photo, $filters, $filename, $directory) {
     $data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $photo));
     if (isset($filters)) {
       $img = mergePictures($data, $filters);
-      imagepng($img, "public/pictures/users-pictures/" . $filename);
+      imagepng($img, "public/pictures/" . $directory . "/" . $filename);
     } else {
-      file_put_contents($_SERVER['DOCUMENT_ROOT'] . "/public/pictures/users-pictures/" . $filename, $data);
+      file_put_contents($_SERVER['DOCUMENT_ROOT'] . "/public/pictures/ . $directory . /" . $filename, $data);
     }
   }
 
@@ -440,6 +440,33 @@
     http_response_code($codeHTTP);
     echo $content;
     return;
+  }
+
+  // function saveProfilePicture() {
+  //   $photo = $_POST['photo'];
+  //   if (isset($photo)) {
+  //     $filters = $_POST['filters'];
+  //     $filename = $_SESSION["logged_user"] . '-' . 'picture-' . substr(md5(mt_rand()), 0, 12) . '.png';
+  //     createPicture($photo, json_decode($filters, true), $filename, "users-pictures");
+  //     pictureInDB("public/pictures/users-pictures/" . $filename);
+  //   } else {
+  //     echo 'Error: No photo';
+  //   }
+  // }
+  function updateProfile() {
+
+  }
+
+  function getProfileData() {
+    session_start();
+    $userId = $_SESSION["logged_userId"];
+    $td = new database();
+    try {
+      $profileData = $td->getOne('SELECT username, email, profile_picture FROM Users WHERE id = '.$userId);
+    } catch (Exception $e) {
+      return responseHTTP(500, $e->getMessage());
+    }
+    return $profileData;
   }
 
 // abcdABCD1234

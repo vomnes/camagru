@@ -98,6 +98,7 @@ function gallery($userStatus)
 
 function profile()
 {
+    $profileData = getProfileData();
     require($_SERVER['DOCUMENT_ROOT'] . '/view/myProfileView.php');
 }
 

@@ -79,6 +79,8 @@
     if ($username != '' && $pw != '' && $rePW != '' && $emailAddress != '') {
       if ($pw != $rePW) {
         return -2; // The two passwords must be identical
+      } else if (!filter_var($emailAddress, FILTER_VALIDATE_EMAIL)) {
+        return -5; // Not a valid email address
       } else if (strlen($username) > 64 || strlen($pw) > 255 || strlen($pw) < 8 || strlen($emailAddress) > 128) {
         return -4; // Fields with limits, please respect the warnings
       } else if (!userExists($username)) {
@@ -470,6 +472,32 @@
       return;
     }
     // Save picture
+    updatePictureProfile();
+    // Update username
+    updateUsernameProfile($td, $response);
+    // Update email
+    updateEmailProfile($td, $response);
+    // Update password
+    updatePasswordProfile($td, $response);
+    foreach ($_POST as $input => $value){
+      if ($value != '') {
+         $fields .= $input . ' = "' . $value . '", ';
+      }
+    }
+    $finalUpdate = rtrim($fields, " , ");
+    if ($finalUpdate != '') {
+      try {
+        $td->updateData("UPDATE Users SET " . $finalUpdate . " WHERE id = \"" . $userId . "\"");
+      } catch (Exception $e) {
+        return responseHTTP(500, $e->getMessage());
+      }
+      return responseHTTP(200, json_encode($response));
+    }
+    return responseHTTP(200, json_encode($response));
+  }
+
+  function updatePictureProfile() {
+    session_start();
     if ($_POST['profile_picture'] != '') {
       if (strpos($_POST['profile_picture'], 'data:image/') === false) {
         echo 'Incorrect data in profile picture<br>';
@@ -480,7 +508,10 @@
         $_POST['profile_picture'] = "public/pictures/profile/" . $filename;
       }
     }
-    // Update username
+  }
+
+  function updateUsernameProfile($td, &$response) {
+    session_start();
     if ($_POST['username'] != '') {
       try {
         $user = $td->getAll('SELECT username FROM Users WHERE username = "' . $_POST['username'] . '"');
@@ -497,41 +528,47 @@
         $response['username'] = $_POST['username'];
       }
     }
-    // Update email
+  }
+
+  function updateEmailProfile($td, &$response) {
     if ($_POST['email'] != '') {
-      try {
-        $user = $td->getAll('SELECT username, email FROM Users WHERE email = "' . $_POST['email'] . '"');
-      } catch (Exception $e) {
-        return responseHTTP(500, $e->getMessage());
-      }
-      if (count($user) >= 1) {
-        if ($user[0]['username'] != $_SESSION["logged_user"]) {
-          $response['message'] .= 'Email address already used<br>';
-        }
+      if (!filter_var($response['email'], FILTER_VALIDATE_EMAIL)) {
+        $response['message'] .= 'Not a valid email address<br>';
         $_POST['email'] = '';
       } else {
         $response['email'] = $_POST['email'];
       }
     }
-    // Update password
-    if ($_POST['password'] != '' | $_POST['new-password'] != '' | $_POST['re-new-password'] != '') {
-      // Handle password
+  }
+
+  function updatePasswordProfile($td, &$response) {
+    $pw = $_POST['password'];
+    $newPW = $_POST['new-password'];
+    $reNewPW = $_POST['re-new-password'];
+    if ($pw != '' | $newPW != '' | $reNewPW != '') {
+      if  ($pw != '' & $newPW != '' & $reNewPW != '') {
+        if ($newPW != $reNewPW) {
+          $response['message'] .= 'Cannot update the password<br>Re entered password is not identique to new password<br>';
+          $_POST['password'] = '';
+        } else {
+          try {
+            $user = $td->getAll('SELECT id, password FROM Users WHERE id = "' . $_SESSION["logged_userId"] . '"');
+          } catch (Exception $e) {
+            return responseHTTP(500, $e->getMessage());
+          }
+          if ($user['password'] != hash('whirlpool', $pw)) {
+            $response['message'] .= 'Current password field does not match<br>with your password.<br>';
+            $_POST['password'] = '';
+          } else {
+            $_POST['password'] = hash('whirlpool', $pw);
+          }
+        }
+      } else {
+        $response['message'] .= 'You want to update your password<br>All the password fields must be filled<br>';
+        $_POST['password'] = '';
+      }
     }
     $_POST['new-password'] = '';
     $_POST['re-new-password'] = '';
-    foreach ($_POST as $input => $value){
-      if ($value != '') {
-         $fields .= $input . ' = "' . $value . '", ';
-      }
-    }
-    $finalUpdate = rtrim($fields, " , ");
-    if ($finalUpdate != '') {
-      try {
-        $td->updateData("UPDATE Users SET " . $finalUpdate . " WHERE id = \"" . $userId . "\"");
-      } catch (Exception $e) {
-        return responseHTTP(500, $e->getMessage());
-      }
-      return responseHTTP(200, json_encode($response));
-    }
   }
 // abcdABCD1234

@@ -51,6 +51,7 @@ function saveChange() {
   if (sourcePhoto.includes('public/pictures')) {
     sourcePhoto = '';
   }
+  document.getElementById('result-profile').innerHTML = '';
   formData.append('profile_picture', sourcePhoto);
   formData.append('username', document.getElementById('username-profile').value);
   formData.append('email', document.getElementById('email-profile').value);

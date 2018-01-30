@@ -28,5 +28,3 @@
        ?>
      </form>
    </div>
-
-<!-- Need to check length max 255, min 8, email pattern and password pattern -->

@@ -559,7 +559,7 @@
           $_POST['password'] = '';
         } else {
           try {
-            $user = $td->getAll('SELECT id, password FROM Users WHERE id = "' . $_SESSION["logged_userId"] . '"');
+            $user = $td->getOne('SELECT id, password FROM Users WHERE id = "' . $_SESSION["logged_userId"] . '"');
           } catch (Exception $e) {
             return responseHTTP(500, $e->getMessage());
           }
@@ -567,7 +567,7 @@
             $response['message'] .= 'Current password field does not match<br>with your password.<br>';
             $_POST['password'] = '';
           } else {
-            $_POST['password'] = hash('whirlpool', $newPW);
+            $_POST['password'] = hash('whirlpool', $pw);
           }
         }
       } else {

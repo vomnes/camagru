@@ -14,6 +14,8 @@
       echo "<p style=\"text-align: center; color: Brown;\">The two passwords must be identical</p>";
     } else if ($code == -3) {
       echo "<p style=\"text-align: center; color: Brown;\">Fields with limits, please respect the warnings</p>";
+    } else if ($code == -4) {
+      echo "<p style=\"text-align: center; color: Brown;\">Must contain at least one number and one uppercase<br>and lowercase letter, and at least 8 or more characters</p>";
     }
     ?>
   </form>

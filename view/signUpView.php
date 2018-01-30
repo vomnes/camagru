@@ -21,7 +21,9 @@
        } else if ($signUpCode == -4) {
          echo "<p style=\"text-align: center; color: Brown;\">Fields with limits, please respect the warnings</p>";
        } else if ($signUpCode == -5) {
-         echo "<p style=\"text-align: center; color: Brown;\">Not a vlid email address</p>";
+         echo "<p style=\"text-align: center; color: Brown;\">Not a valid email address</p>";
+       } else if ($signUpCode == -6) {
+         echo "<p style=\"text-align: center; color: Brown;\">Must contain at least one number and one uppercase<br>and lowercase letter, and at least 8 or more characters</p>";
        }
        ?>
      </form>

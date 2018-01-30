@@ -79,9 +79,11 @@
     if ($username != '' && $pw != '' && $rePW != '' && $emailAddress != '') {
       if ($pw != $rePW) {
         return -2; // The two passwords must be identical
+      } else if (!isValidPassword($pw)) {
+        return -6; // Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters
       } else if (!filter_var($emailAddress, FILTER_VALIDATE_EMAIL)) {
         return -5; // Not a valid email address
-      } else if (strlen($username) > 64 || strlen($pw) > 255 || strlen($pw) < 8 || strlen($emailAddress) > 128) {
+      } else if (strlen($username) > 64 || strlen($pw) > 255 || strlen($emailAddress) > 128) {
         return -4; // Fields with limits, please respect the warnings
       } else if (!userExists($username)) {
         $uniqueToken = md5(uniqid(rand(), true));
@@ -219,6 +221,8 @@
     if ($pw != '' && $rePW != '') {
       if ($pw != $rePW) {
         return -2; // The two passwords must be identical
+      } else if (!isValidPassword($pw)) {
+        return -4; // Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters
       } else if (strlen($pw) > 255 || strlen($pw) < 8) {
         return -3; // Fields with limits, please respect the warnings
       }
@@ -532,7 +536,7 @@
 
   function updateEmailProfile($td, &$response) {
     if ($_POST['email'] != '') {
-      if (!filter_var($response['email'], FILTER_VALIDATE_EMAIL)) {
+      if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
         $response['message'] .= 'Not a valid email address<br>';
         $_POST['email'] = '';
       } else {
@@ -548,7 +552,10 @@
     if ($pw != '' | $newPW != '' | $reNewPW != '') {
       if  ($pw != '' & $newPW != '' & $reNewPW != '') {
         if ($newPW != $reNewPW) {
-          $response['message'] .= 'Cannot update the password<br>Re entered password is not identique to new password<br>';
+          $response['message'] .= 'Cannot update the password<br>Re entered new password is not identique to new password<br>';
+          $_POST['password'] = '';
+        } else if (!isValidPassword($newPW)) {
+          $response['message'] .= 'Not a valid password<br>Must contain at least<br>one number and one uppercase and lowercase<br>letter, and at least 8 or more characters';
           $_POST['password'] = '';
         } else {
           try {
@@ -560,7 +567,7 @@
             $response['message'] .= 'Current password field does not match<br>with your password.<br>';
             $_POST['password'] = '';
           } else {
-            $_POST['password'] = hash('whirlpool', $pw);
+            $_POST['password'] = hash('whirlpool', $newPW);
           }
         }
       } else {
@@ -570,5 +577,28 @@
     }
     $_POST['new-password'] = '';
     $_POST['re-new-password'] = '';
+  }
+
+  function isValidPassword($input) {
+    $upper = false;
+    $lower = false;
+    $digit = false;
+    $len = strlen($input);
+    if ($len < 8) {
+      return false;
+    }
+    for ($i = 0; $i < $len; $i++){
+        if (ctype_upper($input[$i])) {
+            $upper = true;
+        } else if (ctype_lower($input[$i])) {
+            $lower = true;
+        } else if (ctype_digit($input[$i])) {
+            $digit = true;
+        }
+    }
+    if ($upper && $lower && $digit) {
+      return true;
+    }
+    return false;
   }
 // abcdABCD1234

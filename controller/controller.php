@@ -65,6 +65,7 @@ function gallery($userStatus)
       if (isset($_GET["id"])) {
         if ($method == "postcomment") {
           commentInDB();
+          sendCommentNotif();
           return;
         } else if ($method == "getcomments") {
           $commentsList = getPictureComments();

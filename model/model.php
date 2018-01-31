@@ -1,4 +1,5 @@
 <?php
+  session_start();
   require("db.php");
   $bdd = new database();
 
@@ -383,12 +384,39 @@
         'pictureId, userId, content',
         ':pictureId, :userId, :content',
         array(
-          'pictureId' => intval($pictureId, 10),
-          'userId' => intval($userId, 10),
+          'pictureId' => intval($pictureId),
+          'userId' => intval($userId),
           'content' => $content,
         ));
     } catch (Exception $e) {
       return responseHTTP(500, $e->getMessage());
+    }
+  }
+
+  function sendCommentNotif() {
+    $userId = $_SESSION["logged_userId"];
+    $pictureId = $_GET["id"];
+    $content = $_POST["content"];
+    $td = new database();
+    try {
+      // Don't send notif when you comment your own picture
+      $dataPicture = $td->getOne('Select id, userId as ownerId From Pictures WHERE id=' . $pictureId . ' AND userId<>' . $userId . ';');
+    } catch (Exception $e) {
+      return responseHTTP(200, $e->getMessage());
+    }
+    if ($dataPicture != null) {
+      try {
+        // Get the email address of the picture owner, if comments notification are On
+        $dataPicture = $td->getOne('Select username, email From Users WHERE id=' . $dataPicture["ownerId"] . ' AND comments_notification=1;');
+      } catch (Exception $e) {
+        return responseHTTP(200, $e->getMessage());
+      }
+      if ($dataPicture["email"] != '') {
+        sendEmail(
+          $dataPicture["email"],
+          "Camagru - New comment",
+          "Hi " . $dataPicture["username"] . ", " . $_SESSION['logged_user'] . " has commented one of your pictures with \"" . $content . "\". Go on localhost:8080/index.php?action=picture&id=" . $pictureId . " to see the comment.");
+      }
     }
   }
 

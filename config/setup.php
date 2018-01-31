@@ -8,7 +8,7 @@
       $this->createDB();
       $td = new database();
       // User table
-      $td->execute('create table `Users` (
+      $td->execute("create table `Users` (
         id   INT              NOT NULL AUTO_INCREMENT,
         username VARCHAR (256)     NOT NULL,
         password VARCHAR (256)     NOT NULL,
@@ -16,9 +16,10 @@
         account_validated BIT NULL,
         unique_token VARCHAR (256)     NOT NULL,
         creation_date DATETIME DEFAULT CURRENT_TIMESTAMP,
-        profile_picture VARCHAR (256) DEFAULT "public/pictures/profile/default-profile-picture.png",
+        profile_picture VARCHAR (256) DEFAULT 'public/pictures/profile/default-profile-picture.png',
+        comments_notification BIT DEFAULT 1,
         PRIMARY KEY (ID)
-      )');
+      )");
       // Pictures table
       $td->execute('create table `Pictures` (
         id   INT              NOT NULL AUTO_INCREMENT,
@@ -54,6 +55,7 @@
           'email' => 'valentin.omnes@gmail.com',
           'unique_token' => 'abcdef',
         ));
+      $td->disconnect();
     }
 
     // Establish a connection the connection with mySQL

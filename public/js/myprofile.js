@@ -24,6 +24,11 @@ window.onload = function() {
     getBase64Image('#upload-profile-picture');
     ev.preventDefault();
   }, false);
+  var notif = document.getElementById('notif-status');
+  notif.addEventListener('click', function(ev){
+    changeNotificationStatus();
+    ev.preventDefault();
+  }, false);
   var save = document.getElementById("send-update-profile");
   save.addEventListener('click', function(ev){
     saveChange();
@@ -44,6 +49,16 @@ function getBase64Image(elem) {
   }
 }
 
+function changeNotificationStatus() {
+  var btn = document.getElementById('notif-status');
+  var value = btn.getAttribute('value');
+  if (value == "On") {
+    btn.setAttribute('value', 'Off');
+  } else {
+    btn.setAttribute('value', 'On');
+  }
+}
+
 // Update date profile
 function saveChange() {
   var formData = new FormData();
@@ -58,6 +73,19 @@ function saveChange() {
   formData.append('password', document.getElementById('password-profile').value);
   formData.append('new-password', document.getElementById('newpassword-profile').value);
   formData.append('re-new-password', document.getElementById('renewpassword-profile').value);
+  var notif = document.getElementById('notif-status');
+  var valueNotif = notif.getAttribute('value');
+  if (valueNotif != notif.getAttribute('Origin')) {
+    if (valueNotif == "On") {
+      formData.append('comments_notification', 1);
+    } else if (valueNotif == "Off") {
+      formData.append('comments_notification', 0);
+    } else {
+      formData.append('comments_notification', '');
+    }
+  } else {
+    formData.append('comments_notification', '');
+  }
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {

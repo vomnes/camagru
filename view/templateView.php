@@ -30,7 +30,7 @@
         <? } ?>
     </div>
     <div class="container" id="id-container">
-      <?= $content ?>
+      <?php echo $content;?>
       <footer>
           <!-- <a href="#">Created by Valentin Omnès - All Rights Reserved.</a> -->
       </footer>

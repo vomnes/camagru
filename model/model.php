@@ -349,7 +349,7 @@
       return responseHTTP(500, $e->getMessage());
     }
     if (count($allPictures) == 0) {
-      http_response_code(204);
+      http_response_code(200);
       return;
     }
     return $allPictures;
@@ -456,7 +456,7 @@
     $userId = $_SESSION["logged_userId"];
     $td = new database();
     try {
-      $profileData = $td->getOne('SELECT username, email, profile_picture FROM Users WHERE id = '.$userId);
+      $profileData = $td->getOne('SELECT username, email, profile_picture, comments_notification  FROM Users WHERE id = '.$userId);
     } catch (Exception $e) {
       return responseHTTP(500, $e->getMessage());
     }
@@ -485,7 +485,11 @@
     updatePasswordProfile($td, $response);
     foreach ($_POST as $input => $value){
       if ($value != '') {
-         $fields .= $input . ' = "' . $value . '", ';
+        if ($input == 'comments_notification') {
+          $fields .= $input . ' = (' . $value . '), ';
+        } else {
+          $fields .= $input . ' = "' . $value . '", ';
+        }
       }
     }
     $finalUpdate = rtrim($fields, " , ");

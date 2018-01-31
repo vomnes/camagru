@@ -79,3 +79,8 @@
   margin-top: 5%;
   margin-bottom: 5%;
 }
+
+/* Notification */
+#notif-status:hover {
+  cursor: pointer;
+}

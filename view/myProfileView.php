@@ -13,6 +13,13 @@
   <div id="profile-data">
     <label for="name">Username</label><br><input id="username-profile" type="text" name="username" maxlength="64" placeholder="<?php echo $profileData['username'] ?>"><br>
     <label for="email">Email address</label><br><input id="email-profile" type="text" name="email" maxlength="128" autocomplete="off" placeholder="<?php echo $profileData['email'] ?>"><br>
+    <p>Comment notification <input id="notif-status" type="button"
+    <?php var_dump($profileData['comments_notification']) ?>
+    <?php if ($profileData['comments_notification'] == '1') {
+      echo "value=\"On\" origin=\"On\"";
+    } else {
+      echo "value=\"Off\" origin=\"Off\"";
+    }?>/></p>
     <h3>Change password</h3>
     <label for="password">Current password</label><br><input id="password-profile" size="16" type="password" name="password" maxlength="255"><br>
     <label for="newpassword">New password</label><br><input id="newpassword-profile" size="16" type="password" name="re-password" maxlength="255" minlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"><br>

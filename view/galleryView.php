@@ -3,15 +3,15 @@ $len = count($allPictures) + $offset;
 for ($index = $offset; $index < $len; $index++) {
   $id = $allPictures[$index-$offset]["id"];
   $src = $allPictures[$index-$offset]["file_path"];
-  $profilePictureSrc = $allPictures[$index-$offset]["profile_picture"];
   $pictureOwner = ucfirst($allPictures[$index-$offset]["username"]);
+  $profilePictureOwner = ucfirst($allPictures[$index-$offset]["profile_picture"]);
   $likes = $allPictures[$index-$offset]["totalLikes"];
 ?>
 <div class="gallery" id="gallery-<?php echo $index ?>">
   <!-- Header of the picture -->
   <div class="header-picture">
     <div class="thumbnail">
-      <img src="<?php echo $profilePictureSrc; ?>" alt="gallery profile picture">
+      <img src="<?php echo $profilePictureOwner ?>" alt="gallery profile picture">
     </div>
     <a class="gallery-username"><?php echo $pictureOwner ?></a>
   </div>

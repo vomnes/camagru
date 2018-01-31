@@ -198,9 +198,17 @@
     outline: 0;
   }
 
-  #loader {
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 10%;
+  /* -- Delete Picture -- */
+
+  .delete-picture {
+    position: absolute;
+    height: 30px;
+    top: 11px;
+    right: 11px;
+    border: 2px solid white;
+  }
+  .delete-picture:hover {
+    cursor: pointer;
+    border: 2px solid #FF5752;
+    border-radius: 100%;
   }

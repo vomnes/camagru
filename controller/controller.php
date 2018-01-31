@@ -78,6 +78,9 @@ function gallery($userStatus)
           }
           echo 'Error: Type in url expected';
           return;
+        } else if ($method == "deletepicture") {
+          deletePicture(); // WIP
+          return;
         }
       }
       if ($method == "nextpictures") {

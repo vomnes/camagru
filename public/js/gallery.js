@@ -175,3 +175,17 @@ function setURLParameter(name, value) {
   params.set(name, value);
   window.history.replaceState({}, '', `${location.pathname}?${params}`);
 }
+
+/* Delete picture */
+
+function deletePicture(pictureId, pictureIdCSS) {
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      var pictureArea = document.getElementById(pictureIdCSS);
+      pictureArea.parentNode.removeChild(pictureArea);
+    }
+  }
+  xmlhttp.open("POST", "index.php?action=gallery&method=deletepicture&id=" + pictureId, true); // Delete picture in db
+  xmlhttp.send();
+}

@@ -339,7 +339,7 @@
   function getAllPictures($offset) {
     $td = new database();
     try {
-      $allPictures = $td->getAll('SELECT p.id, p.file_path, u.username, u.profile_picture, COUNT(DISTINCT l.id) as totalLikes
+      $allPictures = $td->getAll('SELECT p.id, p.file_path, u.id as userId, u.username, u.profile_picture, COUNT(DISTINCT l.id) as totalLikes
         FROM Pictures p
         LEFT JOIN Users u ON u.id=p.userId
         LEFT JOIN Likes l ON l.pictureId=p.id

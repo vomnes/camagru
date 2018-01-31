@@ -4,7 +4,6 @@ for ($index = $offset; $index < $len; $index++) {
   $id = $allPictures[$index-$offset]["id"];
   $src = $allPictures[$index-$offset]["file_path"];
   $pictureOwner = ucfirst($allPictures[$index-$offset]["username"]);
-  $pictureOwnerId = $allPictures[$index-$offset]["userId"];
   $profilePictureOwner = ucfirst($allPictures[$index-$offset]["profile_picture"]);
   $likes = $allPictures[$index-$offset]["totalLikes"];
 ?>
@@ -15,9 +14,6 @@ for ($index = $offset; $index < $len; $index++) {
       <img src="<?php echo $profilePictureOwner ?>" alt="gallery profile picture">
     </div>
     <a class="gallery-username"><?php echo $pictureOwner ?></a>
-    <?php if ($_SESSION["logged_userId"] == $pictureOwnerId) { ?>
-      <img src="public/pictures/delete-red-128.png" class="delete-picture" onclick="deletePicture(<?php echo $id ?>, 'gallery-<?php echo $index ?>')" alt="delete picture" title="Delete the picture">
-    <?php } ?>
   </div>
   <!-- Picture -->
   <a href='index.php?action=picture&id=<?php echo $id ?>'>

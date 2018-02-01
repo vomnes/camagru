@@ -2,38 +2,29 @@
   position: relative;
   width: auto;
   max-width: 500px;
+  min-height: 439px;
   height: auto;
-  max-height: 455px;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 5%;
+  transform: translateX(-5%);
   margin-left: 2px;
   margin-right: 2px;
-  background: white;
+  background: #EFEFEF;
 }
 
-#your-photo-area-after {
+#your-photo-area {
   position: relative;
-  visibility: hidden;
   left: 50%;
   top: -472px;
   max-width: 422.5px;
   width: auto;
   max-height: 470px;
   height: auto;
+  right: 5%;
+  transform: translateX(10%);
 }
 
-#your-photo-area-before {
+#your-photo-scroll {
   position: relative;
-  visibility: visible;
-  left: 5%;
-  top: -25px;
-  width: 90%;
-  height: auto;
-}
-
-#your-photo-scroll-after {
-  position: relative;
-  visibility: hidden;
   top: -2px;
   max-width: 416.5px;
   width: auto;
@@ -44,17 +35,6 @@
   padding: 3px;
 }
 
-#your-photo-scroll-before {
-  position: relative;
-  visibility: visible;
-  width: 98%;
-  height: 9%;
-  padding: 3px;
-  top: -2px;
-  left: 1.75%;
-  margin-top: 5px;
-}
-
 .border-style {
   border: 2px solid #A8A8A8;
   border-radius: 6px;
@@ -62,7 +42,6 @@
 
 #camera {
   position: relative;
-  visibility: hidden;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   max-width: 500px;
@@ -154,7 +133,7 @@
 
 #filter-area {
   position: absolute;
-  visibility: hidden;
+  visibility: visible;
   top: 523px;
   left: 28px;
   width: 928px;
@@ -180,32 +159,38 @@
 @media screen and (max-width: 1040px) {
   #camera-area {
     position: relative;
+    min-height: 0px;
+    left: 50%;
+    transform: translateX(-50%);
   }
-  #your-photo-area-after {
+  #your-photo-area {
     position: relative;
-    visibility: hidden;
+    visibility: visible;
     top: 105px;
     padding: 5px;
-  }
-  #your-photo-scroll-after {
-    visibility: hidden;
-    width: auto;
-    max-height: 380px;
-    height: auto;
+    right: 50%;
+    transform: translateX(-50%);
   }
   #filter-area {
     position: relative;
-    visibility: hidden;
+    visibility: visible;
     max-width: 500px;
     width: 90%;
     max-height: 83px;
     height: auto;
-    top: -420px;
+    top: -190px;
     left: 50%;
     transform: translateX(-50%);
   }
   .filter-picture {
     width: 88px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  #filter-area {
+    position: relative;
+    top: -16%;
   }
 }
 

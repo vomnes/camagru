@@ -37,13 +37,8 @@ function turnOnCamera() {
   cameraOn();
   document.getElementById("camera").onloadeddata = function() {
       if (on == false) {
-        document.getElementById("your-photo-area-before").id = "your-photo-area-after";
-        document.getElementById("your-photo-scroll-before").id = "your-photo-scroll-after";
         document.getElementById("turn-on-camera").style.visibility = 'hidden';
-        document.getElementById("camera-area").className += "border-style";
-        document.getElementById('camera-area').style.backgroundColor = '#EFEFEF'
-        setPosition();
-        changeVisibility(["camera", "take-picture", "stop-camera", "upload-picture", "your-photo-area-after", "your-photo-scroll-after", "filter-area"], 'visible');
+        changeVisibility(["take-picture", "stop-camera", "upload-picture"], 'visible');
       }
       on = true;
   };
@@ -52,35 +47,11 @@ function turnOnCamera() {
 function turnOffCamera() {
   document.getElementById("camera").pause();
   document.getElementById("camera").src = "";
-  changeVisibility(["camera", "canvas", "take-picture", "stop-camera", "upload-picture", "your-photo-area-after", "your-photo-scroll-after", "filter-area"], 'hidden');
+  changeVisibility(["canvas", "take-picture", "stop-camera", "upload-picture"], 'hidden');
   document.getElementById("turn-on-camera").style.visibility = 'visible';
-  document.getElementById('camera-area').style.backgroundColor = 'white';
-  document.getElementById("camera-area").classList.remove("border-style");
-  document.getElementById('camera-area').style.left = "50%";
-  document.getElementById('camera-area').style.transform = "translateX(-50%)";
-  document.getElementById("your-photo-area-after").id = "your-photo-area-before";
-  document.getElementById("your-photo-scroll-after").id = "your-photo-scroll-before";
+  // document.getElementById('camera-area').style.backgroundColor = 'white';
+  // document.getElementById("camera-area").classList.remove("border-style");
   location.reload();
-}
-
-window.onresize = function(event) {
-  if (document.getElementById("turn-on-camera").style.visibility == 'hidden') {
-    setPosition();
-  }
-};
-
-function setPosition() {
-  if (document.documentElement.clientWidth > 1040) {
-    document.getElementById('camera-area').style.left = "5%";
-    document.getElementById('camera-area').style.transform = "translateX(-5%)";
-    document.getElementById('your-photo-area-after').style.right = "5%";
-    document.getElementById('your-photo-area-after').style.transform = "translateX(10%)";
-  } else {
-    document.getElementById('camera-area').style.left = "50%";
-    document.getElementById('camera-area').style.transform = "translateX(-50%)";
-    document.getElementById('your-photo-area-after').style.left = "50%";
-    document.getElementById('your-photo-area-after').style.transform = "translateX(-50%)";
-  }
 }
 
 function changeVisibility(elements, status) {
@@ -88,6 +59,21 @@ function changeVisibility(elements, status) {
     document.getElementById(elem).style.visibility = status;
   });
 }
+
+//
+// function setPosition() {
+//   if (document.documentElement.clientWidth > 1040) {
+//     document.getElementById('camera-area').style.left = "5%";
+//     document.getElementById('camera-area').style.transform = "translateX(-5%)";
+//     document.getElementById('your-photo-area-after').style.right = "5%";
+//     document.getElementById('your-photo-area-after').style.transform = "translateX(10%)";
+//   } else {
+//     document.getElementById('camera-area').style.left = "50%";
+//     document.getElementById('camera-area').style.transform = "translateX(-50%)";
+//     document.getElementById('your-photo-area-after').style.left = "50%";
+//     document.getElementById('your-photo-area').style.transform = "translateX(-50%)";
+//   }
+// }
 
 window.onload = function() {
   addFilterId();
@@ -189,7 +175,7 @@ function savePicture() {
 				var xhttp = new XMLHttpRequest();
 				xhttp.onreadystatechange = function() {
 				  if (this.readyState == 4 && this.status == 200) {
-            prependImage('your-photo-scroll-after', xhttp.responseText, 'your-photo', '');
+            prependImage('your-photo-scroll', xhttp.responseText, 'your-photo', '');
 				  }
 			  };
 				xhttp.open("GET", "index.php?action=camera&method=lastpicture", true); // Get last picture

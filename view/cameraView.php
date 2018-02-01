@@ -1,6 +1,6 @@
 <script id="camera-script" src="public/js/camera.js"></script>
 <h2 id="title-page">Camera</h2>
-<div id="camera-area">
+<div id="camera-area" class="border-style">
   <img onclick="turnOnCamera()" id="turn-on-camera" src="public/pictures/lens-close.png" onmouseover="switchPicture('turn-on-camera', 'public/pictures/lens-close.png', 'public/pictures/lens.png')" onmouseout="switchPicture('turn-on-camera', 'public/pictures/lens-close.png', 'public/pictures/lens.png')" alt="camera lens close">
   <video autoplay="true" id="camera"></video>
   <canvas id="canvas"></canvas>
@@ -9,9 +9,9 @@
   <img id="upload-picture" src="public/pictures/download-picture-black-128.png" alt="upload picture" onmouseover="switchPicture('upload-picture', 'public/pictures/download-picture-black-128.png', 'public/pictures/download-picture-color-128.png')" onmouseout="switchPicture('upload-picture', 'public/pictures/download-picture-black-128.png', 'public/pictures/download-picture-color-128.png')">
   <div id="applied-filter"></div>
 </div>
-<div id="your-photo-area-before">
+<div id="your-photo-area">
   <h3 style="text-align:center;font-size:1.2em;margin:2px;" >Your pictures</h3>
-  <div id="your-photo-scroll-before">
+  <div id="your-photo-scroll">
     <?php
     $len = count($userPictures);
     for ($i = 0; $i < $len; $i++) { ?>

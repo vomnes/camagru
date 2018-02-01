@@ -154,21 +154,20 @@
     position: relative;
     left: -7%;
     height: 50px;
-    min-width: 500px;
-    width: auto;
-    border: none;
+    max-width: 500px;
+    width: 85%;
     resize: none;
     font-family: 'Open Sans', sans-serif;
     font-size: 0.9em;
     padding: 5px;
-    border: 1px solid white;
+    border: none;
   }
   .put-comment {
-    position: relative;
+    position: absolute;
     text-align: center;
     display: block;
-    left: 545px;
-    top: -84px;
+    right: 12.5px;
+    top: 15px;
     width: 45px;
     height: 45px;
     border-radius: 100%;
@@ -180,6 +179,7 @@
   }
   .put-comment:hover {
     background-image: url("/public/pictures/send-comment-success-2-128.png");
+    cursor: pointer;
   }
   input:focus {
     outline: 0;
@@ -201,4 +201,13 @@
     cursor: pointer;
     border: 2px solid #FF5752;
     border-radius: 100%;
+  }
+
+  @media screen and (max-width: 500px) {
+    .content-comment {
+      width: 75%;
+    }
+    .put-comment {
+      right: 0px;
+    }
   }

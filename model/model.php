@@ -633,4 +633,40 @@
     }
     return false;
   }
+
+  function deletePicture() {
+    session_start();
+    $userId = $_SESSION["logged_userId"];
+    $pictureId = $_GET["id"];
+    $td = new database();
+    try {
+      $pictureData = $td->getOne('SELECT id, userId FROM Pictures WHERE id = "' . $pictureId . '"');
+    } catch (Exception $e) {
+      return responseHTTP(500, $e->getMessage());
+    }
+    if ($pictureData == null) {
+      return responseHTTP(401, 'Error: No picture with this pictureId');
+    } else if ($pictureData['userId'] != $userId) {
+      return responseHTTP(403, 'Error: Access denied');
+    }
+    try {
+      // Delete picture where pictureId and ownerId match
+      $td->deleteData('DELETE FROM `Pictures` WHERE id = ' . $pictureId . ' AND userId = ' . $userId);
+    } catch (Exception $e) {
+      return responseHTTP(500, $e->getMessage());
+    }
+    try {
+      // Delete the likes of the picture
+      $td->deleteData('DELETE FROM `Likes` WHERE pictureId = ' . $pictureId . ' AND userId = ' . $userId);
+    } catch (Exception $e) {
+      return responseHTTP(500, $e->getMessage());
+    }
+    try {
+      // Delete the comments of the picture
+      $td->deleteData('DELETE FROM `Comments` WHERE pictureId = ' . $pictureId . ' AND userId = ' . $userId);
+    } catch (Exception $e) {
+      return responseHTTP(500, $e->getMessage());
+    }
+    return responseHTTP(200, 'Status: Success - PictureId "' . $pictureId . '" has been deleted.');
+  }
 // abcdABCD1234

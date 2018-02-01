@@ -1,5 +1,7 @@
 window.onload = function(ev) {
-  setURLParameter('offset', '0');
+  if (getURLParameter('action') == 'gallery') {
+    setURLParameter('offset', '0');
+  }
 }
 
 window.onscroll = function(ev) {

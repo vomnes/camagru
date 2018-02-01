@@ -356,6 +356,21 @@
     return $allPictures;
   }
 
+  function getPicture() {
+    $pictureId = $_GET['id'];
+    $td = new database();
+    try {
+      $picture = $td->getOne('SELECT p.id, p.file_path, u.id as userId, u.username, u.profile_picture, COUNT(DISTINCT l.id) as totalLikes
+        FROM Pictures p
+        LEFT JOIN Users u ON u.id=p.userId
+        LEFT JOIN Likes l ON l.pictureId=p.id
+        WHERE p.id=' . $pictureId . ' GROUP BY p.id');
+    } catch (Exception $e) {
+      return responseHTTP(500, $e->getMessage());
+    }
+    return $picture;
+  }
+
   function getUserLikes() {
     session_start();
     $td = new database();

@@ -30,6 +30,8 @@ if (!userLogged()) {
           camera();
       } elseif ($page == 'gallery') {
           gallery(1);
+      } elseif ($page == 'picture') {
+          picture();
       } elseif ($page == 'myprofile') {
           profile();
       } elseif ($page == 'logout') {

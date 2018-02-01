@@ -100,6 +100,16 @@ function gallery($userStatus)
     require($_SERVER['DOCUMENT_ROOT'] . '/view/galleryView.php');
 }
 
+function picture() {
+    $pictureData = getPicture();
+    if ($pictureData == null) {
+      header('Location: index.php?action=gallery');
+      return;
+    }
+    $hasLiked = getUserLikes();
+    require($_SERVER['DOCUMENT_ROOT'] . '/view/pictureView.php');
+}
+
 function profile()
 {
     $method = $_GET["method"];

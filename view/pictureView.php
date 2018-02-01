@@ -1,11 +1,13 @@
+<script src="public/js/gallery.js"></script>
+<h2 id="title-page">Picture</h2>
 <?php
-$len = count($allPictures) + $offset;
-for ($index = $offset; $index < $len; $index++) {
-  $id = $allPictures[$index-$offset]["id"];
-  $src = $allPictures[$index-$offset]["file_path"];
-  $pictureOwner = ucfirst($allPictures[$index-$offset]["username"]);
-  $profilePictureOwner = ucfirst($allPictures[$index-$offset]["profile_picture"]);
-  $likes = $allPictures[$index-$offset]["totalLikes"];
+  $index = 0;
+  $id = $pictureData["id"];
+  $src = $pictureData["file_path"];
+  $pictureOwnerId = $pictureData["userId"];
+  $pictureOwner = ucfirst($pictureData["username"]);
+  $profilePictureOwner = ucfirst($pictureData["profile_picture"]);
+  $likes = $pictureData["totalLikes"];
 ?>
 <div class="gallery" id="gallery-<?php echo $index ?>">
   <!-- Header of the picture -->
@@ -13,6 +15,9 @@ for ($index = $offset; $index < $len; $index++) {
     <div class="thumbnail">
       <img src="<?php echo $profilePictureOwner ?>" alt="gallery profile picture">
     </div>
+    <?php if ($_SESSION["logged_userId"] == $pictureOwnerId) { ?>
+      <img src="public/pictures/delete-red-128.png" class="delete-picture" onclick="deletePicture(<?php echo $id ?>, 'gallery-<?php echo $index ?>')" alt="delete picture" title="Delete the picture">
+    <?php } ?>
     <a class="gallery-username"><?php echo $pictureOwner ?></a>
   </div>
   <!-- Picture -->
@@ -44,4 +49,3 @@ for ($index = $offset; $index < $len; $index++) {
     </div>
   <?php } ?>
 </div>
-<?php } ?>

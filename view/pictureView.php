@@ -21,9 +21,7 @@
     <a class="gallery-username"><?php echo $pictureOwner ?></a>
   </div>
   <!-- Picture -->
-  <a href='index.php?action=picture&id=<?php echo $id ?>'>
-    <img class="gallery-picture" src="<?php echo $src ?>" alt="gallery picture">
-  </a>
+  <img class="gallery-picture" src="<?php echo $src ?>" alt="gallery picture">
   <!-- Footer of the picture -->
   <?php if ($_SESSION["logged_user"] != '' AND $_SESSION["logged_userId"] != '') { ?>
     <div class="footer-picture">

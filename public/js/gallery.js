@@ -1,15 +1,15 @@
-window.onload = function(ev) {
-  if (getURLParameter('action') == 'gallery') {
-    setURLParameter('offset', '0');
+if (getURLParameter('action') == 'gallery') {
+  window.onload = function(ev) {
+      setURLParameter('offset', '0');
   }
-}
 
-window.onscroll = function(ev) {
-  handleTitleScroll();
-  if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight + 120) {
-    unlimitedScroll();
-  }
-};
+  window.onscroll = function(ev) {
+    handleTitleScroll();
+    if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight + 120) {
+      unlimitedScroll();
+    }
+  };
+}
 
 /* -- Title -- */
 
@@ -90,7 +90,12 @@ function getPictureComments(index, pictureId) {
     if (this.readyState == 4 && this.status == 200) {
       var commentsList = JSON.parse(xmlhttp.responseText);
       for (i = 0; i < commentsList.length; i++) {
-        appendComment(index, commentsList[i]["username"], commentsList[i]["content"]);
+        let username = commentsList[i]["username"];
+        if (i > 0 && commentsList[i-1]["username"] == username) {
+          appendComment(index, '', commentsList[i]["content"]);
+        } else {
+          appendComment(index, username + '<br>', commentsList[i]["content"]);
+        }
       }
     }
   }
@@ -125,7 +130,7 @@ function createComment(index, pictureId, commentContent, username, element) {
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-      appendComment(index, username, commentContent);
+      appendComment(index, username + '<br>', commentContent);
       document.getElementById('content-comment-' + index).value = "";
     } else {
       flashPlaceholder(element);
@@ -137,7 +142,7 @@ function createComment(index, pictureId, commentContent, username, element) {
 
 function appendComment(index, username, commentContent) {
   document.getElementById('comment-list-' + index).innerHTML +=
-  "<div class=\"one-comment\">\n<a class=\"comment-owner\">"+capitalizeFirstLetter(username)+"</a>\n<a class=\"comment-text\">"+commentContent+"</a>\n</div>";
+  "<p class=\"one-comment\">\n<i>"+capitalizeFirstLetter(username)+"</i><span class=\"comment-text\">"+commentContent+"</span>\n</p>";
   document.getElementById('content-comment-' + index).value = "";
 }
 

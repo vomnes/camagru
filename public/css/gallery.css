@@ -131,26 +131,16 @@
 
   .one-comment {
     position: relative;
-    width: auto;
-    display: block;
-    height: auto;
     left: 48%;
-    margin-left: 2%;
-    margin-right: 2%;
-    padding-bottom: 5px;
+    padding: 0px;
     transform: translateX(-50%);
-  }
-  .comment-owner {
-    position: relative;
-    font-style: italic;
+    word-wrap: break-word;
+    word-spacing: nowrap;
+    margin: 0px 2% 1px 2%;
   }
   .comment-text {
-    position: relative;
     font-family: 'Open Sans', sans-serif;
     font-size: 0.9em;
-    text-align: justify;
-    text-indent: inherit;
-    transform: translate(-50%, -50%);
   }
 
   .new-comment {

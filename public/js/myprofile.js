@@ -36,7 +36,6 @@ window.onload = function() {
   }, false);
 };
 
-
 function getBase64Image(elem) {
   var file    = document.querySelector(elem).files[0];
   var reader  = new FileReader();

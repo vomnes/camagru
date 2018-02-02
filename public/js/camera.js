@@ -25,8 +25,8 @@ function cameraOn() {
   }
 
   function videoError(e) {
-      if (document.getElementById("title-page").innerHTML != 'Camera<br>Camera access denied') {
-        document.getElementById("title-page").innerHTML += '<br>Camera access denied';
+      if (document.getElementById("title-page").innerHTML != 'Camera - Access denied') {
+        document.getElementById("title-page").innerHTML += ' - Access denied';
       }
       console.log('Error to switch on the camera');
   }
@@ -37,8 +37,9 @@ function turnOnCamera() {
   cameraOn();
   document.getElementById("camera").onloadeddata = function() {
       if (on == false) {
-        document.getElementById("turn-on-camera").style.visibility = 'hidden';
-        changeVisibility(["take-picture", "stop-camera", "download-picture"], 'visible');
+        document.getElementById("uploaded-picture").src = "";
+        changeVisibility(["turn-on-camera", "upload-picture", "uploaded-picture", "turn-on-camera-picture-on"], 'hidden');
+        changeVisibility(["take-picture", "upload-new-picture", "stop-camera", "download-picture", "camera"], 'visible');
       }
       on = true;
   };
@@ -47,8 +48,8 @@ function turnOnCamera() {
 function turnOffCamera() {
   document.getElementById("camera").pause();
   document.getElementById("camera").src = "";
-  changeVisibility(["canvas", "take-picture", "stop-camera", "download-picture"], 'hidden');
-  document.getElementById("turn-on-camera").style.visibility = 'visible';
+  changeVisibility(["canvas", "upload-new-picture", "take-picture", "stop-camera", "download-picture", "camera"], 'hidden');
+  changeVisibility(["turn-on-camera", "upload-picture"], 'visible');
   location.reload();
 }
 
@@ -64,6 +65,7 @@ window.onload = function() {
   var downloadPicture = document.getElementById("download-picture");
   var uploadFileButton = document.getElementById("upload-file-btn");
   var uploadPicture = document.getElementById("upload-picture");
+  var uploadNewPicture = document.getElementById("upload-new-picture");
   var canvas = document.getElementById("canvas");
   var video = document.getElementById("camera");
   var width = 500;
@@ -110,14 +112,28 @@ window.onload = function() {
     ev.preventDefault();
   }, false);
 
+  // -- Upload a picture --
+
   uploadPicture.addEventListener('click', function(ev){
     uploadFileButton.click();
     ev.preventDefault();
   }, false);
 
+  uploadNewPicture.addEventListener('click', function(ev){
+    console.log('Click on uploded picture ;)');
+    uploadFileButton.click();
+    ev.preventDefault();
+  }, false);
+
+  // CHECK TURN OFF CAMERA !
+
   uploadFileButton.onchange = function(e) {
-    console.log('file uploaded :)');
+    changeVisibility(["turn-on-camera", "upload-picture"], 'hidden');
     getBase64Image(uploadFileButton);
+    document.getElementById("camera").pause();
+    document.getElementById("camera").setAttribute("src", "");
+    changeVisibility(["canvas", "camera", "take-picture", "stop-camera"], 'hidden');
+    changeVisibility(["upload-new-picture", "download-picture", "turn-on-camera-picture-on"], 'visible');
   }
 }
 
@@ -126,13 +142,11 @@ window.onload = function() {
 
 function getBase64Image(elem) {
   var file = elem.files[0];
-  canvas.style.visibility = 'visible';
+  var picture = document.getElementById("uploaded-picture");
+  picture.style.visibility = 'visible';
   var reader  = new FileReader();
   reader.addEventListener("load", function () {
-    console.log('picture data');
-    // document.getElementById("canvas").src = reader.result;
-    canvas.setAttribute('src', reader.result);
-    // console.log(reader.result);
+    picture.src = reader.result;
   }, false);
   if (file) {
     reader.readAsDataURL(file);

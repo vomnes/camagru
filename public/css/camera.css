@@ -55,6 +55,50 @@
   cursor: pointer;
 }
 
+/* Upload picture */
+
+#uploaded-picture {
+  position: absolute;
+  visibility: hidden;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  max-width: 500px;
+  width: 100%;
+  max-height: 375px;
+  height: 85%;
+  z-index: -2;
+  top: 0px;
+  left: 0px;
+}
+#uploaded-picture:hover {
+  cursor: pointer;
+}
+
+#upload-new-picture {
+  position: fixed;
+  visibility: hidden;
+  width: 9%;
+  height: 10%;
+  bottom: 7.5px;
+  left: 25%;
+}
+#upload-new-picture:hover {
+  cursor: pointer;
+}
+
+/* Turn on camera while picture is on */
+#turn-on-camera-picture-on {
+  position: fixed;
+  visibility: hidden;
+  width: 9%;
+  height: 10%;
+  bottom: 10px;
+  left: 15px;
+}
+#turn-on-camera-picture-on:hover {
+  cursor: pointer;
+}
+
 #canvas {
   position: fixed;
   border-top-left-radius: 5px;
@@ -197,6 +241,27 @@
   }
   .filter-picture {
     width: 88px;
+  }
+  #stop-camera {
+    left: 10px;
+  }
+  #turn-on-camera-picture-on {
+    width: 9%;
+    height: 13%;
+    bottom: 2px;
+    left: 10px;
+  }
+  #upload-new-picture {
+    height: 14%;
+    width: auto;
+    bottom: 0px;
+    left: 17%;
+  }
+  #download-picture {
+    height: 14%;
+    width: auto;
+    bottom: 0px;
+    right: 10px;
   }
 }
 

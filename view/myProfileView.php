@@ -6,9 +6,8 @@
       <img id="profile-private" src="<?php echo $profileData['profile_picture'] ?>" alt="user's profile picture">
     </div>
     <form id="profile-form" enctype="multipart/form-data" action="" method="post" autocomplete="off">
-      <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
-      <p id="text-upload-profile-picture">Upload a new profile picture :<br>Preview by clicking on the picture.</p>
-      <input id="upload-profile-picture" name="userfile" type="file" accept=".jpg, .jpeg, .png"/>
+      <input type="hidden" style="display:none;" name="MAX_FILE_SIZE" value="30000" />
+      <input id="upload-profile-picture" name="userfile" style="display:none;" type="file" accept=".jpg, .jpeg, .png"/>
   </div>
   <div id="profile-data">
     <label for="name">Username</label><br><input id="username-profile" type="text" name="username" maxlength="64" placeholder="<?php echo $profileData['username'] ?>"><br>

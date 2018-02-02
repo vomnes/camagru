@@ -120,7 +120,6 @@ window.onload = function() {
   }, false);
 
   uploadNewPicture.addEventListener('click', function(ev){
-    console.log('Click on uploded picture ;)');
     uploadFileButton.click();
     ev.preventDefault();
   }, false);

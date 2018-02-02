@@ -14,16 +14,20 @@ function setSizeFields() {
   document.getElementById("email-profile").size = size;
 }
 
-window.onload = function() {
+window.addEventListener('load', function(w){
   document.getElementById('email-profile').value = '';
   document.getElementById('password-profile').value = '';
   setSizeFields();
-  var previewPicture = document.getElementById("profile-private");
-  // Preview the profile picture
-  previewPicture.addEventListener('click', function(ev){
-    getBase64Image('#upload-profile-picture');
+  var getPicture = document.getElementById("profile-private");
+  var uploadFileButton = document.getElementById("upload-profile-picture");
+  // Set the profile picture
+  getPicture.addEventListener('click', function(ev){
+    uploadFileButton.click();
     ev.preventDefault();
   }, false);
+  uploadFileButton.onchange = function(e) {
+    getBase64Image('#upload-profile-picture');
+  }
   var notif = document.getElementById('notif-status');
   notif.addEventListener('click', function(ev){
     changeNotificationStatus();
@@ -34,7 +38,8 @@ window.onload = function() {
     saveChange();
     ev.preventDefault();
   }, false);
-};
+  w.preventDefault();
+}, false);
 
 function getBase64Image(elem) {
   var file    = document.querySelector(elem).files[0];

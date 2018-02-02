@@ -1,5 +1,6 @@
 #topnav {
   position: fixed;
+  top: 5px;
   width: 1000px;
   min-height: 64px;
   height: auto;

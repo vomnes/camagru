@@ -132,13 +132,11 @@ window.onload = function() {
     getBase64Image(uploadFileButton);
     document.getElementById("camera").pause();
     document.getElementById("camera").setAttribute("src", "");
+    document.getElementById("canvas").setAttribute("content", '');
     changeVisibility(["canvas", "camera", "take-picture", "stop-camera"], 'hidden');
     changeVisibility(["upload-new-picture", "download-picture", "turn-on-camera-picture-on"], 'visible');
   }
 }
-
-// https://stackoverflow.com/questions/2381572/how-can-i-trigger-a-javascript-event-click
-// https://stackoverflow.com/questions/12081493/capturing-the-close-of-the-browse-for-file-window-with-javascript
 
 function getBase64Image(elem) {
   var file = elem.files[0];
@@ -190,22 +188,27 @@ function selectFilter(elementId) {
 }
 
 function savePicture() {
-  var photo = document.getElementById("canvas");
-  var base64Photo = photo.getAttribute('content');
-  if (base64Photo == null) {
+  var base64Photo = document.getElementById("canvas").getAttribute('content');
+  var base64Image = document.getElementById("uploaded-picture").src;
+  var base64 = '';
+  if (!base64Photo && !base64Image) {
     return;
+  } else if (base64Photo) {
+    base64 = base64Photo;
   } else {
-    var formData = new FormData();
-    formData.append('photo', base64Photo);
-    formData.append('filters', JSON.stringify(getUsedFilters()));
+    base64 = base64Image;
   }
+  var formData = new FormData();
+  formData.append('photo', base64);
+  formData.append('filters', JSON.stringify(getUsedFilters()));
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
 				var xhttp = new XMLHttpRequest();
 				xhttp.onreadystatechange = function() {
 				  if (this.readyState == 4 && this.status == 200) {
-            prependImage('your-photo-scroll', xhttp.responseText, 'your-photo', '');
+            let lastPicture = JSON.parse(xhttp.responseText);
+            prependImage('your-photo-scroll', lastPicture['file_path'], 'index.php?action=picture&id=' + lastPicture['id'], 'your-photo', '');
 				  }
 			  };
 				xhttp.open("GET", "index.php?action=camera&method=lastpicture", true); // Get last picture
@@ -240,9 +243,11 @@ function appendImage(parentId, src, className, idName) {
   document.getElementById(parentId).appendChild(img);
 }
 
-function prependImage(parentId, src, className, idName) {
+function prependImage(parentId, src, href, className, idName) {
   var parent = document.getElementById(parentId);
+  var anchor = document.createElement("a");
   var img = document.createElement("img");
+  anchor.href = href;
   img.src = src;
   if (className != '') {
     img.className += className;
@@ -250,6 +255,7 @@ function prependImage(parentId, src, className, idName) {
   if (idName != '') {
     img.id = idName;
   }
-  parent.appendChild(img);
-  parent.insertBefore(img, parent.firstChild);
+  anchor.appendChild(img);
+  parent.appendChild(anchor);
+  parent.insertBefore(anchor, parent.firstChild);
 }

@@ -287,11 +287,11 @@
     session_start();
     $td = new database();
     try {
-      $lastPicture = $td->getOne('SELECT file_path FROM Pictures WHERE userId = ' . $_SESSION["logged_userId"] . ' ORDER BY creation_date DESC LIMIT 1');
+      $lastPicture = $td->getOne('SELECT id, file_path FROM Pictures WHERE userId = ' . $_SESSION["logged_userId"] . ' ORDER BY creation_date DESC LIMIT 1');
     } catch (Exception $e) {
       return responseHTTP(500, $e->getMessage());
     }
-    return $lastPicture["file_path"];
+    return json_encode($lastPicture);
   }
 
   function createPicture($photo, $filters, $filename, $directory) {

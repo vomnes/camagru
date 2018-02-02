@@ -94,7 +94,6 @@ function saveChange() {
       document.getElementById('newpassword-profile').value = '';
       document.getElementById('renewpassword-profile').value = '';
       var response = JSON.parse(xmlhttp.responseText);
-      console.log(response);
       if (response['username']) {
         document.getElementById('username-profile').placeholder = response['username'];
       }

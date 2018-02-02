@@ -27,6 +27,30 @@
         <a id="gallery-btm" href="index.php?action=gallery" onmouseover="mouseTitle('visible', 'See the gallery')" onmouseout="mouseTitle('hidden', '')"><img title="See the gallery" src="/public/pictures/gallery-128.png" alt="gallery logo" width="30" height="30" border="0"></a>
         <a id="profile-btm" href="index.php?action=myprofile" onmouseover="mouseTitle('visible', '<?php echo ucfirst($data["username"]); ?>\'s Profile')" onmouseout="mouseTitle('hidden', '')"><img title="Edit profile" src="/public/pictures/profile-128.png" alt="profile logo" width="30" height="30" border="0"></a>
         <a id="logout-btm" href="index.php?action=logout" onmouseover="mouseTitle('visible', 'Logout')" onmouseout="mouseTitle('hidden', '')"><img title="Logout" src="/public/pictures/logout-128.png" alt="logout logo" width="35" height="35" border="0"></a>
+        <!-- Under xx px width menu -->
+        <img id="open-mobile-menu" title="Mobile menu" src="/public/pictures/menu-mobile-128.png" alt="logout logo" width="35" height="35" border="0">
+        <div id="mobile-menu">
+          <div class="element-menu">
+            <a id="" href="index.php?action=camera">
+            <img title="Manage pictures" src="/public/pictures/camera-128.png" alt="camera logo" width="15" height="15" border="0">
+            Manage pictures</a>
+          </div>
+          <div class="element-menu">
+            <a id="" href="index.php?action=gallery">
+            <img title="See the gallery" src="/public/pictures/gallery-128.png" alt="gallery logo" width="15" height="15" border="0">
+            See the gallery</a>
+          </div>
+          <div class="element-menu">
+            <a id="" href="index.php?action=myprofile">
+            <img title="Edit profile" src="/public/pictures/profile-128.png" alt="profile logo" width="15" height="15" border="0">
+            <?php echo ucfirst($data["username"]); ?>'s Profile</a>
+          </div>
+          <div class="element-menu">
+            <a id="" href="index.php?action=logout">
+            <img title="Logout" src="/public/pictures/logout-128.png" alt="logout logo" width="15" height="15" border="0">
+            Logout</a>
+          </div>
+        </div>
         <? } ?>
     </div>
     <div class="container" id="id-container">

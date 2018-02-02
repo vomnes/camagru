@@ -1,112 +1,139 @@
-@media screen and (min-width: 1034px) {
-  #topnav {
-    position: fixed;
-    width: 1000px;
-    height: 64px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1;
-    background-color: rgba(255,255,255,0.85);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.25);
-    -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.25);
-    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.25);
-  }
-  #camagru-logo {
-    position: fixed;
-    top: 0px;
-    left: 5%;
-  }
-  #camagru-text {
-    position: relative;
-    top: 22px;
-    left: 12%;
-  }
-  #btm-description {
-    visibility: hidden;
-    position: fixed;
-    top: 22px;
-    width: 200px;
-    height: 24px;
-    text-align: center;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 3px;
-    background-color: #FCFCFC;
-    /* Shadow */
-    border: 1px solid rgba(0,0,0,0.25);
-    box-shadow: inset 1px 1px 3px rgba(0,0,0,0.25);
-    -moz-box-shadow: inset 1px 1px 3px rgba(0,0,0,0.25);
-    -webkit-box-shadow: inset 1px 1px 3px rgba(0,0,0,0.25);
-  }
-  #title-page-header {
-    visibility: hidden;
-    position: fixed;
-    top: -3px;
-    font-size: 1.7em;
-    text-align: center;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  #camera-btm {
-    position: fixed;
-    top: 19.5px;
-    right: 21.25%;
-  }
-  #camera-btm:hover {
-    filter: brightness(80%);
-  }
-  #gallery-btm {
-    position: fixed;
-    top: 19.5px;
-    right: 15.6%;
-  }
-  #gallery-btm:hover {
-    filter: brightness(80%);
-  }
-  #profile-btm {
-    position: fixed;
-    top: 19.5px;
-    right: 10.5%;
-  }
-  #profile-btm:hover {
-    filter: brightness(80%);
-  }
-  #logout-btm {
-    position: fixed;
-    top: 16px;
-    right: 5%;
-  }
-  #logout-btm:hover {
-    -webkit-filter: invert(50%);
-  }
+#topnav {
+  position: fixed;
+  width: 1000px;
+  min-height: 64px;
+  height: auto;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  background-color: rgba(255,255,255);
+  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+}
+#camagru-logo {
+  position: fixed;
+  top: 0px;
+  left: 5%;
+}
+#camagru-text {
+  position: relative;
+  top: 22px;
+  left: 12%;
+}
+#btm-description {
+  visibility: hidden;
+  position: fixed;
+  top: 22px;
+  width: 200px;
+  height: 24px;
+  text-align: center;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 3px;
+  background-color: #FCFCFC;
+  /* Shadow */
+  border: 1px solid rgba(0,0,0,0.25);
+  box-shadow: inset 1px 1px 3px rgba(0,0,0,0.25);
+  -moz-box-shadow: inset 1px 1px 3px rgba(0,0,0,0.25);
+  -webkit-box-shadow: inset 1px 1px 3px rgba(0,0,0,0.25);
+}
+#title-page-header {
+  visibility: hidden;
+  position: fixed;
+  top: -3px;
+  font-size: 1.7em;
+  text-align: center;
+  left: 50%;
+  transform: translateX(-50%);
+}
+#camera-btm {
+  position: fixed;
+  top: 19.5px;
+  right: 21.25%;
+}
+#camera-btm:hover {
+  filter: brightness(80%);
+}
+#gallery-btm {
+  position: fixed;
+  top: 19.5px;
+  right: 15.6%;
+}
+#gallery-btm:hover {
+  filter: brightness(80%);
+}
+#profile-btm {
+  position: fixed;
+  top: 19.5px;
+  right: 10.5%;
+}
+#profile-btm:hover {
+  filter: brightness(80%);
+}
+#logout-btm {
+  position: fixed;
+  top: 16px;
+  right: 5%;
+}
+#logout-btm:hover {
+  -webkit-filter: invert(50%);
+}
+
+#open-mobile-menu {
+  visibility: hidden;
+  position: fixed;
+  top: 16px;
+  right: 5%;
+}
+#open-mobile-menu:hover {
+  cursor: pointer;
+}
+
+#mobile-menu {
+  position: relative;
+  display: none;
+  visibility: hidden;
+  width: 100%;
+  height: auto;
+  margin-top: 40px;
+  margin-bottom: 5px;
+  padding-top: 2.5px;
+  padding-bottom: 5px;
+  background-color: rgba(255,255,255);
+  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+}
+.element-menu {
+  margin: 10px;
+  padding: 5px 10px 5px 10px;
+  border-bottom: 0.25px solid #AFAFAF;
 }
 
 @media screen and (max-width: 1034px) {
   #topnav {
-    position: fixed;
-    width: 95%;
-    height: 64px;
+    width: 95.25%;
     left: 50%;
     transform: translateX(-50%);
-    background-color: rgba(255,255,255,0.85);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.25);
-    -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.25);
-    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.25);
     padding-left: 5px;
     padding-right: 5px;
-    z-index: 999;
   }
-  /* #camagru-logo {
-    position: fixed;
-    top: 0px;
-    left: 5%;
-  }*/
+}
+
+@media screen and (max-width: 725px) {
+  #open-mobile-menu {
+    visibility: visible;
+  }
   #camagru-text {
     visibility: hidden;
-  }/*
-  #profile-link {
-    position: fixed;
-    top: 22px;
-    right: 20%;
-  } */
+  }
+  #camera-btm {
+    visibility: hidden;
+  }
+  #gallery-btm {
+    visibility: hidden;
+  }
+  #profile-btm {
+    visibility: hidden;
+  }
+  #logout-btm {
+    visibility: hidden;
+  }
 }

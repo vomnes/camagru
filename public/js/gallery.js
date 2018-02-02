@@ -4,23 +4,10 @@ if (getURLParameter('action') == 'gallery') {
   }
 
   window.onscroll = function(ev) {
-    handleTitleScroll();
     if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight + 120) {
       unlimitedScroll();
     }
   };
-}
-
-/* -- Title -- */
-
-function handleTitleScroll() {
-  if (window.scrollY >= 71) {
-    document.getElementById("title-page").style.visibility = 'hidden';
-    document.getElementById("title-page-header").style.visibility = 'visible';
-  } else {
-    document.getElementById("title-page").style.visibility = 'visible';
-    document.getElementById("title-page-header").style.visibility = 'hidden';
-  }
 }
 
 /* -- Likes -- */

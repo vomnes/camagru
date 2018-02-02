@@ -20,14 +20,14 @@
     <div id="topnav">
         <a id="camagru-logo" href="index.php"><img src="/public/pictures/photo-camera-128.png" alt="logo" width="64" height="64" border="0" title="Camagru logo"></a>
         <a id="camagru-text" href="index.php">Camagru</a>
-        <h2 id="title-page-header">Gallery</h2>
+        <h2 id="title-page-header"></h2>
         <?php if ($data['isLogged']) { ?>
         <a id="btm-description"></a>
         <a id="camera-btm" href="index.php?action=camera" onmouseover="mouseTitle('visible', 'Manage pictures')" onmouseout="mouseTitle('hidden', '')"><img title="Manage pictures" src="/public/pictures/camera-128.png" alt="camera logo" width="30" height="30" border="0"></a>
         <a id="gallery-btm" href="index.php?action=gallery" onmouseover="mouseTitle('visible', 'See the gallery')" onmouseout="mouseTitle('hidden', '')"><img title="See the gallery" src="/public/pictures/gallery-128.png" alt="gallery logo" width="30" height="30" border="0"></a>
         <a id="profile-btm" href="index.php?action=myprofile" onmouseover="mouseTitle('visible', '<?php echo ucfirst($data["username"]); ?>\'s Profile')" onmouseout="mouseTitle('hidden', '')"><img title="Edit profile" src="/public/pictures/profile-128.png" alt="profile logo" width="30" height="30" border="0"></a>
         <a id="logout-btm" href="index.php?action=logout" onmouseover="mouseTitle('visible', 'Logout')" onmouseout="mouseTitle('hidden', '')"><img title="Logout" src="/public/pictures/logout-128.png" alt="logout logo" width="35" height="35" border="0"></a>
-        <!-- Under xx px width menu -->
+        <!-- Under 725px width menu -->
         <img id="open-mobile-menu" title="Mobile menu" src="/public/pictures/menu-mobile-128.png" alt="logout logo" width="35" height="35" border="0">
         <div id="mobile-menu">
           <div class="element-menu">

@@ -71,14 +71,27 @@
 #turn-on-camera {
   position: absolute;
   z-index: 1;
-  width: 45%;
-  left: 50%;
+  width: 25%;
+  left: 30%;
+  top: 10%;
   transform: translateX(-50%);
   margin-top: 5%;
   margin-bottom: 5%;
 }
 
 #turn-on-camera:hover {
+  cursor: pointer;
+}
+
+#upload-picture {
+  position: absolute;
+  z-index: 1;
+  width: 25%;
+  right: 15%;
+  top: 20%;
+}
+
+#upload-picture:hover {
   cursor: pointer;
 }
 
@@ -119,7 +132,7 @@
   cursor: pointer;
 }
 
-#upload-picture {
+#download-picture {
   position: fixed;
   visibility: hidden;
   width: 9%;
@@ -127,7 +140,7 @@
   bottom: 10px;
   right: 15px;
 }
-#upload-picture:hover {
+#download-picture:hover {
   cursor: copy;
 }
 
@@ -166,7 +179,7 @@
   #your-photo-area {
     position: relative;
     visibility: visible;
-    top: 105px;
+    top: 5px;
     padding: 5px;
     right: 50%;
     transform: translateX(-50%);
@@ -178,19 +191,12 @@
     width: 90%;
     max-height: 83px;
     height: auto;
-    top: -190px;
+    top: 5px;
     left: 50%;
     transform: translateX(-50%);
   }
   .filter-picture {
     width: 88px;
-  }
-}
-
-@media screen and (max-width: 450px) {
-  #filter-area {
-    position: relative;
-    top: -16%;
   }
 }
 

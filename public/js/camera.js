@@ -38,7 +38,7 @@ function turnOnCamera() {
   document.getElementById("camera").onloadeddata = function() {
       if (on == false) {
         document.getElementById("turn-on-camera").style.visibility = 'hidden';
-        changeVisibility(["take-picture", "stop-camera", "upload-picture"], 'visible');
+        changeVisibility(["take-picture", "stop-camera", "download-picture"], 'visible');
       }
       on = true;
   };
@@ -47,10 +47,8 @@ function turnOnCamera() {
 function turnOffCamera() {
   document.getElementById("camera").pause();
   document.getElementById("camera").src = "";
-  changeVisibility(["canvas", "take-picture", "stop-camera", "upload-picture"], 'hidden');
+  changeVisibility(["canvas", "take-picture", "stop-camera", "download-picture"], 'hidden');
   document.getElementById("turn-on-camera").style.visibility = 'visible';
-  // document.getElementById('camera-area').style.backgroundColor = 'white';
-  // document.getElementById("camera-area").classList.remove("border-style");
   location.reload();
 }
 
@@ -60,24 +58,11 @@ function changeVisibility(elements, status) {
   });
 }
 
-//
-// function setPosition() {
-//   if (document.documentElement.clientWidth > 1040) {
-//     document.getElementById('camera-area').style.left = "5%";
-//     document.getElementById('camera-area').style.transform = "translateX(-5%)";
-//     document.getElementById('your-photo-area-after').style.right = "5%";
-//     document.getElementById('your-photo-area-after').style.transform = "translateX(10%)";
-//   } else {
-//     document.getElementById('camera-area').style.left = "50%";
-//     document.getElementById('camera-area').style.transform = "translateX(-50%)";
-//     document.getElementById('your-photo-area-after').style.left = "50%";
-//     document.getElementById('your-photo-area').style.transform = "translateX(-50%)";
-//   }
-// }
-
 window.onload = function() {
   addFilterId();
   var takePicture = document.getElementById("take-picture");
+  var downloadPicture = document.getElementById("download-picture");
+  var uploadFileButton = document.getElementById("upload-file-btn");
   var uploadPicture = document.getElementById("upload-picture");
   var canvas = document.getElementById("canvas");
   var video = document.getElementById("camera");
@@ -120,10 +105,38 @@ window.onload = function() {
     canvas.setAttribute('content', data);
   }
 
-  uploadPicture.addEventListener('click', function(ev){
+  downloadPicture.addEventListener('click', function(ev){
     savePicture();
     ev.preventDefault();
   }, false);
+
+  uploadPicture.addEventListener('click', function(ev){
+    uploadFileButton.click();
+    ev.preventDefault();
+  }, false);
+
+  uploadFileButton.onchange = function(e) {
+    console.log('file uploaded :)');
+    getBase64Image(uploadFileButton);
+  }
+}
+
+// https://stackoverflow.com/questions/2381572/how-can-i-trigger-a-javascript-event-click
+// https://stackoverflow.com/questions/12081493/capturing-the-close-of-the-browse-for-file-window-with-javascript
+
+function getBase64Image(elem) {
+  var file = elem.files[0];
+  canvas.style.visibility = 'visible';
+  var reader  = new FileReader();
+  reader.addEventListener("load", function () {
+    console.log('picture data');
+    // document.getElementById("canvas").src = reader.result;
+    canvas.setAttribute('src', reader.result);
+    // console.log(reader.result);
+  }, false);
+  if (file) {
+    reader.readAsDataURL(file);
+  }
 }
 
 function addFilterId() {
@@ -146,6 +159,9 @@ function addFilterId() {
 }
 
 function selectFilter(elementId) {
+  if (document.getElementById("download-picture").style.visibility != 'visible') {
+    return;
+  }
   var element = document.getElementById(elementId);
   if (element.value == 0) {
     element.value = 1;

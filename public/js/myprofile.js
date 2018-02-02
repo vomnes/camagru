@@ -41,7 +41,6 @@ function getBase64Image(elem) {
   var reader  = new FileReader();
   reader.addEventListener("load", function () {
     document.getElementById('profile-private').src = reader.result;
-    console.log(reader.result);
   }, false);
   if (file) {
     reader.readAsDataURL(file);

@@ -17,7 +17,7 @@
        } else if ($signUpCode == -2) {
          echo "<p style=\"text-align: center; color: Brown;\">The two passwords must be identical</p>";
        } else if ($signUpCode == -1) {
-         echo "<p style=\"text-align: center; color: Brown;\">An error has occured</p>";
+         echo "<p style=\"text-align: center; color: Brown;\">An error has occured please contact use</p>";
        } else if ($signUpCode == -4) {
          echo "<p style=\"text-align: center; color: Brown;\">Fields with limits, please respect the warnings</p>";
        } else if ($signUpCode == -5) {

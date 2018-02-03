@@ -57,19 +57,15 @@
     return 1;
   }
 
-  function sendEmail($to, $subject, $body) {
-    if (mail($to, $subject, $body)) {
-      echo "<p>Message successfully sent!</p>";
-    } else {
-      echo "<p>Message delivery failed...</p>";
-    }
-  }
-
   function validationEmail($username, $emailAddress, $token) {
-    sendEmail(
+     $ret = mail(
       $emailAddress,
       "Camagru - Account validation",
       "Welcome ".$username.", Go on localhost:8080/index.php?action=validateaccount&token=".$token." to validate your account.");
+      if (!$ret) {
+        return -1;
+      }
+      return 1;
   }
 
   function signUpModel() {
@@ -90,9 +86,9 @@
         $uniqueToken = md5(uniqid(rand(), true));
         $ret = createUser($username, $pw, $emailAddress, $uniqueToken); // Error or User created
         if ($ret == -1) {
-          return -1; // An error has occured
+          return -1; // An error has occured please contact us
         }
-        validationEmail($username, $emailAddress, $uniqueToken);
+        $ret = validationEmail($username, $emailAddress, $uniqueToken);
         return $ret;
       } else {
         return -3; // User already exists
@@ -164,10 +160,14 @@
   }
 
   function sendResetEmail($username, $emailAddress, $token) {
-    sendEmail(
+    $ret = mail(
       $emailAddress,
       "Camagru - Set new password",
       "Hello ".$username.", This is the link to generate a new password: localhost:8080/index.php?action=resetpassword&token=".$token."");
+    if (!$ret) {
+      return -3;
+    }
+    return 1;
   }
 
   function resetPasswordEmail() {
@@ -185,8 +185,8 @@
           if ($data[$i]["account_validated"] == 0) {
             return -1; // Account not yet validated
           }
-          sendResetEmail($username, $data[$i]["email"], $data[$i]["unique_token"]);
-          return 1; // Email with set new password link sent
+          $ret = sendResetEmail($username, $data[$i]["email"], $data[$i]["unique_token"]);
+          return $ret; // 1 - Email with set new password link sent / -3 An error has occured please contact us
         }
       }
       return -2; // User does not exists
@@ -427,7 +427,7 @@
         return responseHTTP(200, $e->getMessage());
       }
       if ($dataPicture["email"] != '') {
-        sendEmail(
+        mail(
           $dataPicture["email"],
           "Camagru - New comment",
           "Hi " . $dataPicture["username"] . ", " . $_SESSION['logged_user'] . " has commented one of your pictures with \"" . $content . "\". Go on localhost:8080/index.php?action=picture&id=" . $pictureId . " to see the comment.");

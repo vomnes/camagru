@@ -13,6 +13,8 @@
       echo "<p style=\"text-align: center; color: Brown;\">Account not yet validated</p>";
     } else if ($code == -2) {
       echo "<p style=\"text-align: center; color: Brown;\">No account with this username</p>";
+    } else if ($code = -3) {
+      echo "<p style=\"text-align: center; color: Brown;\">An error has occured please contact us</p>";
     }
     ?>
   </form>

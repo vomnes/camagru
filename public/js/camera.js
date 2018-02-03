@@ -19,7 +19,7 @@ function cameraOn() {
 
   function handleVideo(stream) {
       video.srcObject = stream;
-      if (document.getElementById("title-page").innerHTML == 'Camera<br>Camera access denied') {
+      if (document.getElementById("title-page").innerHTML == 'Camera - Access denied') {
         document.getElementById("title-page").innerHTML = 'Camera';
       }
   }
@@ -190,7 +190,7 @@ function savePicture() {
   var base64Photo = document.getElementById("canvas").getAttribute('content');
   var base64Image = document.getElementById("uploaded-picture").src;
   var base64 = '';
-  if (!base64Photo && !base64Image) {
+  if (!base64Photo && base64Image.includes('action=camera')) {
     return;
   } else if (base64Photo) {
     base64 = base64Photo;

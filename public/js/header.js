@@ -21,7 +21,9 @@ window.addEventListener('load', function(ev){
 }, false);
 
 window.addEventListener('scroll', function(e) {
-  handleTitleScroll();
+  if (document.getElementById("title-page")) {
+    handleTitleScroll();
+  }
   e.preventDefault();
 }, false);
 

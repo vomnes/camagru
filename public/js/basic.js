@@ -62,3 +62,17 @@ function prependImage(parentId, src, href, className, idName) {
   parent.appendChild(anchor);
   parent.insertBefore(anchor, parent.firstChild);
 }
+
+  function isValidPassword(str)
+  {
+    return RegExp("^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,254}$").test(str);
+  }
+
+  function isValidUsername(str)
+  {
+    return RegExp("^(?=.*[a-z])[0-9a-zA-Z]{4,64}$").test(str);
+  }
+
+  function isValidEmail(str) {
+    return RegExp("/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$").test(str);
+  }

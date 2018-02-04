@@ -589,13 +589,9 @@
       echo 'Status: Nothing to update';
       return;
     }
-    // Save picture
     updatePictureProfile();
-    // Update username
     updateUsernameProfile($td, $response);
-    // Update email
     updateEmailProfile($td, $response);
-    // Update password
     updatePasswordProfile($td, $response);
     foreach ($_POST as $input => $value){
       if ($value != '') {
@@ -638,6 +634,7 @@
       if (!isValidUsername($_POST['username'])) {
         $response['message'] .= 'Not a valid username<br>Must contain between 4 and 64 characters,<br>only lowercase and uppercase characters and digits.<br>';
         $response['username'] = '';
+        $_POST['username'] = '';
         return;
       }
       try {

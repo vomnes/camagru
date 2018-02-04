@@ -69,7 +69,12 @@ function saveChange() {
   if (sourcePhoto.includes('public/pictures')) {
     sourcePhoto = '';
   }
+  document.getElementById('send-update-profile').style.border = "2px solid #CCC";
   document.getElementById('result-profile').innerHTML = '';
+  if (!checkInput()) {
+    document.getElementById('send-update-profile').style.border = "2px solid Brown";
+    return;
+  }
   formData.append('profile_picture', sourcePhoto);
   formData.append('username', escapeHtml(document.getElementById('username-profile').value));
   formData.append('email', escapeHtml(document.getElementById('email-profile').value));
@@ -114,4 +119,34 @@ function saveChange() {
   }
   xmlhttp.open("POST", "index.php?action=myprofile&method=savechange", true);
   xmlhttp.send(formData);
+}
+
+function checkInput() {
+  if (document.getElementById('username-profile').value != '') {
+    if (!isValidUsername(document.getElementById('username-profile').value)) {
+      document.getElementById('result-profile').innerHTML = "Not a valid username<br>Must contain between 4 and 64 characters,<br>only lowercase and uppercase characters and digits<br>";
+      return false;
+    }
+  }
+  if (document.getElementById('email-profile').value != '') {
+    if (!isValidEmail(document.getElementById('email-profile').value)) {
+      document.getElementById('result-profile').innerHTML = "Not a valid email address<br>";
+      return false;
+    }
+  }
+  if (document.getElementById('newpassword-profile').value != '') {
+    if (document.getElementById('password-profile').value == '') {
+      document.getElementById('result-profile').innerHTML = "You want to update your password<br>All the password fields must be filled<br>";
+      return false;
+    }
+    if (!isValidPassword(document.getElementById('newpassword-profile').value)) {
+      document.getElementById('result-profile').innerHTML = "Not a valid password<br>Must contain only digits<br>and uppercase and lowercase characters,<br>between 8 and 254 characters<br>";
+      return false;
+    }
+    if (document.getElementById('newpassword-profile').value != document.getElementById('renewpassword-profile').value != '') {
+      document.getElementById('result-profile').innerHTML = "Cannot update the password<br>Re entered new password is not identique to new password<br>";
+      return false;
+    }
+  }
+  return true;
 }

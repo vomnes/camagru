@@ -71,11 +71,11 @@ function saveChange() {
   }
   document.getElementById('result-profile').innerHTML = '';
   formData.append('profile_picture', sourcePhoto);
-  formData.append('username', document.getElementById('username-profile').value);
-  formData.append('email', document.getElementById('email-profile').value);
-  formData.append('password', document.getElementById('password-profile').value);
-  formData.append('new-password', document.getElementById('newpassword-profile').value);
-  formData.append('re-new-password', document.getElementById('renewpassword-profile').value);
+  formData.append('username', escapeHtml(document.getElementById('username-profile').value));
+  formData.append('email', escapeHtml(document.getElementById('email-profile').value));
+  formData.append('password', escapeHtml(document.getElementById('password-profile').value));
+  formData.append('new-password', escapeHtml(document.getElementById('newpassword-profile').value));
+  formData.append('re-new-password', escapeHtml(document.getElementById('renewpassword-profile').value));
   var notif = document.getElementById('notif-status');
   var valueNotif = notif.getAttribute('value');
   if (valueNotif != notif.getAttribute('Origin')) {

@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="public/css/profile.css">
     <link rel="stylesheet" type="text/css" href="public/css/camera.css">
     <script src="public/js/header.js"></script>
+    <script src="public/js/basic.js"></script>
     <link rel="me" href="mailto:valentin.omnes@gmail.com">
     <link rel="icon" type="image/png" sizes="32x32" href="/public/pictures/favicon.png">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans|Belgrano" rel="stylesheet">
@@ -80,7 +81,7 @@
     <div class="container" id="id-container">
       <?php echo $content;?>
       <footer>
-          <!-- <a href="#">Created by Valentin Omnès - All Rights Reserved.</a> -->
+          <a href="#">Created by Valentin Omnès - All Rights Reserved.</a>
       </footer>
     </div>
   </body>

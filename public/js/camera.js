@@ -238,32 +238,3 @@ function getUsedFilters() {
   }
   return usedFilters;
 }
-
-function appendImage(parentId, src, className, idName) {
-  var img = document.createElement("img");
-  img.src = src;
-  if (className != '') {
-    img.className += className;
-  }
-  if (idName != '') {
-    img.id = idName;
-  }
-  document.getElementById(parentId).appendChild(img);
-}
-
-function prependImage(parentId, src, href, className, idName) {
-  var parent = document.getElementById(parentId);
-  var anchor = document.createElement("a");
-  var img = document.createElement("img");
-  anchor.href = href;
-  img.src = src;
-  if (className != '') {
-    img.className += className;
-  }
-  if (idName != '') {
-    img.id = idName;
-  }
-  anchor.appendChild(img);
-  parent.appendChild(anchor);
-  parent.insertBefore(anchor, parent.firstChild);
-}

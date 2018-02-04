@@ -16,8 +16,9 @@
   function logoutUser() {
     session_start();
     if (isset($_SESSION["logged_user"])) {
-      $_SESSION["logged_user"] = "";
-      $_SESSION["logged_userId"] = "";
+      unset($_SESSION["logged_user"]);
+      unset($_SESSION["logged_userId"]);
+      session_destroy();
     }
   }
 
@@ -74,11 +75,13 @@
     $rePW = $_REQUEST["re-password"];
     $emailAddress = $_REQUEST["email"];
     if ($username != '' && $pw != '' && $rePW != '' && $emailAddress != '') {
-      if ($pw != $rePW) {
+      if (!isValidUsername($username)) {
+        return -7; // Not a valid username
+      } else if ($pw != $rePW) {
         return -2; // The two passwords must be identical
       } else if (!isValidPassword($pw)) {
         return -6; // Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters
-      } else if (!filter_var($emailAddress, FILTER_VALIDATE_EMAIL)) {
+      } else if (!isValidEmail($emailAddress)) {
         return -5; // Not a valid email address
       } else if (strlen($username) > 64 || strlen($pw) > 255 || strlen($emailAddress) > 128) {
         return -4; // Fields with limits, please respect the warnings
@@ -103,7 +106,7 @@
     $username = $_REQUEST["username"];
     $pw = $_REQUEST["password"];
     if ($username != '' && $pw != '') {
-      if (count($username) > 256 || count($pw) > 256) {
+      if (!isValidUsername($username) || !isValidPassword($pw)) {
         return array("code" => -2);
       }
       $bdd = new database();
@@ -175,7 +178,10 @@
   }
 
   function resetPasswordEmail() {
-    $username = $_REQUEST["username"];
+    $username = filterInput($_REQUEST["username"]);
+    if (!isValidUsername($username)) {
+      return -2;
+    }
     if ($username != '') {
       $bdd = new database();
       try {
@@ -227,7 +233,7 @@
       if ($pw != $rePW) {
         return -2; // The two passwords must be identical
       } else if (!isValidPassword($pw)) {
-        return -4; // Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters
+        return -4; // Must contains between 8 and 254 characters of only digits and uppercase and lowercase characters.
       } else if (strlen($pw) > 255 || strlen($pw) < 8) {
         return -3; // Fields with limits, please respect the warnings
       }
@@ -362,6 +368,9 @@
 
   function getPicture() {
     $pictureId = $_GET['id'];
+    if (!isValidInt($pictureId)) {
+      return responseHTTP(406, 'Error: Not a valid pictureId');
+    }
     $td = new database();
     try {
       $picture = $td->getOne('SELECT p.id, p.file_path, u.id as userId, u.username, u.profile_picture, COUNT(DISTINCT l.id) as totalLikes
@@ -394,10 +403,14 @@
   function commentInDB() {
     session_start();
     $userId = $_SESSION["logged_userId"];
-    $content = $_POST["content"];
     $pictureId = $_GET["id"];
+    if (!isValidInt($pictureId)) {
+      return responseHTTP(406, 'Error: Not a valid pictureId');
+    }
+    $content = filterInput($_POST["content"]);
     $td = new database();
     try {
+      $content = filterInput($content);
       $td->insertData(
         'Comments',
         'pictureId, userId, content',
@@ -415,7 +428,7 @@
   function sendCommentNotif() {
     $userId = $_SESSION["logged_userId"];
     $pictureId = $_GET["id"];
-    $content = $_POST["content"];
+    $content = filterInput($_POST["content"]);
     $td = new database();
     try {
       // Don't send notif when you comment your own picture
@@ -439,8 +452,24 @@
     }
   }
 
+  function isValidPictureId($id) {
+    $td = new database();
+    try {
+      $data = $td->getAll('Select id From Pictures Where id=' . $id . ';');
+    } catch (Exception $e) {
+      return responseHTTP(500, $e->getMessage());
+    }
+    if ($data == null) {
+      return false;
+    }
+    return true;
+  }
+
   function getPictureComments() {
     $pictureId = $_GET["id"];
+    if (!isValidInt($pictureId)) {
+      return responseHTTP(406, 'Error: Not a valid pictureId');
+    }
     $td = new database();
     try {
       $pictureComments = $td->getAll('SELECT c.content,  u.username FROM Comments c LEFT JOIN Users u ON u.id=c.userId WHERE pictureId = ' . $pictureId . ' ORDER BY c.creation_date ASC');
@@ -453,6 +482,9 @@
   function updateLikes() {
     $changeType = $_GET["type"];
     $pictureId = $_GET["id"];
+    if (!isValidInt($pictureId)) {
+      return responseHTTP(406, 'Error: Not a valid pictureId');
+    }
     session_start();
     $userId = $_SESSION["logged_userId"];
     $td = new database();
@@ -496,6 +528,9 @@
     session_start();
     $userId = $_SESSION["logged_userId"];
     $pictureId = $_GET["id"];
+    if (!isValidInt($pictureId)) {
+      return responseHTTP(406, 'Error: Not a valid pictureId');
+    }
     $td = new database();
     try {
       $pictureData = $td->getOne('SELECT id, userId FROM Pictures WHERE id = "' . $pictureId . '"');
@@ -600,6 +635,11 @@
   function updateUsernameProfile($td, &$response) {
     session_start();
     if ($_POST['username'] != '') {
+      if (!isValidUsername($_POST['username'])) {
+        $response['message'] .= 'Not a valid username<br>Must contain between 4 and 64 characters,<br>only lowercase and uppercase characters and digits.<br>';
+        $response['username'] = '';
+        return;
+      }
       try {
         $user = $td->getAll('SELECT username FROM Users WHERE username = "' . $_POST['username'] . '"');
       } catch (Exception $e) {
@@ -619,7 +659,7 @@
 
   function updateEmailProfile($td, &$response) {
     if ($_POST['email'] != '') {
-      if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+      if (!isValidEmail($_POST['email'])) {
         $response['message'] .= 'Not a valid email address<br>';
         $_POST['email'] = '';
       } else {
@@ -638,7 +678,7 @@
           $response['message'] .= 'Cannot update the password<br>Re entered new password is not identique to new password<br>';
           $_POST['password'] = '';
         } else if (!isValidPassword($newPW)) {
-          $response['message'] .= 'Not a valid password<br>Must contain at least<br>one number and one uppercase and lowercase<br>letter, and at least 8 or more characters';
+          $response['message'] .= 'Not a valid password<br>Must contain only digits<br>and uppercase and lowercase characters,<br>between 8 and 254 characters';
           $_POST['password'] = '';
         } else {
           try {
@@ -646,11 +686,13 @@
           } catch (Exception $e) {
             return responseHTTP(500, $e->getMessage());
           }
+          // Check current password match
           if ($user['password'] != hash('whirlpool', $pw)) {
             $response['message'] .= 'Current password field does not match<br>with your password.<br>';
             $_POST['password'] = '';
           } else {
-            $_POST['password'] = hash('whirlpool', $pw);
+          // Set password with the whirlpool hash of the new password
+            $_POST['password'] = hash('whirlpool', $newpw);
           }
         }
       } else {
@@ -662,33 +704,31 @@
     $_POST['re-new-password'] = '';
   }
 
-  function isValidPassword($input) {
-    $upper = false;
-    $lower = false;
-    $digit = false;
-    $len = strlen($input);
-    if ($len < 8) {
-      return false;
-    }
-    for ($i = 0; $i < $len; $i++){
-        if (ctype_upper($input[$i])) {
-            $upper = true;
-        } else if (ctype_lower($input[$i])) {
-            $lower = true;
-        } else if (ctype_digit($input[$i])) {
-            $digit = true;
-        }
-    }
-    if ($upper && $lower && $digit) {
-      return true;
-    }
-    return false;
-  }
-
   /* -- Responses HTTP -- */
 
   function responseHTTP($codeHTTP, $content) {
     http_response_code($codeHTTP);
     echo $content;
     return;
+  }
+
+  /* -- Security -- */
+
+  function filterInput($input) {
+    $input = trim($input);
+    $input = stripslashes($input);
+    $input = htmlspecialchars($input);
+    return $input;
+  }
+  function isValidUsername($username) {
+    return preg_match("/^(?=.*[a-z])[0-9a-zA-Z]{4,64}$/", $username);
+  }
+  function isValidEmail($email) {
+    return filter_var($email, FILTER_VALIDATE_EMAIL);
+  }
+  function isValidInt($int) {
+    return filter_var($int, FILTER_VALIDATE_INT);
+  }
+  function isValidPassword($password) {
+    return preg_match("/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,254}$/", $password);
   }

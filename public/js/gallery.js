@@ -61,16 +61,6 @@ function showsPictureComments(index, pictureId) {
   showsDiv("comments-picture-" + index);
 }
 
-function showsDiv(elem) {
-  if (document.getElementById(elem).style.visibility == "visible") {
-    document.getElementById(elem).style.visibility = "hidden";
-    document.getElementById(elem).style.display = "none";
-  } else {
-    document.getElementById(elem).style.visibility = "visible";
-    document.getElementById(elem).style.display = "block";
-  }
-}
-
 function getPictureComments(index, pictureId) {
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.onreadystatechange = function() {
@@ -117,7 +107,7 @@ function createComment(index, pictureId, commentContent, username, element) {
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-      appendComment(index, username + '<br>', commentContent);
+      appendComment(index, username + '<br>', escapeHtml(commentContent));
       document.getElementById('content-comment-' + index).value = "";
     } else {
       flashPlaceholder(element);
@@ -131,10 +121,6 @@ function appendComment(index, username, commentContent) {
   document.getElementById('comment-list-' + index).innerHTML +=
   "<p class=\"one-comment\">\n<i>"+capitalizeFirstLetter(username)+"</i><span class=\"comment-text\">"+commentContent+"</span>\n</p>";
   document.getElementById('content-comment-' + index).value = "";
-}
-
-function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 /* Scroll */
@@ -157,17 +143,6 @@ function unlimitedScroll() {
     }
   }
   xmlhttp.send();
-}
-
-function getURLParameter(name) {
-  var url = new URL(window.location.href);
-  return url.searchParams.get(name);
-}
-
-function setURLParameter(name, value) {
-  const params = new URLSearchParams(location.search);
-  params.set(name, value);
-  window.history.replaceState({}, '', `${location.pathname}?${params}`);
 }
 
 /* Delete picture */

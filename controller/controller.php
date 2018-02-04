@@ -63,6 +63,9 @@ function gallery($userStatus)
     $method = $_GET["method"];
     if (isset($method)) {
       if (isset($_GET["id"])) {
+        if (!isValidInt($_GET["id"]) || !isValidPictureId($_GET["id"])) {
+          return responseHTTP(406, 'Error: Not a valid Id');
+        }
         if ($method == "postcomment") {
           commentInDB();
           sendCommentNotif();

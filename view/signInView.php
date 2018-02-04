@@ -1,7 +1,7 @@
 <?php if ($accountIsActivated > 0) { ?>
   <img class="picture-sign" src="public/pictures/activatePicture.jpg" alt="Activate">
 <?php } else { ?>
-  <img class="picture-sign" src="public/pictures/signInPicture.jpg" alt="Sign in">
+  <img class="picture-sign" src="public/pictures/camagru-home.png" alt="Sign in">
 <?php } ?>
   <div class="sign">
   <?php if ($accountIsActivated == 1) { ?>

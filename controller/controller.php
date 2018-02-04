@@ -126,7 +126,7 @@ function profile()
 function logout()
 {
     logoutUser();
-    require($_SERVER['DOCUMENT_ROOT'] . '/view/indexView.php');
+    require($_SERVER['DOCUMENT_ROOT'] . '/view/signInView.php');
 }
 
 function headerController() {

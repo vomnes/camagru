@@ -2,8 +2,6 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <!-- <meta http-equiv="x-ua-compatible" content="ie=edge"> †
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
     <title>Camagru</title>
     <link rel="stylesheet" type="text/css" href="public/css/header.css">
     <link rel="stylesheet" type="text/css" href="public/css/content.css">
@@ -51,7 +49,33 @@
             Logout</a>
           </div>
         </div>
-        <? } ?>
+      <? } else {?>
+        <p id="no-logged-btn">
+          <a class="underline" href="index.php?action=signin">Login</a> - <a class="underline" href="index.php?action=signup">Register</a> - <a class="underline" href="index.php?action=gallery">Gallery</a>
+        </p>
+        <!-- Under 725px width menu -->
+        <img id="open-mobile-menu" title="Mobile menu" src="/public/pictures/menu-mobile-128.png" alt="logout logo" width="35" height="35" border="0">
+        <div id="mobile-menu">
+          <div class="element-menu">
+            <a id="" href="index.php?action=signin">
+              <img title="Sign In" src="/public/pictures/login-128.png" alt="Login logo" width="15" height="15" border="0">
+              Login
+            </a>
+          </div>
+          <div class="element-menu">
+            <a id="" href="index.php?action=signup">
+              <img title="Sign Up" src="/public/pictures/register-128.png" alt="Register logo" width="15" height="15" border="0">
+              Register
+            </a>
+          </div>
+          <div class="element-menu">
+            <a id="" href="index.php?action=gallery">
+              <img title="See the gallery" src="/public/pictures/gallery-128.png" alt="Gallery logo" width="15" height="15" border="0">
+              Gallery
+            </a>
+          </div>
+        </div>
+      <? }?>
     </div>
     <div class="container" id="id-container">
       <?php echo $content;?>

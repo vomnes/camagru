@@ -75,11 +75,12 @@ window.onload = function() {
       if (takePicture.getAttribute('mode') == "video") {
         takePicture.setAttribute('mode', 'picture');
         takePicture.style.backgroundImage = "url('/public/pictures/re-icon-128.png')";
-        document.getElementById("canvas").style.visibility = 'visible';
+        canvas.style.visibility = 'visible';
         takepicture();
       } else {
         takePicture.setAttribute('mode', 'video');
-        document.getElementById("canvas").style.visibility = 'hidden';
+        canvas.style.visibility = 'hidden';
+        canvas.setAttribute('content', '');
         takePicture.style.backgroundImage = "";
       }
     ev.preventDefault();
@@ -191,6 +192,14 @@ function savePicture() {
   var base64Image = document.getElementById("uploaded-picture").src;
   var base64 = '';
   if (!base64Photo && base64Image.includes('action=camera')) {
+    var takePictureBtn = document.getElementById("take-picture");
+    if (takePictureBtn.getAttribute('mode') == "video") {
+      let borderColor = takePictureBtn.style.borderColor;
+      takePictureBtn.style.borderColor = 'Brown';
+      setTimeout(function(){
+        takePictureBtn.style.borderColor = borderColor;
+      }, 100);
+    }
     return;
   } else if (base64Photo) {
     base64 = base64Photo;

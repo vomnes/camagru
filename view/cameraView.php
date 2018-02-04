@@ -2,7 +2,7 @@
 <h2 id="title-page">Camera</h2>
 <div id="camera-area" class="border-style">
   <img onclick="turnOnCamera()" id="turn-on-camera" src="public/pictures/lens-close.png" onmouseover="switchPicture('turn-on-camera', 'public/pictures/lens-close.png', 'public/pictures/lens.png')" onmouseout="switchPicture('turn-on-camera', 'public/pictures/lens-close.png', 'public/pictures/lens.png')" alt="camera lens close" title="Turn on camera">
-  <input type="file" style="display:none;" id="upload-file-btn"><img id="upload-picture" src="public/pictures/upload-picture-black-512.png" onmouseover="switchPicture('upload-picture', 'public/pictures/upload-picture-black-512.png', 'public/pictures/upload-picture-color-512.png');" onmouseout="switchPicture('upload-picture', 'public/pictures/upload-picture-black-512.png', 'public/pictures/upload-picture-color-512.png');" alt="upload picture" title="Upload picture"></input>
+  <input type="file" style="display:none;" id="upload-file-btn" accept=".jpg, .jpeg, .png"><img id="upload-picture" src="public/pictures/upload-picture-black-512.png" onmouseover="switchPicture('upload-picture', 'public/pictures/upload-picture-black-512.png', 'public/pictures/upload-picture-color-512.png');" onmouseout="switchPicture('upload-picture', 'public/pictures/upload-picture-black-512.png', 'public/pictures/upload-picture-color-512.png');" alt="upload picture" title="Upload picture"></input>
   <img id="uploaded-picture" src="">
   <canvas id="canvas"></canvas>
   <video autoplay="true" id="camera"></video>

@@ -19,10 +19,10 @@ if (!userLogged()) {
       } elseif ($page == 'gallery') {
           gallery(0);
       } else {
-          signUp();
+          signIn();
       }
   } else {
-    signUp();
+    signIn();
   }
 } else {
   if (isset($page)) {

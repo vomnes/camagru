@@ -307,6 +307,18 @@
     }
   }
 
+  function resize_image($photo, $w, $h) {
+    if (list($width, $height) = getimagesizefromstring($photo)) {
+    } else {
+      responseHTTP(500, 'Error in resize_image');
+      die();
+    }
+    $src = imagecreatefromstring($photo);
+    $dst = imagecreatetruecolor($w, $h);
+    imagecopyresampled($dst, $src, 0, 0, 0, 0, $w, $h, $width, $height);
+    return $dst;
+  }
+
   function mergePictures($photo, $filtersArray) {
     $width = 500;
     $height = 375;
@@ -314,8 +326,9 @@
     $final_img = imagecreatetruecolor($width, $height);
     imagesavealpha($final_img, true);
 
-    // Add webcam picture
-    $frame = imagecreatefromstring($photo);
+    // Add picture
+    $frame = resize_image($photo, 500, 375);
+    // $frame = imagecreatefromstring($photo);
     imagecopy($final_img, $frame, 0, 0, 0, 0, $width, $height);
     // Add filters
     foreach ($filtersArray as $key => $filter) {

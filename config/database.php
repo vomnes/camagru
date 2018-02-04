@@ -4,5 +4,8 @@
     $DB_DSN = 'mysql:dbname='.$DB_NAME.';host='.$DB_HOST;
     $DB_USER = 'root';
     $DB_PASSWORD = '';
-    $DB_OPTIONS = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION);
+    $DB_OPTIONS = array(
+      PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+      PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
+    );
 ?>

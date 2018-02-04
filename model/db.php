@@ -69,16 +69,18 @@
       }
 
       function updateData($query) {
+        $result = $this->DB_CONN->prepare($query);
         try {
-          $this->DB_CONN->query($query);
+          $result->execute();
         } catch (Exception $e) {
           throw new \Exception($this->handleError($e, __FUNCTION__));
         }
       }
 
       function deleteData($query) {
+        $result = $this->DB_CONN->prepare($query);
         try {
-          $this->DB_CONN->query($query);
+          $result->execute();
         } catch (Exception $e) {
           throw new \Exception($this->handleError($e, __FUNCTION__));
         }

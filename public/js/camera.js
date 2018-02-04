@@ -191,6 +191,7 @@ function savePicture() {
   var base64Photo = document.getElementById("canvas").getAttribute('content');
   var base64Image = document.getElementById("uploaded-picture").src;
   var base64 = '';
+  // Check image exists
   if (!base64Photo && base64Image.includes('action=camera')) {
     var takePictureBtn = document.getElementById("take-picture");
     if (takePictureBtn.getAttribute('mode') == "video") {

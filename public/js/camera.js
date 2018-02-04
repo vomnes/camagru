@@ -46,11 +46,11 @@ function turnOnCamera() {
 }
 
 function turnOffCamera() {
-  document.getElementById("camera").pause();
-  document.getElementById("camera").src = "";
+  var camera = document.getElementById("camera");
+  camera.pause();
+  camera.srcObject = null;
   changeVisibility(["canvas", "upload-new-picture", "take-picture", "stop-camera", "download-picture", "camera"], 'hidden');
   changeVisibility(["turn-on-camera", "upload-picture"], 'visible');
-  location.reload();
 }
 
 function changeVisibility(elements, status) {
@@ -125,13 +125,12 @@ window.onload = function() {
     ev.preventDefault();
   }, false);
 
-  // CHECK TURN OFF CAMERA !
-
   uploadFileButton.onchange = function(e) {
+    var camera = document.getElementById("camera");
     changeVisibility(["turn-on-camera", "upload-picture"], 'hidden');
     getBase64Image(uploadFileButton);
-    document.getElementById("camera").pause();
-    document.getElementById("camera").setAttribute("src", "");
+    camera.pause();
+    camera.srcObject = null;
     document.getElementById("canvas").setAttribute("content", '');
     changeVisibility(["canvas", "camera", "take-picture", "stop-camera"], 'hidden');
     changeVisibility(["upload-new-picture", "download-picture", "turn-on-camera-picture-on"], 'visible');

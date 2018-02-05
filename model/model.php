@@ -179,10 +179,10 @@
 
   function resetPasswordEmail() {
     $username = filterInput($_REQUEST["username"]);
-    if (!isValidUsername($username)) {
-      return -2;
-    }
     if ($username != '') {
+      if (!isValidUsername($username)) {
+        return -2;
+      }
       $bdd = new database();
       try {
         $data = $bdd->getAll('SELECT username, unique_token, account_validated, email FROM Users');

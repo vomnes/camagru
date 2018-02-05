@@ -28,7 +28,7 @@ function cameraOn() {
       if (document.getElementById("title-page").innerHTML != 'Camera - Access denied') {
         document.getElementById("title-page").innerHTML += ' - Access denied';
       }
-      console.log('Error to switch on the camera');
+      console.log('Camera access denied');
   }
 }
 

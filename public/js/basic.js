@@ -74,5 +74,5 @@ function prependImage(parentId, src, href, className, idName) {
   }
 
   function isValidEmail(str) {
-    return RegExp("/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$").test(str);
+    return RegExp("^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$").test(str);
   }

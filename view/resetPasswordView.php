@@ -15,7 +15,7 @@
     } else if ($code == -3) {
       echo "<p style=\"text-align: center; color: Brown;\">Fields with limits, please respect the warnings</p>";
     } else if ($code == -4) {
-      echo "<p style=\"text-align: center; color: Brown;\">Must contain at least one number and one uppercase<br>and lowercase letter, and at least 8 or more characters</p>";
+      echo "<p style=\"text-align: center; color: Brown;\">Must contain between 8 and 254 characters with only digits, uppercase<br>and lowercase characters</p>";
     }
     ?>
   </form>

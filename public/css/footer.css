@@ -2,7 +2,7 @@ footer {
   padding: 10px;
   position: absolute;
   text-align: center;
-  font-size: 10px;
+  font-size: 0.5em;
   left: 50%;
   transform: translateX(-50%);
   bottom: -35px;

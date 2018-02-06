@@ -7,6 +7,16 @@ I have realised this project from scratch using PHP, MYSQL, Javascript, HTML and
 My code is organised using Model–View–Controller. Thus, there are only one page (_index.php_) and according the URL parameters a specific page is launched.
 For example **_index.php?action=gallery_** launch the gallery page.
 
+## Features
+- Create an account
+- Activate your account and reset your password through an unique link sent by email
+- Modified your private data -> Username, email, password and profile picture
+- Create custom pictures using your webcam or pictures from your computer and add on them available filters, when the picture has been saved everyone can see this picture
+- Delete only your pictures
+- All connected users can like or comment pictures
+- An user can receive email notification when an other user has commented one of his pictures
+- It is a responsive web design
+
 ## Launch on Unix System
 In your terminal :
 #### PHP’s Built-in Server

@@ -19,6 +19,8 @@ In your terminal :
 ```
    mysql.server start
 ```
+#### Run
+In order to initialise the database you need to go on this url **_localhost:8080/config/setup.php_**, then your can start to use Camagru by going on localhost:8080
 
 ## Some pictures
 ### Sign In
@@ -47,5 +49,3 @@ In your terminal :
 
 ### Gallery Responsive
 <img alt="Gallery Responsive" src="screenshot/GalleryMobilePage.png" width="60%" title="Gallery mobile Camagru page">
-
-```localhost:8080/config/setup.php```

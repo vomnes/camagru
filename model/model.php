@@ -689,7 +689,7 @@
             $_POST['password'] = '';
           } else {
           // Set password with the whirlpool hash of the new password
-            $_POST['password'] = hash('whirlpool', $newpw);
+            $_POST['password'] = hash('whirlpool', $newPW);
           }
         }
       } else {

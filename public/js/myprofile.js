@@ -139,10 +139,6 @@ function checkInput() {
       document.getElementById('result-profile').innerHTML = "You want to update your password<br>All the password fields must be filled<br>";
       return false;
     }
-    if (!isValidPassword(document.getElementById('newpassword-profile').value)) {
-      document.getElementById('result-profile').innerHTML = "Not a valid password<br>Must contain only digits<br>and uppercase and lowercase characters,<br>between 8 and 254 characters<br>";
-      return false;
-    }
     if (document.getElementById('newpassword-profile').value != document.getElementById('renewpassword-profile').value != '') {
       document.getElementById('result-profile').innerHTML = "Cannot update the password<br>Re entered new password is not identique to new password<br>";
       return false;

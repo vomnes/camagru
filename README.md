@@ -11,13 +11,13 @@ For example **_index.php?action=gallery_** launch the gallery page.
 In your terminal :
 #### PHP’s Built-in Server
 ```
-... git clone https://github.com/vomnes/camagru.git
-... cd camagru
-... php -S localhost:8080 -t .
+   git clone https://github.com/vomnes/camagru.git
+   cd camagru
+   php -S localhost:8080 -t .
 ```
 #### MySQL Server
 ```
-... mysql.server start
+   mysql.server start
 ```
 
 ## Some pictures

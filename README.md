@@ -2,7 +2,7 @@
  The goal of this project is to build a web application a little more complex than the previous ones with a little less means.
 
 ### Sign In
- ![Sign In](https://github.com/vomnes/Camagru/blob/master/screenshot/SignInPage.png "Login Camagru page")
+ ![Sign In](https://github.com/vomnes/Camagru/blob/master/screenshot/SignInPage.png "Login Camagru page"){:width="60%"}.
 
 ### Sign Up
  ![Sign Up](https://github.com/vomnes/Camagru/blob/master/screenshot/SignUpPage.png "Register Camagru page")
